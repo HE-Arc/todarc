@@ -27,4 +27,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get all of the post's comments.
+     */
+    public function projects()
+    {
+        return $this->morphMany('App\Project', 'project_owner');
+    }
+
+    /**
+     * The labels that belong to the task.
+     */
+    public function tasks()
+    {
+        return $this->belongsToMany('App\Task');
+    }
+
+    /**
+     * The taks that belong to the label.
+     */
+    public function Organisations()
+    {
+        return $this->belongsToMany('App\Organisation');
+    }
 }

@@ -17,8 +17,8 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable(false);
 
-            $table->unsignedInteger('project_owner_id');
-            $table->string('project_owner_type');
+            $table->unsignedInteger('owner_id');
+            $table->string('owner_type');
 
             $table->timestamps();
         });

@@ -32,6 +32,6 @@ class CreateOrganisationUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organisation_users');
+        Schema::dropIfExists('organisation_user');
     }
 }

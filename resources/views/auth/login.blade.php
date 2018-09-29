@@ -1,20 +1,20 @@
 @extends('layouts.app-loggedout')
 
 @section('content')
-<div class="form-signin" >
-  <form method="POST" action="{{ route('login') }}">
+<div class="form-signin" id="login-form">
+  <form method="post" action="{{ route('login') }}" v-on:submit.prevent="submit">
     @csrf
 
     <h1 class="h3 mb-3 font-weight-normal">{{ __('Login') }}</h1>
 
     <label for="email" class="sr-only">{{ __('E-Mail Address') }}</label>
-    <input type="email" id="email" class="form-control" placeholder="{{ __('E-Mail Address') }}" required autofocus>
+    <input type="email" id="email" class="form-control" placeholder="{{ __('E-Mail Address') }}" v-model="email" required autofocus>
 
     <label for="password" class="sr-only">{{ __('Password') }}</label>
-    <input type="password" id="password" class="form-control" placeholder="{{ __('Password') }}" required>
+    <input type="password" id="password" class="form-control" placeholder="{{ __('Password') }}" v-model="password" required>
 
     <div class="custom-control custom-checkbox mb-3">
-      <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+      <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} v-model="remember">
       <label class="custom-control-label" for="remember">
          {{ __('Remember Me') }}
       </label>

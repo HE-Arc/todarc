@@ -16,6 +16,17 @@ window.BootstrapVue = require('bootstrap-vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-const app = new Vue({
-    el: '#app'
+var appLogin = new Vue({
+  el: '#login-form',
+  data: {
+    email: '',
+    password: '',
+    remember: false
+  },
+  methods: {
+    submit: function(event) {
+      //send data in json
+      return false;
+    }
+  }
 });

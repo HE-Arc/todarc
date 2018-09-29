@@ -4,9 +4,21 @@
 
 // Variables
 @import 'variables';
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
+@import 'login';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+body
+{
+  color: $font-color;
+}
+
+.form-control, .form-control:focus
+{
+  background-color: $input-background;
+  border-color: $input-border;
+  color: $font-color;
+}
 
 .navbar-laravel {
   background-color: #fff;

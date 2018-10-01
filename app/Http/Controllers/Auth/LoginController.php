@@ -45,13 +45,13 @@ class LoginController extends Controller
     if($authSuccess)
     {
       $request->session()->regenerate();
-      return response(['success' => true], Response::HTTP_OK)->json('redirectTo' => $this->redirectTo);
+      return response(['success' => true], Response::HTTP_OK)->json(['redirectTo' => $this->redirectTo]);
     }
 
     return response(
     [
       'success' => false,
       'message' => 'Auth failed (or some other message)'
-    ], Response::HTTP_FORBIDDEN);ata
+    ], Response::HTTP_FORBIDDEN);
   }
 }

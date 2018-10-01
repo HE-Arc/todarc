@@ -1,4 +1,8 @@
-@extends('layouts.app-loggedout')
+@extends('layouts.app')
+
+@section('scripts')
+  <script src="{{ asset('js/loginApp.js') }}" defer></script>
+@endsection
 
 @section('content')
 <div class="form-signin" id="login-form">
@@ -21,6 +25,8 @@
     </div>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">{{ __('Login') }}</button>
+
+    <p>@{{ email }} - @{{ password }} - @{{remember}}</p>
 
     <div class="text-right">
     <a class="btn btn-link" href="{{ route('password.request') }}">

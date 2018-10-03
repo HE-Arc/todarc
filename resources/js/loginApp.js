@@ -23,12 +23,12 @@ var appLogin = new Vue({
   data: {
     email: '',
     password: '',
-    remember: false
+    remember: false,
+    valid: true
   },
   methods: {
     submit: function(event) {
       //send data in json
-
       this.$http.post(
         '/login',
         this.$data,
@@ -37,7 +37,13 @@ var appLogin = new Vue({
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
           }
         }
-      ).then((response) => console.log('hello'), (response) => console.log('hello'));
+      ).then(response =>
+      {
+        window.location.pathname = response.data.redirectTo;
+      }, response =>
+      {
+        this.$data.valid = false;
+      });
 
       return false;
     }

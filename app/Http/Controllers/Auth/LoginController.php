@@ -47,7 +47,7 @@ class LoginController extends Controller
     if($authSuccess)
     {
       $request->session()->regenerate();
-      return response(['success' => true, 'redirectTo' => $this->redirectTo], Response::HTTP_OK);
+      return response()->json(['success' => true, 'redirectTo' => $this->redirectTo], 201);
     }
     else
     {

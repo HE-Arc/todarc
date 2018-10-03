@@ -11,6 +11,8 @@
 
     <h1 class="h3 mb-3 font-weight-normal">{{ __('Login') }}</h1>
 
+    <b-alert :show="!valid" fade dismissible variant="danger">{{ __('The email or password is not correct.') }}</b-alert>
+
     <label for="email" class="sr-only">{{ __('E-Mail Address') }}</label>
     <input type="email" id="email" class="form-control" placeholder="{{ __('E-Mail Address') }}" v-model="email" required autofocus>
 

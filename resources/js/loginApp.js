@@ -8,6 +8,7 @@
 
 window.Vue = require('vue');
 window.BootstrapVue = require('bootstrap-vue');
+window.VueResource = require('vue-resource');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,7 +28,17 @@ var appLogin = new Vue({
   methods: {
     submit: function(event) {
       //send data in json
-      console.log('hello world');
+
+      this.$http.post(
+        '/login',
+        this.$data,
+        {
+          headers : {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          }
+        }
+      ).then((response) => console.log('hello'), (response) => console.log('hello'));
+
       return false;
     }
   }

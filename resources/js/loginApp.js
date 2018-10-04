@@ -8,7 +8,7 @@
 
 window.Vue = require('vue');
 window.BootstrapVue = require('bootstrap-vue');
-window.VueResource = require('vue-resource');
+window.axios = require('axios');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,7 +29,7 @@ var appLogin = new Vue({
   methods: {
     submit: function(event) {
       //send data in json
-      this.$http.post(
+      axios.post(
         '/login',
         this.$data,
         {

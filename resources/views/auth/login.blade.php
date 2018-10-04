@@ -28,8 +28,6 @@
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">{{ __('Login') }}</button>
 
-    <p>@{{ email }} - @{{ password }} - @{{remember}}</p>
-
     <div class="text-right">
     <a class="btn btn-link" href="{{ route('password.request') }}">
         {{ __('Forgot Your Password?') }}

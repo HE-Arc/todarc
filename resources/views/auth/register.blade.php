@@ -37,7 +37,7 @@
               <label for="password">{{ __('Password') }} *</label>
 
               <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="{{ __('Password') }}" v-bind="password">
-              <small class="form-text text-muted">At least 6 characters</small>
+              <small class="form-text text-muted">At least 6 charactersgit </small>
 
               @if ($errors->has('password'))
                   <span class="invalid-feedback" role="alert">

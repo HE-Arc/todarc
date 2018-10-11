@@ -17,7 +17,7 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable(false);
 
-            $table->unsignedInteger('group_id');
+            $table->unsignedInteger('group_id')->nullable();
             $table->foreign('group_id')->references('id')->on('groups');
 
             $table->unsignedInteger('project_id');

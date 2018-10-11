@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
           UsersTableSeeder::class,
           OrganisationsTableSeeder::class,
           OrganisationUserTableSeeder::class,
+          ProjectsTableSeeder::class,
           GroupsTableSeeder::class,
           LabelsTableSeeder::class,
-          ProjectsTableSeeder::class,
           TasksTableSeeder::class,
           LabelTaskTableSeeder::class,
           TaskUserTableSeeder::class

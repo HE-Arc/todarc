@@ -8,7 +8,7 @@ php artisan migrate
 composer dump-autoload
 php artisan db:seed
 
-php artisan migrate:reset;
-php artisan migrate;
+php artisan migrate:reset
+php artisan migrate
 php artisan db:seed
 ```

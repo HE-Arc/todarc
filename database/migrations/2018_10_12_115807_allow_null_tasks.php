@@ -14,8 +14,8 @@ class AllowNullTasks extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-          $table->date('from_date')->nullable()->change();
-          $table->date('until_date')->nullable()->change();
+          $table->date('from_date')->nullable(true)->change();
+          $table->date('until_date')->nullable(true)->change();
         });
     }
 

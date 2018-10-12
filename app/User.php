@@ -47,7 +47,7 @@ class User extends Authenticatable
     /**
      * The taks that belong to the label.
      */
-    public function Organisations()
+    public function organisations()
     {
         return $this->belongsToMany('App\Organisation');
     }

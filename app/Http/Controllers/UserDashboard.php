@@ -18,8 +18,10 @@ class UserDashboard extends Controller
   public function dashboard(Request $request)
   {
     $user = Auth::user();
-    $projects = $user->projects();
 
-    return view('userdashboard.dashboard', ['projects' => $projects]);
+    $projects = $user->projects()->get();
+    $organisations = $user->organisations()->get();
+
+    return view('userdashboard.dashboard', ['projects' => $projects, 'organisations' => $organisations]);
   }
 }

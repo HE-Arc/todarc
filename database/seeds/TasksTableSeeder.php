@@ -12,7 +12,7 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tasks')->insert([
+        DB::table('tasks')->insert([[
             'name' => 'Create Seeder',
             'from_date' => Carbon::parse('2018-10-06'),
             'until_date' => Carbon::parse('2018-10-18'),
@@ -36,6 +36,6 @@ class TasksTableSeeder extends Seeder
             'until_date' => Carbon::parse('2018-10-18'),
             'order' => 3,
             'group_id' => 3
-        ]);
+        ]]);
     }
 }

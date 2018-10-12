@@ -14,14 +14,13 @@
         <div class="col-md-12">
             <h2>{{ __('Projects') }}</h2>
             <div id="projects-container">
-              <user-dashboard-project name="Hello"
-                v-bind:tasks-to-do="['test1', 'test2', 'test3']"
-                button-text="{{ __('See the project') }}"
-                uri-project="https://github.com"
-              ></user-dashboard-project>
-              <user-dashboard-project name="Salut"></user-dashboard-project>
-              <user-dashboard-project name="hallo"></user-dashboard-project>
-              <user-dashboard-project name="Hello"></user-dashboard-project>
+              @foreach($projects as $project)
+                <user-dashboard-project name="{{$project->name}}"
+                  v-bind:tasks-to-do="['test1', 'test2', 'test3']"
+                  button-text="{{ __('See the project') }}"
+                  uri-project="https://github.com"
+                ></user-dashboard-project>
+              @endforeach
             </div>
         </div>
     </div>

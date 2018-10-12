@@ -11,7 +11,7 @@ class GroupsTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('groups')->insert([
+      DB::table('groups')->insert([[
           'name' => 'Main',
           'group_id' => null,
           'project_id' => 1
@@ -31,6 +31,6 @@ class GroupsTableSeeder extends Seeder
           'name' => 'Main for private repo',
           'group_id' => null,
           'project_id' => 2
-      ]);
+      ]]);
     }
 }

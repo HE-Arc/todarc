@@ -11,7 +11,7 @@ class TaskUserTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('task_user')->insert([
+      DB::table('task_user')->insert([[
         'user_id' => 1,
         'task_id' => 1
       ],[
@@ -20,6 +20,6 @@ class TaskUserTableSeeder extends Seeder
       ],[
         'user_id' => 1,
         'task_id' => 3
-      ]);
+      ]]);
     }
 }

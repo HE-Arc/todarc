@@ -11,7 +11,7 @@ class LabelTaskTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('label_task')->insert([
+      DB::table('label_task')->insert([[
           'task_id' => 1,
           'label_id' => 1
       ],[
@@ -26,6 +26,6 @@ class LabelTaskTableSeeder extends Seeder
       ],[
           'task_id' => 2,
           'label_id' => 2
-      ]);
+      ]]);
     }
 }

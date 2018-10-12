@@ -11,7 +11,7 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('projects')->insert([
+      DB::table('projects')->insert([[
           'name' => 'Todarc',
           'owner_id' => 1,
           'owner_type' => 'App\Organisation'
@@ -19,6 +19,6 @@ class ProjectsTableSeeder extends Seeder
           'name' => 'Private todo board',
           'owner_id' => 1,
           'owner_type' => 'App\User'
-      ]);
+      ]]);
     }
 }

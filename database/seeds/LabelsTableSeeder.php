@@ -11,7 +11,7 @@ class LabelsTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('labels')->insert([
+      DB::table('labels')->insert([[
           'name' => 'Dev',
           'color' => '#FF0000',
           'project_id' => 1
@@ -31,6 +31,6 @@ class LabelsTableSeeder extends Seeder
           'name' => 'Easy',
           'color' => '#008ec2',
           'project_id' => 2
-      ]);
+      ]]);
     }
 }

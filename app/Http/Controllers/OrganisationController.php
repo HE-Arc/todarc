@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Organisation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrganisationController extends Controller
 {
@@ -15,6 +16,16 @@ class OrganisationController extends Controller
     public function index()
     {
         //
+    }
+
+    public function dashboard($organisationName)
+    {
+      $organisation = Organisation::where('name', $organisationName)->get()[0];
+
+      $users = $organisation->users();
+      $projects = $organisation->projects();
+
+      return view('organisationDashboard.dashboard', ['organisation' => $organisation, 'users' => $users, 'projects' => $projects]);
     }
 
     /**

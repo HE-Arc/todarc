@@ -14,10 +14,13 @@
 
 
 Route::group(['middleware' => 'checklogin'], function() {
+
+  Route::resource('projects', 'ProjectController');
+
   Route::get('/', 'UserDashboard@dashboard')->name('home');
   Route::get('/home', 'UserDashboard@dashboard')->name('home');
   Route::get('/organisation/{organisationName}', 'OrganisationController@index');
-  Route::get('/project/{projectName}', 'HomeController@Home'); // TODO : Change when project controller is created
+  
 });
 
 Auth::routes();

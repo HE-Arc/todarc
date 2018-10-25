@@ -22,10 +22,10 @@ class OrganisationController extends Controller
     {
       $organisation = Organisation::where('name', $organisationName)->get()[0];
 
-      $users = $organisation->users();
-      $projects = $organisation->projects();
+      $projects = $organisation->projects()->get();
+      $users = $organisation->users()->get();
 
-      return view('organisationDashboard.dashboard', ['organisation' => $organisation, 'users' => $users, 'projects' => $projects]);
+      return view('organisationDashboard.dashboard', ['organisation' => $organisation, 'projects' => $projects, 'users' => $users]);
     }
 
     /**

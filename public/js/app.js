@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 43);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -14016,6 +14016,7 @@ if (token) {
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -47241,15 +47242,17 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
 
 /***/ }),
-/* 38 */
+/* 38 */,
+/* 39 */,
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(11)
 /* script */
-var __vue_script__ = __webpack_require__(39)
+var __vue_script__ = __webpack_require__(41)
 /* template */
-var __vue_template__ = __webpack_require__(40)
+var __vue_template__ = __webpack_require__(42)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47288,7 +47291,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47317,7 +47320,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47360,17 +47363,16 @@ if (false) {
 }
 
 /***/ }),
-/* 41 */,
-/* 42 */,
-/* 43 */
+/* 43 */,
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(44);
-module.exports = __webpack_require__(45);
+__webpack_require__(45);
+module.exports = __webpack_require__(46);
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -47388,17 +47390,17 @@ window.Vue = __webpack_require__(35);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(38));
+Vue.component('example-component', __webpack_require__(40));
 
 var app = new Vue({
   el: '#app'
 });
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleNotFoundError: Module not found: Error: Can't resolve 'bootstrap-vue/dist/bootstrap-vue.css' in '/mnt/d/Projects/todarc/resources/sass'\n    at factoryCallback (/mnt/d/Projects/todarc/node_modules/webpack/lib/Compilation.js:282:40)\n    at factory (/mnt/d/Projects/todarc/node_modules/webpack/lib/NormalModuleFactory.js:237:20)\n    at resolver (/mnt/d/Projects/todarc/node_modules/webpack/lib/NormalModuleFactory.js:60:20)\n    at asyncLib.parallel (/mnt/d/Projects/todarc/node_modules/webpack/lib/NormalModuleFactory.js:127:20)\n    at /mnt/d/Projects/todarc/node_modules/async/dist/async.js:3888:9\n    at /mnt/d/Projects/todarc/node_modules/async/dist/async.js:473:16\n    at iteratorCallback (/mnt/d/Projects/todarc/node_modules/async/dist/async.js:1062:13)\n    at /mnt/d/Projects/todarc/node_modules/async/dist/async.js:969:16\n    at /mnt/d/Projects/todarc/node_modules/async/dist/async.js:3885:13\n    at resolvers.normal.resolve (/mnt/d/Projects/todarc/node_modules/webpack/lib/NormalModuleFactory.js:119:22)\n    at onError (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/Resolver.js:65:10)\n    at loggingCallbackWrapper (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at runAfter (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/Resolver.js:158:4)\n    at innerCallback (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/Resolver.js:146:3)\n    at loggingCallbackWrapper (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at next (/mnt/d/Projects/todarc/node_modules/tapable/lib/Tapable.js:252:11)\n    at /mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/UnsafeCachePlugin.js:40:4\n    at loggingCallbackWrapper (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at runAfter (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/Resolver.js:158:4)\n    at innerCallback (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/Resolver.js:146:3)\n    at loggingCallbackWrapper (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at next (/mnt/d/Projects/todarc/node_modules/tapable/lib/Tapable.js:252:11)\n    at innerCallback (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/Resolver.js:144:11)\n    at loggingCallbackWrapper (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at next (/mnt/d/Projects/todarc/node_modules/tapable/lib/Tapable.js:249:35)\n    at resolver.doResolve.createInnerCallback (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:44:6)\n    at loggingCallbackWrapper (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at afterInnerCallback (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/Resolver.js:166:11)\n    at loggingCallbackWrapper (/mnt/d/Projects/todarc/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at next (/mnt/d/Projects/todarc/node_modules/tapable/lib/Tapable.js:249:35)");
 
 /***/ })
 /******/ ]);

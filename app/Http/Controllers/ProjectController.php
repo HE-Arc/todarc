@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use View;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // get all the nerds
+        $projects = Project::all();
+        // TODO filter with user
+
+        // load the view and pass the projects
+        return view('home')->with('projects', $projects);
     }
 
     /**
@@ -46,7 +52,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        // show the view and pass the project to it
+        return View::make('project.dashboard')->with('project', $project);
     }
 
     /**

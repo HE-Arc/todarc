@@ -15,6 +15,7 @@ window.Vue = require('vue');
 
 Vue.component('user-dashboard-project', require('./components/UserDashboard/Project.vue'));
 Vue.component('user-dashboard-organisation', require('./components/UserDashboard/Organisation.vue'));
+Vue.component('add-new-org', require('./components/UserDashboard/AddNewOrg.vue'));
 
 const app = new Vue({
     el: '#user-dashboard'

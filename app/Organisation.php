@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class Organisation extends Model
 {
@@ -21,6 +22,18 @@ class Organisation extends Model
     public function projects()
     {
         return $this->morphMany('App\Project', 'owner');
+    }
+
+    public function userNames()
+    {
+      $userNames = new Collection();
+
+      foreach ($this->users as $user)
+      {
+        $userNames->push($user->name);
+      }
+
+      return $userNames;
     }
 
 }

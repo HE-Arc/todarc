@@ -30,13 +30,12 @@
     <div class="col-md-12">
       <h2>Organisations</h2>
       <div class="cards-container">
-        @foreach($projects as $project)
-
-        <user-dashboard-organization name="{{$project->name}}"
-          v-bind:tasks-to-do="['test1', 'test2', 'test3']"
-          button-text="{{ __('See the project') }}"
+        @foreach($organisations as $organisation)
+        <user-dashboard-organisation name="{{$organisation->name}}"
+          v-bind:members="{{ $organisation->userNames()->toJson() }}"
+          button-text="{{ __('See the organisation') }}"
           uri-project="https://github.com"
-          ></user-dashboard-organization>
+          ></user-dashboard-organis ation>
         @endforeach
       </div>
     </div>

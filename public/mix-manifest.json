@@ -2,6 +2,6 @@
     "/js/userDashboardApp.js": "/js/userDashboardApp.js",
     "/js/projectDashboardApp.js": "/js/projectDashboardApp.js",
     "/js/app.js": "/js/app.js",
-    "/js/loginApp.js": "/js/loginApp.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/loginApp.js": "/js/loginApp.js"
 }

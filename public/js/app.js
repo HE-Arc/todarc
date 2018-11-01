@@ -13987,7 +13987,7 @@ module.exports = function normalizeComponent (
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-webpack.config.resolve = { extensions: ['.js', '.scss'] };
+
 
 window._ = __webpack_require__(13);
 window.Popper = __webpack_require__(3).default;
@@ -14000,6 +14000,7 @@ try {
   window.$ = window.jQuery = __webpack_require__(4);
   __webpack_require__(15);
 } catch (e) {}
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -14007,6 +14008,7 @@ try {
  */
 window.axios = __webpack_require__(16);
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just

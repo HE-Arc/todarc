@@ -12,9 +12,13 @@
 <div class="container" id="project-dashboard">
     <div class="row">
         <div class="col-md-12">
-            <project-dashboard name="{{$project->name}}"
-                v-bind:tasks-to-do="['test1', 'test2', 'test3']"
-            ></project-dashboard>
+            @foreach ($group as $groups())
+                {{$group->name}}
+            @endforeach
+            {{
+
+            }}
+            <project-dashboard project={!! json_encode($project) !!} groups={!! json_encode($project->groups()) !!}></project-dashboard>
         </div>
     </div>
 </div>

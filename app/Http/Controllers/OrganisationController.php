@@ -24,7 +24,7 @@ class OrganisationController extends Controller
 
       $projects = $organisation->projects()->get();
       $users = $organisation->users()->get();
-      $tasks = []; // $users->tasks()->get();
+      $tasks = [];
 
       foreach($users as $user)
       {

@@ -13,7 +13,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('organisation-dashboard-project', require('./components/UserDashboard/Project.vue'));
+Vue.component('organisation-dashboard-project', require('./components/OrganisationDashboard/Project.vue'));
 Vue.component('organisation-dashboard-user', require('./components/OrganisationDashboard/User.vue'));
 
 const app = new Vue({

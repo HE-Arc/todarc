@@ -30,8 +30,9 @@
             <h2>{{__('Users:')}}</h2>
             <div id="users-container">
               @foreach($users as $user)
-                <organisation-dashboard-project name="{{$user->name}}">
-                </organisation-dashboard-project>
+                <organisation-dashboard-user name="{{$user->name}}"
+                  v-bind:tasks="{{$tasks[$user->email]}}">
+                </organisation-dashboard-user>
               @endforeach
             </div>
         </div>

@@ -24,8 +24,15 @@ class OrganisationController extends Controller
 
       $projects = $organisation->projects()->get();
       $users = $organisation->users()->get();
+      $tasks = []; // $users->tasks()->get();
 
-      return view('organisationDashboard.dashboard', ['organisation' => $organisation, 'projects' => $projects, 'users' => $users]);
+      foreach($users as $user)
+      {
+        $userTasks = $user->tasks()->get();
+        $tasks[$user->email] = $userTasks;
+      }
+
+      return view('organisationDashboard.dashboard', ['organisation' => $organisation, 'projects' => $projects, 'users' => $users, 'tasks' => $tasks]);
     }
 
     /**

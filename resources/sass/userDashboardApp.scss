@@ -1,10 +1,15 @@
-#projects-container
+.cards-container
 {
   // grid
   display: grid;
   grid-template-columns: repeat(3, 33.3333%);
   grid-row-gap: 20px;
   grid-column-gap: 15px;
+
+  @include media-breakpoint-down(md)
+  {
+      grid-template-columns: 100%;
+  }
 
   //margin and padding
   padding-top: 20px;

@@ -10482,7 +10482,7 @@ a.text-dark:focus {
   margin-bottom: 15px;
 }
 
-#projects-container {
+.cards-container {
   display: grid;
   grid-template-columns: repeat(3, 33.3333%);
   grid-row-gap: 20px;
@@ -10491,7 +10491,13 @@ a.text-dark:focus {
   margin-bottom: 30px;
 }
 
-#projects-container .card {
+@media (max-width: 991.98px) {
+  .cards-container {
+    grid-template-columns: 100%;
+  }
+}
+
+.cards-container .card {
   background-color: #393939;
   border-color: #2c2c2c;
 }

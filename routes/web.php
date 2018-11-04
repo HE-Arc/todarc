@@ -15,7 +15,21 @@
 
 Route::group(['middleware' => 'checklogin'], function() {
 
+  Route::get('/projects/{$id}/groups', 'JsonProjectGroupController@index');
+  Route::post('/projects/{$id}/groups/new', 'JsonProjectGroupController@create');
+  Route::patch('/projects/{$id}/groups', 'JsonProjectGroupController@store');
+  
+  Route::resource('projects.tasks', 'JsonProjectTaskController')->only([
+    'index', 'create', 'store'
+  ]);
+  
+  Route::resource('projects.groups', 'JsonProjectGroupController')->only([
+    'index', 'create', 'store'
+  ]);
+
   Route::resource('projects', 'ProjectController');
+
+  //Route::resource('groups', 'GroupsController');
 
   Route::get('/', 'UserDashboard@dashboard')->name('home');
   Route::get('/home', 'UserDashboard@dashboard')->name('home');

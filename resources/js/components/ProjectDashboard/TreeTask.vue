@@ -1,7 +1,7 @@
 <template>
   <div class="tree">
     <ul class="tree-list">
-      <tree-task-node :node="treeData"></tree-task-node>
+      <tree-task-node :key="null" v-bind:id="null"></tree-task-node>
     </ul>
   </div>
 </template>
@@ -12,7 +12,13 @@ import TreeTaskNode from "./TreeTaskNode";
 export default {
     name:"tree",
     props: {
-        treeData: Object
+
+    },
+    loaded:{
+        //root = groups.filter(x=>x.group_id==null)
+    },
+    computed: {
+        
     },
     components: {
         TreeTaskNode

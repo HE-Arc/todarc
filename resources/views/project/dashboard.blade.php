@@ -12,13 +12,7 @@
 <div class="container" id="project-dashboard">
     <div class="row">
         <div class="col-md-12">
-            @foreach ($group as $groups())
-                {{$group->name}}
-            @endforeach
-            {{
-
-            }}
-            <project-dashboard project={!! json_encode($project) !!} groups={!! json_encode($project->groups()) !!}></project-dashboard>
+            <project-dashboard v-bind:project='{!! $project->toJson(); !!}' v-bind:groups='{!! $groups->toJson() !!}' ></project-dashboard>
         </div>
     </div>
 </div>

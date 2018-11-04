@@ -21,7 +21,17 @@ class Project extends Model
   */
   public function groups()
   {
-    return $this->hasMany('App\Group');
+    return $this->hasMany('App\Group', 'project_id', 'id');
+  }
+
+  public function groupsJson()
+  {
+    $groups = new Collection();
+    foreach ($this->groups() as $group)
+    {
+      $groups->push($group->name);
+    }
+    return $groups->toJson();;
   }
 
   /**

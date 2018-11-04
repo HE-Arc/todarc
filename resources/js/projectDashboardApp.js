@@ -5,7 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 require('./bootstrap');
-window.Vue = require('vue');
+import Vue from 'vue';
+window.Vue = Vue;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,6 +16,10 @@ window.Vue = require('vue');
 
 Vue.component('project-dashboard', require('./components/ProjectDashboard/Project.vue'));
 
+
+import store from './components/ProjectDashboard/store/index.js';
+
 const app = new Vue({
+    store,
     el: '#project-dashboard'
 });

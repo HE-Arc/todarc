@@ -17,7 +17,7 @@
           <h2>{{ __('Projects') }}</h2>
         </div>
         <div class="col-md-3 text-right">
-          <add-new-org button-text="{{__('+ New organisation')}}"></add-new-org>
+          <add-new-project button-text="{{__('+ New project')}}"></add-new-project>
         </div>
       </div>
 

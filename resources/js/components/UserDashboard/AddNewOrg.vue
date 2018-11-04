@@ -5,6 +5,13 @@
 <script>
   module.exports =
   {
+    data: function ()
+    {
+      return {
+        orgName: '',
+        orgDescription: ''
+      }
+    },
     props:
     {
       buttonText: String
@@ -13,7 +20,7 @@
     {
       clicked: function()
       {
-        console.log('ici');
+        console.log(this.orgName);
       }
     }
   }

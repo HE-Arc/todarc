@@ -14,7 +14,7 @@ class JsonProjectTaskController extends Controller
      */
     public function index(Project $project)
     {
-        return response()->toJson($project->tasks);
+        return response()->json($project->tasks);
     }
 
     /**

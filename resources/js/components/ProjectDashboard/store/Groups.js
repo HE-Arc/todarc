@@ -1,7 +1,20 @@
 
 export default {
+  namespaced: true,
   state: {
     groups: []
+  },
+  getters: {
+    group(state){
+      return id => state.groups.find(group => {
+        return group.id === id
+      });
+    },
+    subGroups(state){
+      return id => state.groups.filter(group => {
+        return group.group_id === id
+      });
+    }
   },
   mutations: {
     FETCH(state, groups) {
@@ -9,9 +22,10 @@ export default {
     }
   },
   actions: {
-    fetch({}, project_id) {
+    fetch({commit}, project_id) {
+      project_id = 1;
       return axios
-        .get(groups)
+        .get(`${project_id}/groups`)
         .then(response => commit("FETCH", response.data))
         .catch();
     },

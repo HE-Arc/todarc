@@ -1,34 +1,33 @@
 <template>
   <li class="node-tree">
-    <span class="label">{{ groups.name }}</span>
-    <ul v-if="groupsLength>0">
-      <node v-for="group in groups" :key="group.id" v-bind:id="group.id"></node>
+    <span v-if="group(id)" font-color="green" class="label">{{ group(id).name }}</span>
+    <ul v-if="groups.filter(x=>x.id==id)">
+      <node v-for="group in groups.filter(x=>x.group_id==id)" :key="group.id" v-bind:id="group.id"></node>
     </ul>
   </li>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   name: "node",
   props: {
     id: Number
   },
-  data:function(){
-    return {
-      //children = groups.filter(x=>x.group_id==key)
-    }
-  },
   computed: {
-    group(){
-      this.$store.state.groups.filter(x=>x.id==key);
+    search(){
+      return this.$store.getters["groupsModule/group"](this.id);
     },
-    groups(){
-      this.$store.state.groups.filter(x=>x.group_id==key);
-    },
-    groupsLength() {
-        return this.groups.length;
+    ...mapState({groups: state => state.groupsModule.groups}),
+    ...mapGetters({
+      group: 'groupsModule/group',
+      subGroup: 'groupsModule/subGroups',
+    }),
+    tempTest() {
+      //if (this.groups) {
+        return this.$store.getters['groupsModule/group'](this.id);
+      //}
     }
   }
 };

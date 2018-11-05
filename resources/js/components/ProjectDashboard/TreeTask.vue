@@ -1,27 +1,25 @@
 <template>
   <div class="tree">
     <ul class="tree-list">
-      <tree-task-node :key="null" v-bind:id="null"></tree-task-node>
+      <tree-task-node v-if="groups" :key="null" v-bind:id="null"></tree-task-node>
     </ul>
   </div>
 </template>
 
 <script>
 import TreeTaskNode from "./TreeTaskNode";
+import { mapState } from 'vuex';
 
 export default {
     name:"tree",
-    props: {
-
-    },
-    loaded:{
-        //root = groups.filter(x=>x.group_id==null)
-    },
-    computed: {
-        
+    mounted() {
+        this.$store.dispatch('groupsModule/fetch');
     },
     components: {
         TreeTaskNode
+    },
+    computed: {
+        ...mapState({groups: state => state.groupsModule.groups})
     }
 };
 </script>

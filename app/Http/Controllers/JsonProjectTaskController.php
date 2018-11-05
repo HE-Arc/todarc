@@ -14,7 +14,10 @@ class JsonProjectTaskController extends Controller
      */
     public function index(Project $project)
     {
-        return response()->json($project->tasks);
+        //abort_unless($project->belongsTo(Auth::user()), 404);
+        // TODO add verification for rights to see this project
+
+        return response()->json($project->tasks());
     }
 
     /**
@@ -24,7 +27,7 @@ class JsonProjectTaskController extends Controller
      */
     public function create(Project $project)
     {
-        //
+        
     }
 
     /**

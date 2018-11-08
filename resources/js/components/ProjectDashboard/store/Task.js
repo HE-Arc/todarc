@@ -4,22 +4,30 @@ export default {
   state: {
     tasks: []
   },
+  getters: {
+    task(state){
+      return id => state.tasks.find(task => {
+        return task.id === id
+      });
+    }
+  },
   mutations: {
-    FETCH(state, tasks) {
+    FETCH_TASKS(state, tasks) {
       state.tasks = tasks;
     }
   },
   actions: {
-    fetch({}, id) {
+    fetchTasks({commit}, project_id) {
+      project_id = 1;
       return axios
-        .get(tasks)
-        .then(response => commit("FETCH", response.data))
+        .get(`${project_id}/tasks`)
+        .then(response => commit("FETCH_TASKS", response.data))
         .catch();
     },
     deleteTask({}, id) {
       axios
         .delete(`${tasks}/${id}`)
-        .then(() => this.dispatch("fetch"))
+        .then(() => this.dispatch("fetchTasks"))
         .catch();
     },
     edit({}, task) {
@@ -27,11 +35,13 @@ export default {
         .put(`${tasks}/${task.id}`, {
           name: task.name
         })
-        .then(() => this.dispatch("fetch"));
+        .then(() => this.dispatch("fetchTasks"));
     },
-    addTask({}, name) {
+    addTask({}, name, project_id, group_id) {
       axios.post(`${tasks}`, {
-        task: task
+        name:name,
+        project_id:project_id,
+        group_id:group_id
       });
     }
   }

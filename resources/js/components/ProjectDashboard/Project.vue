@@ -1,9 +1,9 @@
 <template>
-  <div class="card text-center">
+  <div class="card">
     <h4 class="card-header">Tasks</h4>
     <div class="card-body">
       <h6>Tasks running : </h6>
-      <tree :groups="groups"></tree>
+      <tree-groups :groups="groups"></tree-groups>
     </div>
     <div class="card-footer">
       <a><button class="btn btn-light btn-block">Clic for no reason, feels free</button></a>
@@ -13,12 +13,12 @@
 
 <script>
 
-import Tree from "./TreeTask";
+import TreeGroups from "./TreeGroups";
 
 export default {
   props: ["project", "groups"],
   components: {
-    Tree
+    TreeGroups
   }
 };
 </script>

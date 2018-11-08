@@ -1,22 +1,23 @@
 <template>
   <div class="tree">
     <ul class="tree-list">
-      <tree-task-node v-if="groups" :key="null" v-bind:id="null"></tree-task-node>
+      <node-group v-if="groups" :key="null" v-bind:id="null"></node-group>
     </ul>
   </div>
 </template>
 
 <script>
-import TreeTaskNode from "./TreeTaskNode";
+import NodeGroup from "./NodeGroup";
 import { mapState } from 'vuex';
 
 export default {
-    name:"tree",
+    name:"treeGroups",
     mounted() {
-        this.$store.dispatch('groupsModule/fetch');
+        this.$store.dispatch('groupsModule/fetchGroups');
+        this.$store.dispatch('tasksModule/fetchTasks');
     },
     components: {
-        TreeTaskNode
+        NodeGroup
     },
     computed: {
         ...mapState({groups: state => state.groupsModule.groups})

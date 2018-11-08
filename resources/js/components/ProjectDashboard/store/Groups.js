@@ -17,22 +17,22 @@ export default {
     }
   },
   mutations: {
-    FETCH(state, groups) {
+    FETCH_GROUPS(state, groups) {
       state.groups = groups;
     }
   },
   actions: {
-    fetch({commit}, project_id) {
+    fetchGroups({commit}, project_id) {
       project_id = 1;
       return axios
         .get(`${project_id}/groups`)
-        .then(response => commit("FETCH", response.data))
+        .then(response => commit("FETCH_GROUPS", response.data))
         .catch();
     },
     deleteGroup({}, id) {
       axios
         .delete(`${groups}/${id}`)
-        .then(() => this.dispatch("fetch"))
+        .then(() => this.dispatch("fetchGroups"))
         .catch();
     },
     edit({}, group) {
@@ -41,7 +41,7 @@ export default {
           name: group.name,
           group_id: groupsStore.group_id
         })
-        .then(() => this.dispatch("fetch"));
+        .then(() => this.dispatch("fetchGroups"));
     },
     addGroup({}, name, parent_id, project_id) {
       axios.post(`${groups}`, {

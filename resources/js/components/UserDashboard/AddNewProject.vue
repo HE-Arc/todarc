@@ -34,7 +34,7 @@
       sendProject: function()
       {
         axios.post(
-          '/addProject',
+          '/storeProject',
           this.$data,
           {
             headers : {
@@ -43,7 +43,8 @@
           }
         ).then(response =>
         {
-          window.location.pathname = response.data.redirectTo;
+          //window.location.pathname = response.data.redirectTo;
+          console.log('test');
         }, response =>
         {
           console.log("error");

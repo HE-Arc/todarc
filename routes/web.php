@@ -20,7 +20,9 @@ Route::group(['middleware' => 'checklogin'], function() {
   Route::get('/', 'UserDashboard@dashboard')->name('home');
   Route::get('/home', 'UserDashboard@dashboard')->name('home');
   Route::get('/organisation/{organisationName}', 'OrganisationController@index');
-  
+  Route::post('/storeProjectOrg/{organisationName}', 'ProjectController@storeForOrganisation');
+  Route::post('/storeProject', 'ProjectController@store');
+
 });
 
 Auth::routes();

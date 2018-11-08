@@ -17,6 +17,7 @@ Vue.component('user-dashboard-project', require('./components/UserDashboard/Proj
 Vue.component('user-dashboard-organisation', require('./components/UserDashboard/Organisation.vue'));
 Vue.component('add-new-org', require('./components/UserDashboard/AddNewOrg.vue'));
 Vue.component('add-new-project', require('./components/UserDashboard/AddNewProject.vue'));
+Vue.component('modal', require('./components/Modal.vue'));
 
 const app = new Vue({
     el: '#user-dashboard'

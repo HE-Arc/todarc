@@ -18,9 +18,7 @@
   {
     props: {
       name: Number,
-      tasksToDo: Array,
-      buttonText: String,
-      uriProject: String
+      tasksToDo: Array
     }
   }
 </script>

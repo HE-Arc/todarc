@@ -14,8 +14,20 @@
 
 
 Route::group(['middleware' => 'checklogin'], function() {
-
+  
   Route::resource('projects', 'ProjectController');
+
+  Route::resource('groups', 'JsonGroupsController')->except([
+    'create', 'index', 'store'
+  ]);
+ 
+  Route::resource('projects.tasks', 'JsonProjectTaskController')->only([
+    'index', 'create', 'store'
+  ]);
+  
+  Route::resource('projects.groups', 'JsonProjectGroupController')->only([
+    'index', 'create', 'store'
+  ]);
 
   Route::get('/', 'UserDashboard@dashboard')->name('home');
   Route::get('/home', 'UserDashboard@dashboard')->name('home');

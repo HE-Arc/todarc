@@ -20,6 +20,7 @@ class UserDashboard extends Controller
   */
   public function dashboard(Request $request)
   {
+    // TODO Update to index
     $user = Auth::user();
 
     $projects = $user->projects;

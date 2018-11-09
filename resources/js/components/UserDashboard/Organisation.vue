@@ -2,13 +2,13 @@
   <div class="card text-center">
     <h4 class="card-header">{{ name }}</h4>
     <div class="card-body">
-      <h6>Tasks running : </h6>
+      <h6>Members : </h6>
       <ul>
-        <li v-for="todo in tasksToDo">{{todo}}</li>
+        <li v-for="member in members">{{member}}</li>
       </ul>
     </div>
     <div class="card-footer">
-      <a v-bind:href="uriProject"><button class="btn btn-light btn-block">{{buttonText}}</button></a>
+      <a v-bind:href="uriOrganisation"><button class="btn btn-light btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>
@@ -16,11 +16,12 @@
 <script>
   module.exports =
   {
-    props: {
+    props:
+    {
       name: String,
-      tasksToDo: Array,
       buttonText: String,
-      uriProject: String
+      uriOrganisation: String,
+      members: Array
     }
   }
 </script>

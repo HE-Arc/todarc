@@ -22,8 +22,8 @@ class OrganisationController extends Controller
     {
       $organisation = Organisation::where('name', $organisationName)->get()[0];
 
-      $projects = $organisation->projects()->get();
-      $users = $organisation->users()->get();
+      $projects = $organisation->projects;
+      $users = $organisation->users;
       $tasks = [];
 
       foreach($users as $user)

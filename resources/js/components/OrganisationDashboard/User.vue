@@ -8,6 +8,7 @@
       </ul>
     </div>
     <div class="card-footer">
+      <a v-bind:href="home"><button class="btn btn-light btn-block">{{btnExpulseName}}</button></a>
     </div>
   </div>
 </template>
@@ -17,7 +18,8 @@
   {
     props: {
       name: String,
-      tasks: Array
+      tasks: Array,
+      btnExpulseName: String
     }
   }
 </script>

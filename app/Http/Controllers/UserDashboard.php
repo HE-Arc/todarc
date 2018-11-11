@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Project;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+use App\Project;
+use App\Task;
 
 class UserDashboard extends Controller
 {
@@ -17,11 +20,12 @@ class UserDashboard extends Controller
   */
   public function dashboard(Request $request)
   {
+    // TODO Update to index
     $user = Auth::user();
 
-    $projects = $user->projects()->get();
-    $organisations = $user->organisations()->get();
+    $projects = $user->projects;
+    $organisations = $user->organisations;
 
-    return view('userdashboard.dashboard', ['projects' => $projects, 'organisations' => $organisations]);
+    return view('userdashboard.dashboard', ['user' => $user, 'projects' => $projects, 'organisations' => $organisations]);
   }
 }

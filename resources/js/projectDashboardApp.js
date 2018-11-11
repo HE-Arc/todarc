@@ -5,7 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 require('./bootstrap');
-window.Vue = require('vue');
+import Vue from 'vue';
+window.Vue = Vue;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -13,12 +14,12 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('user-dashboard-project', require('./components/UserDashboard/Project.vue'));
-Vue.component('user-dashboard-organisation', require('./components/UserDashboard/Organisation.vue'));
-Vue.component('add-new-org', require('./components/UserDashboard/AddNewOrg.vue'));
-Vue.component('add-new-project', require('./components/UserDashboard/AddNewProject.vue'));
-Vue.component('modal', require('./components/Modal.vue'));
+Vue.component('project-dashboard', require('./components/ProjectDashboard/Project.vue'));
+
+
+import store from './components/ProjectDashboard/store/index.js';
 
 const app = new Vue({
-    el: '#user-dashboard'
+    store,
+    el: '#project-dashboard'
 });

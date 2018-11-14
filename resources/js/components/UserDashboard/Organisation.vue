@@ -8,7 +8,7 @@
       </ul>
     </div>
     <div class="card-footer">
-      <a v-bind:href="uriOrganization"><button class="btn btn-light btn-block">{{buttonText}}</button></a>
+      <a v-bind:href="uriOrganisation"><button class="btn btn-light btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>
@@ -16,10 +16,11 @@
 <script>
   module.exports =
   {
-    props: {
-      name: Number,
+    props:
+    {
+      name: String,
       buttonText: String,
-      uriOrganization: String,
+      uriOrganisation: String,
       members: Array
     }
   }

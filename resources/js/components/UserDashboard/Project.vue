@@ -17,8 +17,10 @@
   module.exports =
   {
     props: {
-      name: Number,
-      tasksToDo: Array
+      name: String,
+      tasksToDo: Array,
+      buttonText: String,
+      uriProject: String
     }
   }
 </script>

@@ -10517,16 +10517,7 @@ body {
   background-color: #222 !important;
 }
 
-#projects-container {
-  display: grid;
-  grid-template-columns: repeat(3, 33.3333%);
-  grid-row-gap: 20px;
-  grid-column-gap: 15px;
-  padding-top: 20px;
-  margin-bottom: 30px;
-}
-
-#projects-container .card {
+.card {
   background-color: #393939;
   border-color: #2c2c2c;
 }

@@ -15,6 +15,9 @@ window.Vue = require('vue');
 
 Vue.component('organisation-dashboard-project', require('./components/OrganisationDashboard/Project.vue'));
 Vue.component('organisation-dashboard-user', require('./components/OrganisationDashboard/User.vue'));
+Vue.component('add-new-project', require('./components/OrganisationDashboard/AddNewProject.vue'));
+Vue.component('add-new-user', require('./components/OrganisationDashboard/AddNewUser.vue'));
+Vue.component('modal', require('./components/Modal.vue'));
 
 const app = new Vue({
     el: '#organisation-dashboard'

@@ -17,7 +17,7 @@ Route::group(['middleware' => 'checklogin'], function() {
   
   Route::resource('projects', 'ProjectController');
 
-  Route::resource('groups', 'JsonGroupsController')->except([
+  Route::resource('groups', 'JsonGroupController')->except([
     'create', 'index', 'store'
   ]);
  

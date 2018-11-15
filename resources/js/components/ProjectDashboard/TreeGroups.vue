@@ -1,33 +1,57 @@
 <template>
-  <div class="tree">
-    <ul class="tree-list">
-      <node-group v-if="groups" :key="null" v-bind:id="null"></node-group>
-    </ul>
-  </div>
+    <div class="tree">
+        <div>
+            <ul class="tree-list">
+                <node-group v-if="groups" :key="null" v-bind:id="null"></node-group>
+            </ul>
+            <p>TESTS</p>
+            
+            <sl-vue-tree v-model="groupsData">
+                <template slot="title" slot-scope="{ node }">
+                    {{ node.title }}
+                </template>
+            </sl-vue-tree>
+                {{groupsData}}
+        </div>
+    </div>
 </template>
 
 <script>
-import NodeGroup from "./NodeGroup";
+import nodeGroup from "./NodeGroup";
 import { mapState } from 'vuex';
+
+//import draggable from 'vuedraggable';
+import slVueTree from 'sl-vue-tree/dist/sl-vue-tree.js';
+import 'sl-vue-tree/dist/sl-vue-tree-dark.css';
 
 export default {
     name:"treeGroups",
     mounted() {
-        this.$store.dispatch('groupsModule/fetchGroups');
-        this.$store.dispatch('tasksModule/fetchTasks');
+        this.$store.dispatch('groupsModule/fetch');
+    },
+       data: function () {
+     return {
+       nodes: nodes,
+       test: test
+     }
     },
     components: {
-        NodeGroup
+        slVueTree,
+        nodeGroup
     },
     computed: {
-        ...mapState({groups: state => state.groupsModule.groups})
+        ...mapState({groups: state => state.groupsModule.groups,
+                    groupsData: state => state.groupsModule.groupsData})
     }
 };
 </script>
 
 <style>
-.tree-list ul {
+.node {
     padding-left: 16px;
     margin: 6px 0;
+}
+.node-task {
+    background-color: red;
 }
 </style>

@@ -13,12 +13,12 @@
 
 <script>
 
-import TreeGroups from "./TreeGroups";
+import treeGroups from "./TreeGroups";
 
 export default {
   props: ["project", "groups"],
   components: {
-    TreeGroups
+    treeGroups
   }
 };
 </script>

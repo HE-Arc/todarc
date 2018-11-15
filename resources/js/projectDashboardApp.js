@@ -16,7 +16,6 @@ window.Vue = Vue;
 
 Vue.component('project-dashboard', require('./components/ProjectDashboard/Project.vue'));
 
-
 import store from './components/ProjectDashboard/store/index.js';
 
 const app = new Vue({

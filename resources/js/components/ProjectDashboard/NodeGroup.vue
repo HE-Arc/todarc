@@ -1,16 +1,19 @@
 <template>
-  <li class="node-tree">
-    <span v-if="group(id)" font-color="green" class="label">{{ group(id).name }}</span>
-    <ul v-if="groups.filter(x=>x.id==id)">
-      <node-group v-for="group in groups.filter(x=>x.group_id==id)" :key="group.id" v-bind:id="group.id"></node-group>
-    </ul>
-    <task-group v-for="task in tasks.filter(x=>x.group_id==id)" :key="task.id" v-bind:id="task.id"></task-group>
-  </li>
+  <div class="node node-group">
+    <draggable element="node-group" :options="{draggable:'.group'}">
+      <span v-if="group(id)" font-color="green" class="label">{{ group(id).name }}</span>
+      <node-group v-for="group in groups.filter(x=>x.group_id==id)" :key="group.id" v-bind:id="group.id" class="group"></node-group>
+      <button>Add group</button>
+    </draggable>
+    
+  </div>
 </template>
 
 <script>
-import TaskGroup from "./NodeTask";
+import taskGroup from "./NodeTask";
 import { mapState, mapGetters } from 'vuex';
+
+import draggable from 'vuedraggable'
 
 export default {
   name: "nodeGroup",
@@ -26,7 +29,8 @@ export default {
     })
   },
   components: {
-    TaskGroup
+    taskGroup,
+    draggable
   },
 };
 </script>

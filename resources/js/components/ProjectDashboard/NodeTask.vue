@@ -1,5 +1,5 @@
 <template>
-  <div class="node-task">
+  <div class="node node-task">
     <span v-if="task(id)" font-color="green" class="label">{{ task(id).name }}</span>
   </div>
 </template>
@@ -14,6 +14,7 @@ export default {
   },
   computed: {
     task2(){
+      //TODO Clean
       return this.$store.getters["tasksModule/task"](this.id);
     },
     ...mapGetters({

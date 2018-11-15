@@ -4,11 +4,11 @@
     <div class="card-body">
       <h6>Tasks running : </h6>
       <ul>
-        <li v-for="todo in tasksToDo">{{todo}}</li>
+        <li v-for="task in tasksToDo">{{ task.name }}</li>
       </ul>
     </div>
     <div class="card-footer">
-      <a v-bind:href="uriProject"><button class="btn btn-light btn-block">{{buttonText}}</button></a>
+      <a v-bind:href="buttonUri"><button class="btn btn-light btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@
       name: String,
       tasksToDo: Array,
       buttonText: String,
-      uriProject: String
+      buttonUri: String
     }
   }
 </script>

@@ -44,7 +44,7 @@ class ProjectController extends Controller
       $group->project()->associate($project);
       $group->save();
 
-      $redirectTo = '/';
+      $redirectTo = action('ProjectController@show', ['id' => $project->id]);
 
       return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
     }

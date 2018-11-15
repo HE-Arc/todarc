@@ -27,7 +27,7 @@
           <user-dashboard-project name="{{$project->name}}"
             v-bind:tasks-to-do="{{ $project->tasksNameJson($user) }}"
             button-text="{{ __('See the project') }}"
-            uri-project="https://github.com"
+            uri-project="{{$project->url}}"
             ></user-dashboard-project>
         @endforeach
       </div>
@@ -50,7 +50,7 @@
         <user-dashboard-organisation name="{{$organisation->name}}"
           v-bind:members="{{ $organisation->userNames()->toJson() }}"
           button-text="{{ __('See the organisation') }}"
-          uri-project="https://github.com"
+          uri-organisation="{{ $organisation->url }}"
           ></user-dashboard-organis ation>
         @endforeach
       </div>

@@ -67,4 +67,11 @@ class Project extends Model
    {
      return $this->tasksName($user)->toJson();
    }
+
+   public function getUrlAttribute()
+  {
+    return action('ProjectController@show', ['id' => $this->id]);
+  }
+
+   protected $appends = ['url'];
 }

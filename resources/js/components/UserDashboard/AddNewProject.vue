@@ -43,8 +43,7 @@
           }
         ).then(response =>
         {
-          //window.location.pathname = response.data.redirectTo;
-          console.log('test');
+          window.location = response.data.redirectTo;
         }, response =>
         {
           console.log("error");

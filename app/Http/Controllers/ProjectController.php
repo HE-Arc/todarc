@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use View;
+
 
 class ProjectController extends Controller
 {
@@ -41,7 +44,20 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $project = new Project;
+
+        $project->name = $request->projectName;
+        $project->owner()->associate(Auth::user());
+        $project->save();
+
+        $group = new Group;
+        $group->name = self::DEFAULT_GROUPNAME;
+        $group->project()->associate($project);
+        $group->save();
+
+        $redirectTo = '/';
+
+        return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
     }
 
     /**
@@ -101,4 +117,6 @@ class ProjectController extends Controller
     {
         //
     }
+
+    const DEFAULT_GROUPNAME = 'Todo';
 }

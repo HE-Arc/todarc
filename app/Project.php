@@ -27,7 +27,7 @@ class Project extends Model
   /**
   * Get all of the owning commentable models.
   */
-  public function project_owner()
+  public function Owner()
   {
     return $this->morphTo();
   }

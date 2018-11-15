@@ -1,11 +1,10 @@
 <template>
   <div class="card text-center">
-    <h4 class="card-header">{{ username }}</h4>
+    <h4 class="card-header">{{ userName }}</h4>
     <div class="card-body">
     </div>
     <div class="card-footer">
-      <a v-bind:href="buttonUri">
-      <button class="btn btn-light btn-block">{{buttonText}}</button></a>
+      <button class="btn btn-primary btn-lg" href="#" role="button" v-on:click="kick">{{buttonText}}</button></a>
     </div>
   </div>
 </template>
@@ -14,9 +13,15 @@
   module.exports =
   {
     props: {
-      username: String,
+      userName: String,
       buttonText: String,
-      buttonUri: String
+      buttonUri: String,
+    },
+    methods:{
+      kick:function()
+      {
+        console.log("Kick");
+      }
     }
   }
 </script>

@@ -20,7 +20,7 @@
       name: String,
       tasksToDo: Array,
       buttonText: String,
-      buttonUri: String
+      buttonUri: String,
     }
   }
 </script>

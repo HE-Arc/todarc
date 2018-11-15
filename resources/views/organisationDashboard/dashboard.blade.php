@@ -43,18 +43,18 @@
         </div>
         <div class="col-md-3 text-right">
           <add-new-user button-text="{{__('+ Existing user')}}"
-          orgName="{{$organisation->name}}"
-          v-bind:orgUsers="['user1', 'user2', 'user3']"
-          userName="test"
+          org-Name="{{$organisation->name}}"
+          v-bind:org-Users="['user1', 'user2', 'user3']"
+          user-Name="test"
           ></add-new-user>
         </div>
       </div>
       <div id="users-container">
           @foreach($users as $user)
           <organisation-dashboard-user
-          username="{{$user->name}}"
-          buttonText="{{ __('Kick user') }}"
-          buttonUri=""
+          user-Name="{{$user->name}}"
+          button-Text="{{ __('Kick user') }}"
+          button-Uri=""
           ></organisation-dashboard-user>
           @endforeach
       </div>

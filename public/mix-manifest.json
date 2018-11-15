@@ -1,6 +1,7 @@
 {
-    "/js/projectDashboardApp.js": "/js/projectDashboardApp.js",
     "/js/userDashboardApp.js": "/js/userDashboardApp.js",
+    "/js/organisationDashboardApp.js": "/js/organisationDashboardApp.js",
+    "/js/projectDashboardApp.js": "/js/projectDashboardApp.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/loginApp.js": "/js/loginApp.js"

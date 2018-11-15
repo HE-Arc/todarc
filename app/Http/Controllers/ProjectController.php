@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\Group;
 use Illuminate\Http\Request;
 use View;
+
 
 class ProjectController extends Controller
 {
@@ -24,35 +26,27 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function store(Request $request, $owner)
     {
-        //
-    }
+      $project = new Project;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+      $project->name = $request->projectName;
+      $project->owner()->associate($owner);
+      $project->save();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function storeForOrganisation(Request $request, $orgName)
-    {
-        //
+      $group = new Group;
+      $group->name = self::DEFAULT_GROUPNAME;
+      $group->project()->associate($project);
+      $group->save();
+
+      $redirectTo = '/';
+
+      return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
     }
 
     /**
@@ -101,4 +95,6 @@ class ProjectController extends Controller
     {
         //
     }
+
+    const DEFAULT_GROUPNAME = 'Todo';
 }

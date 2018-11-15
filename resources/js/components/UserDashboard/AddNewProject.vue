@@ -34,7 +34,7 @@
       sendProject: function()
       {
         axios.post(
-          '/storeProject',
+          '/projects',
           this.$data,
           {
             headers : {

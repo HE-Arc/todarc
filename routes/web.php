@@ -18,7 +18,7 @@ Route::group(['middleware' => 'checklogin'], function() {
   Route::resource('projects', 'ProjectController')->except(['store']);
   Route::resource('projects', 'UserProjectController')->only(['store']);
   Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
-  Route::resource('organisations', 'OrganisationController')->only(['show']);
+  Route::resource('organisations', 'OrganisationController')->only(['show', 'store']);
 
   Route::resource('groups', 'JsonGroupController')->except([
     'create', 'index', 'store'

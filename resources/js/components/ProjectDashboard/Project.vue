@@ -16,10 +16,22 @@
 import treeGroups from "./TreeGroups";
 
 export default {
-  props: ["project", "groups"],
+  props: {
+    project: {
+      required: true
+    },
+    groups: {
+      required: true
+    }
+  },
   components: {
     treeGroups
-  }
+  },
+  provide(){
+    return {
+      groups : this.groups
+    }
+  },
 };
 </script>
 

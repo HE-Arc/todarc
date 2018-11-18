@@ -1,42 +1,51 @@
 <template>
   <div class="node node-group">
-    <draggable :options="{draggable:'.group'}" :list="groupsNew">
-        <span v-if="group(id)" class="label">{{ group(id).name }}</span>
-        <node-group v-for="group in groups.filter(x=>x.group_id==id)" :key="group.id" v-bind:id="group.id" class="group"></node-group>
-        <hr>
-        <button>Add group</button>
+    <span v-if="group" class="label">{{ group.name }}</span>
+    <draggable :list="groupsNew" :options="{group:'group'}">
+      <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id" class="group"></node-group>
+      <!-- <hr>
+      <button>Add group</button> -->
+      <!-- <task-group v-for="task in tasks.filter(x=>x.group_id==id)" :key="task.id" v-bind:id="task.id"></task-group> -->
     </draggable>
-    <!-- <task-group v-for="task in tasks.filter(x=>x.group_id==id)" :key="task.id" v-bind:id="task.id"></task-group> -->
   </div>
 </template>
 
 <script>
 import taskGroup from "./NodeTask";
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from "vuex";
 
-import draggable from 'vuedraggable';
+import draggable from "vuedraggable";
 
 export default {
   name: "NodeGroup",
   props: {
     id: Number
   },
+  inject: ["groups"],
   data() {
     return {
-      groupsNew: this.id
-    }
+      groupsData: [],
+      groupsNew: [],
+      group: null
+    };
   },
   computed: {
-    ...mapState({ groups: state => state.groupsModule.groups,
-                  tasks: state => state.tasksModule.tasks}),
+    ...mapState({
+      //groups: state => state.groupsModule.groups,
+      tasks: state => state.tasksModule.tasks
+    }),
     ...mapGetters({
-      group: 'groupsModule/group',
-      subGroup: 'groupsModule/subGroups',
+      //group: "groupsModule/group",
+      //subGroup: "groupsModule/subGroups"
     })
   },
   components: {
     taskGroup,
-    draggable,
+    draggable
   },
+  mounted(){
+    this.groupsNew = this.groups.filter(g => g.group_id === this.id);
+    this.group = this.groups.find(g => g.id === this.id);
+  }
 };
 </script>

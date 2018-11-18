@@ -1,18 +1,25 @@
 <template>
     <div class="tree">
         <div>
+            <h2>List 1</h2>
             <ul class="tree-list">
-                <draggable :options="{draggable:'.group'}">
-                    <node-group v-for="group in groups" :key="group.id" v-bind:id="group.id"></node-group>
+                <draggable :list="groupsNew1" :options="{group:'group'}">
+                    <!-- <div v-for="group in groupsNew1" :key="group.id" v-bind:id="group.id" class="node node-group">
+                        <span class="label">{{ group.name }}</span>
+                    </div> -->
+                    <node-group v-for="group in groupsNew1" :key="group.id" v-bind:id="group.id" class="node node-group"></node-group>
+                </draggable>
+            </ul>
+            <h2>List 2</h2>
+            <ul class="tree-list">
+                <draggable :list="groupsNew2" :options="{group:'group'}">
+                    <node-group v-for="group in groupsNew2" :key="group.id" v-bind:id="group.id"></node-group>
+                    <!-- <div v-for="group in groupsNew2" :key="group.id" v-bind:id="group.id" class="node node-group">
+                        <span class="label">{{ group.name }}</span>
+                    </div> -->
                 </draggable>
             </ul>
             <p>TESTS</p>
-            
-            <sl-vue-tree v-model="groupsData">
-                <template slot="title" slot-scope="{ node }">
-                    {{ node.title }}
-                </template>
-            </sl-vue-tree>
             {{groupsData}}
         </div>
     </div>
@@ -24,27 +31,29 @@ import { mapState, mapGetters } from 'vuex';
 
 import draggable from 'vuedraggable';
 
-import slVueTree from 'sl-vue-tree/dist/sl-vue-tree.js';
-import 'sl-vue-tree/dist/sl-vue-tree-dark.css';
-
 export default {
     name:"treeGroups",
+    inject:["groups"],
     mounted() {
         this.$store.dispatch('groupsModule/fetch');
     },
     data: function () {
      return {
-       
+       groupsNew1: [],
+       groupsNew2: []
      }
     },
     components: {
-        slVueTree,
         NodeGroup,
         draggable
     },
     computed: {
-        ...mapState({groups: state => state.groupsModule.groups,
+        ...mapState({groupsD: state => state.groupsModule.groups,
                     groupsData: state => state.groupsModule.groupsData}),
+    },
+    mounted(){
+        this.groupsNew1 = this.groups.filter(g=>g.group_id === null);
+        this.groupsNew2 = this.groups.filter(g=>g.group_id === null);
     }
 };
 </script>

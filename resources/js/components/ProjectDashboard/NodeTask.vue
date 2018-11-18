@@ -12,6 +12,7 @@ export default {
   props: {
     id: Number
   },
+  inject:["groups"],
   computed: {
     task2(){
       //TODO Clean

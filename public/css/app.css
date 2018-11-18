@@ -10502,6 +10502,12 @@ a.text-dark:focus {
   border-color: #2c2c2c;
 }
 
+nav.navbar.navbar-dark p.nav-link,
+nav.navbar.navbar-dark p.nav-link:hover {
+  color: white;
+  margin: 0 15px;
+}
+
 body {
   color: white;
 }

@@ -4,10 +4,6 @@
   <script src="{{ asset('js/userDashboardApp.js') }}" defer></script>
 @endsection
 
-@section('navbar')
-  @include('layouts.navbar')
-@endsection
-
 @section('content')
 <div class="container" id="user-dashboard">
   <div class="row">

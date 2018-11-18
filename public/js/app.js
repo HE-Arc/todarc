@@ -13876,7 +13876,8 @@ module.exports = Cancel;
 
 /***/ }),
 /* 11 */,
-/* 12 */
+/* 12 */,
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24842,7 +24843,6 @@ module.exports = Vue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(38).setImmediate))
 
 /***/ }),
-/* 13 */,
 /* 14 */,
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -47160,7 +47160,7 @@ module.exports = __webpack_require__(44);
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(15);
-window.Vue = __webpack_require__(12);
+window.Vue = __webpack_require__(13);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

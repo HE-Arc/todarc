@@ -2,7 +2,9 @@
     <div class="tree">
         <div>
             <ul class="tree-list">
-                <node-group v-if="groups" :key="null" v-bind:id="null"></node-group>
+                <draggable :options="{draggable:'.group'}">
+                    <node-group v-for="group in groups" :key="group.id" v-bind:id="group.id"></node-group>
+                </draggable>
             </ul>
             <p>TESTS</p>
             
@@ -11,16 +13,17 @@
                     {{ node.title }}
                 </template>
             </sl-vue-tree>
-                {{groupsData}}
+            {{groupsData}}
         </div>
     </div>
 </template>
 
 <script>
-import nodeGroup from "./NodeGroup";
-import { mapState } from 'vuex';
+import NodeGroup from "./NodeGroup";
+import { mapState, mapGetters } from 'vuex';
 
-//import draggable from 'vuedraggable';
+import draggable from 'vuedraggable';
+
 import slVueTree from 'sl-vue-tree/dist/sl-vue-tree.js';
 import 'sl-vue-tree/dist/sl-vue-tree-dark.css';
 
@@ -29,19 +32,19 @@ export default {
     mounted() {
         this.$store.dispatch('groupsModule/fetch');
     },
-       data: function () {
+    data: function () {
      return {
-       nodes: nodes,
-       test: test
+       
      }
     },
     components: {
         slVueTree,
-        nodeGroup
+        NodeGroup,
+        draggable
     },
     computed: {
         ...mapState({groups: state => state.groupsModule.groups,
-                    groupsData: state => state.groupsModule.groupsData})
+                    groupsData: state => state.groupsModule.groupsData}),
     }
 };
 </script>

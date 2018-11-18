@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Organisation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrganisationController extends Controller
 {
@@ -38,6 +39,7 @@ class OrganisationController extends Controller
         $organisation = new Organisation;
         $organisation->name = $request->orgName;
         $organisation->save();
+        $organisation->Users()->attach([Auth::user()->id]);
 
         $redirectTo = action('OrganisationController@show', ['id' => $organisation->id]);
 

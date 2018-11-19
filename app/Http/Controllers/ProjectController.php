@@ -39,6 +39,7 @@ class ProjectController extends Controller
       $project->owner()->associate($owner);
       $project->save();
 
+      //Add a default group
       $group = new Group;
       $group->name = self::DEFAULT_GROUPNAME;
       $group->project()->associate($project);
@@ -58,8 +59,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         // show the view and pass the project to it
-        //$groups = $project->groups();
-        return View::make('project.dashboard', ['groups'=>$project->groups])->with('project', $project);
+        return View::make('project.dashboard', ['groups'=>$project->groups, 'tasks'=>$project->tasks])->with('project', $project);
     }
 
     /**

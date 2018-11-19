@@ -12,7 +12,6 @@
 </template>
 
 <script>
-
 import treeGroups from "./TreeGroups";
 
 export default {
@@ -21,6 +20,9 @@ export default {
       required: true
     },
     groups: {
+      required: true
+    },
+    tasks: {
       required: true
     }
   },
@@ -36,20 +38,21 @@ export default {
         obj.order = index;
         obj.group_id = parent_id;
       });
-      
+
       return axios
         .post('/projects/'+this.project.id+'/groups',{
           groups: data
         })
-        .then(axios.spread((tasks, groups) => {
-          console.log("Groups updated successfully")
-        }))
+        .then(() => {
+          console.log("Groups updated successfully");
+        })
         .catch();
     }
   },
   provide(){
     return {
       groups : this.groups,
+      tasks : this.tasks,
       addGroup : this.addGroup,
       updateGroups : this.updateGroups,
     }

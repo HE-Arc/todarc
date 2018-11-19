@@ -17,7 +17,7 @@ class JsonProjectTaskController extends Controller
         //abort_unless($project->belongsTo(Auth::user()), 404);
         // TODO add verification for rights to see this project
 
-        return response()->json($project->tasks());
+        return response()->json($project->tasks);
     }
 
     /**

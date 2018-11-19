@@ -18,7 +18,7 @@ import draggable from 'vuedraggable';
 export default {
   name: "treeGroups",
   inject: ['groups', 'updateGroups'],
-  mounted() {
+  mounted(){
     this.$store.dispatch('groupsModule/fetch');
   },
   data: function() {
@@ -34,11 +34,6 @@ export default {
   components: {
     NodeGroup,
     draggable
-  },
-  computed: { ...mapState({
-      // groupsD: state => state.groupsModule.groups,
-      // groupsData: state => state.groupsModule.groupsData
-    }),
   },
   mounted() {
     this.groupsNew = this.groups.filter(g => g.group_id === null);

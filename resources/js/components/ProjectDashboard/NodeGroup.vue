@@ -2,11 +2,16 @@
   <li class="node node-group">
     <span v-if="group" class="label">{{ group.name }} <i class="fas fa-arrows-alt"></i></span>
 
-    <draggable element="ul" class="min-height" :list="groupsNew" :options="{group:'group', draggable:'.node', animation:200}" @change="change">
+    <draggable element="ul" class="min-height" :list="groupsNew" :options="{group:'group', draggable:'.node-task', animation:200}" @change="changeGroups">
     
       <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id"></node-group>
     
       <!-- <task-group v-for="task in tasks.filter(x=>x.group_id==id)" :key="task.id" v-bind:id="task.id" class="node node-task"></task-group> -->
+    
+    </draggable>
+    <draggable element="ul" class="min-height" :list="tasksNew" :options="{group:'task', draggable:'.node-task', animation:200}" @change="changeTasks">
+    
+      <task-group v-for="task in tasksNew" :key="task.id" v-bind:id="task.id"></task-group>
     
     </draggable>
     <!-- <button>Add group</button> -->
@@ -20,39 +25,34 @@ import { mapState, mapGetters } from "vuex";
 import draggable from "vuedraggable";
 
 export default {
-  name: "NodeGroup",
+  name: 'NodeGroup',
   props: {
     id: Number
   },
-  inject: ["groups", "updateGroups"],
+  inject: ['groups', 'tasks', 'updateGroups'],
   data() {
     return {
+      group: null,
       groupsNew: [],
-      group: null
+      tasksNew: [],
     };
   },
   methods:{
-    change(evt){
+    changeGroups(evt){
       this.updateGroups(this.groupsNew, this.id);
+    },
+    changeTasks(evt){
+      //TODO
     }
-  },
-  computed: {
-    ...mapState({
-      //groups: state => state.groupsModule.groups,
-      tasks: state => state.tasksModule.tasks
-    }),
-    ...mapGetters({
-      //group: "groupsModule/group",
-      //subGroup: "groupsModule/subGroups"
-    })
   },
   components: {
     taskGroup,
     draggable
   },
   mounted(){
-    this.groupsNew = this.groups.filter(g => g.group_id === this.id);
-    this.group = this.groups.find(g => g.id === this.id);
+    this.groupsNew = this.groups.filter(group => group.group_id === this.id);
+    this.tasksNew = this.tasks.filter(task => task.group_id === this.id);
+    this.group = this.groups.find(group => group.id === this.id);
   }
 };
 </script>

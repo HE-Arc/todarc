@@ -1,8 +1,15 @@
 <template>
   <div class="card">
-    <h4 class="card-header">Tasks</h4>
+    <div class="card-header modal-header">
+      <h4>
+        Tasks
+      </h4>
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+        <label class="custom-control-label" for="customCheck1">Running tasks</label>
+      </div>
+    </div>
     <div class="card-body">
-      <h6>Tasks running : </h6>
       <tree-groups :groups="groups"></tree-groups>
     </div>
     <div class="card-footer">

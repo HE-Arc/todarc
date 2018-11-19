@@ -12,9 +12,8 @@
 
 <script>
 import NodeGroup from "./NodeGroup";
-import { mapState, mapGetters } from 'vuex';
-
 import draggable from 'vuedraggable';
+
 export default {
   name: "treeGroups",
   inject: ['groups', 'updateGroups'],
@@ -38,10 +37,10 @@ export default {
   mounted() {
     this.groupsNew = this.groups.filter(g => g.group_id === null);
   }
-}; 
+};
 </script>
 
-<style>
+<style lang="scss" scoped>
 .node {
   padding-left: 16px;
   margin: 6px 0;

@@ -59,7 +59,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .min-height{
   min-height: 20px;
 }

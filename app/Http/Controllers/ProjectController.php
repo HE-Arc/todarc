@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Project;
 use App\Group;
-use Illuminate\Http\Request;
 use View;
 
 

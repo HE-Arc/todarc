@@ -3,30 +3,12 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
-@import '~bootstrap/scss/bootstrap.scss';
+// @import 'variables';
+// @import '~bootstrap/scss/bootstrap.scss';
+
+@import "~bootswatch/dist/darkly/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/darkly/bootswatch";
+
 @import 'login';
 @import 'userDashboardApp';
-
-body
-{
-  color: $font-color;
-}
-
-.form-control, .form-control:focus
-{
-  background-color: $input-background;
-  border-color: $input-border;
-  color: $font-color;
-}
-
-.bg-dark
-{
-  background-color: #222 !important;
-}
-
-.card
-{
-  background-color: $card-background;
-  border-color: $card-border-color;
-}

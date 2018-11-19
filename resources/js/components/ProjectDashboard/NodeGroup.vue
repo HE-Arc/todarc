@@ -20,8 +20,6 @@
 
 <script>
 import taskGroup from "./NodeTask";
-import { mapState, mapGetters } from "vuex";
-
 import draggable from "vuedraggable";
 
 export default {

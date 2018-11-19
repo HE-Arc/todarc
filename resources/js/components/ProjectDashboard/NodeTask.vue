@@ -1,5 +1,5 @@
 <template>
-  <div class="node node-task">
+  <div class="node node-task list-group-item bg-secondary">
     <span v-if="task" font-color="green" class="label">{{ task.name }}</span>
   </div>
 </template>

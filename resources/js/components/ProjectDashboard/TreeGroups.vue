@@ -1,13 +1,7 @@
 <template>
-  <div class="tree">
-    <h2>List 1</h2>
-    
-    <draggable element="ul" :list="groupsNew" :options="{group:'group', draggable:'.node-group', animation:200}" @change="change" class="tree-list min-height">
-    
-      <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id"></node-group>
-      
-    </draggable>
-  </div>
+  <draggable element="ul" :list="groupsNew" :options="{group:'group', draggable:'.node-group', animation:200}" @change="change" class="min-height list-group list-group-root">
+    <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id"></node-group>
+  </draggable>
 </template>
 
 <script>

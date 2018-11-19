@@ -1,0 +1,39 @@
+ul, li{
+  list-style-type: none;
+}
+
+.just-padding {
+  padding: 15px;
+}
+
+// .list-group.list-group-root {
+//   padding: 0;
+//   overflow: hidden;
+// }
+
+@mixin one-more-level($level){
+  > .list-group {
+    padding-left: ($level*15)*1px;
+    > .node {
+      > .list-group-item {
+        padding-left: (($level+1)*15)*1px;
+      }
+      @if($level >= 8){
+        > .list-group {
+          padding-left: (($level+1)*15)*1px;
+        }
+      }@else{
+        @include one-more-level($level + 1)
+      }
+    }
+  }
+}
+
+.list-group.list-group-root > .node{
+  @include one-more-level(0);
+
+  .list-group-item {
+    border-radius: 0;
+    border-width: 1px 0 0 0;
+  }
+}

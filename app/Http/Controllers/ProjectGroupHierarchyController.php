@@ -14,7 +14,7 @@ class ProjectGroupHierarchyController extends Controller
      * @param  \Integer $project_id
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $project_id)
+    public function store(Request $request, $project_id)
     {
         //TODO check rights for this project
         $ids = array_map(function($g){return $g['id'];}, $request->groups);

@@ -4,10 +4,6 @@
   <script src="{{ asset('js/projectDashboardApp.js') }}" defer></script>
 @endsection
 
-@section('navbar')
-    @include('layouts.navbar')
-@endsection
-
 @section('content')
 <div class="container" id="project-dashboard">
     <div class="row">

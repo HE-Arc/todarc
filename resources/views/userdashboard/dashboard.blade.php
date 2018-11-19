@@ -4,10 +4,6 @@
   <script src="{{ asset('js/userDashboardApp.js') }}" defer></script>
 @endsection
 
-@section('navbar')
-  @include('layouts.navbar')
-@endsection
-
 @section('content')
 <div class="container" id="user-dashboard">
   <div class="row">
@@ -51,7 +47,7 @@
           v-bind:members="{{ $organisation->userNames()->toJson() }}"
           button-text="{{ __('See the organisation') }}"
           uri-organisation="{{ $organisation->url }}"
-          ></user-dashboard-organis ation>
+          ></user-dashboard-organisation>
         @endforeach
       </div>
     </div>

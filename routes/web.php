@@ -16,7 +16,7 @@ Route::group(['middleware' => 'checklogin'], function() {
   Route::resource('projects', 'ProjectController')->except(['store']);
   Route::resource('projects', 'UserProjectController')->only(['store']); //TODO Change route name to users.projects
   Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
-  Route::resource('organisations', 'OrganisationController')->only(['show']);
+  Route::resource('organisations', 'OrganisationController')->only(['show', 'store']);
 
   Route::get('/', 'UserDashboard@dashboard')->name('home');
   Route::get('/home', 'UserDashboard@dashboard')->name('home');

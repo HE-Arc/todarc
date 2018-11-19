@@ -33,27 +33,43 @@ export default {
     addGroup(){
 
     },
-    updateGroups(data, parent_id){
-      data.map((obj,index)=>{
-        obj.order = index;
-        obj.group_id = parent_id;
+    updateGroups(data, group_id){
+      data.map((group,index)=>{
+        group.order = index;
+        group.group_id = group_id;
       });
 
       return axios
-        .post('/projects/'+this.project.id+'/groups',{
+        .post('/projects/'+this.project.id+'/groups-hierarchy',{
           groups: data
         })
         .then(() => {
           console.log("Groups updated successfully");
         })
         .catch();
+    },
+    updateTasks(data, group_id){
+      data.map((task,index)=>{
+        task.order = index;
+        task.group_id = group_id;
+      });
+
+      return axios
+        .post('/projects/'+this.project.id+'/tasks-hierarchy',{
+          tasks: data
+        })
+        .then(() => {
+          console.log("Tasks updated successfully");
+        })
+        .catch();
     }
   },
   provide(){
     return {
-      groups : this.groups,
       tasks : this.tasks,
+      groups : this.groups,
       addGroup : this.addGroup,
+      updateTasks : this.updateTasks,
       updateGroups : this.updateGroups,
     }
   },

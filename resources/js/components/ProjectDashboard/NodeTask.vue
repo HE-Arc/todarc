@@ -1,6 +1,6 @@
 <template>
   <div class="node node-task">
-    <span font-color="green" class="label">{{ task.name }}</span>
+    <span v-if="task" font-color="green" class="label">{{ task.name }}</span>
   </div>
 </template>
 
@@ -10,10 +10,14 @@ import { mapGetters } from 'vuex';
 export default {
   name: "nodeTask",
   props: {
-    id: Number,
-    task: Object
+    id: Number
   },
-  inject:["tasks"],
+  data() {
+    return {
+      task: null,
+    };
+  },
+  inject:['tasks'],
   mounted(){
     this.task = this.tasks.find(task => task.id == this.id);
   }

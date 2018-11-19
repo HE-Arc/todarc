@@ -30,5 +30,6 @@ class JsonProjectTaskController extends Controller
     public function store(Request $request, Project $project)
     {
         //TODO Create a new Task
+        
     }
 }

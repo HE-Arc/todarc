@@ -29,7 +29,7 @@ export default {
   props: {
     id: Number
   },
-  inject: ['groups', 'tasks', 'updateGroups'],
+  inject: ['groups', 'tasks', 'updateGroups', 'updateTasks'],
   data() {
     return {
       group: null,
@@ -39,10 +39,12 @@ export default {
   },
   methods:{
     changeGroups(evt){
-      this.updateGroups(this.groupsNew, this.id);
+      if(this.groupsNew.length>0)
+        this.updateGroups(this.groupsNew, this.id);
     },
     changeTasks(evt){
-      //TODO
+      if(this.tasksNew.length>0)
+        this.updateTasks(this.tasksNew, this.id);
     }
   },
   components: {

@@ -18,8 +18,14 @@ Route::group(['middleware' => 'checklogin'], function() {
   Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
   Route::resource('organisations', 'OrganisationController')->only(['show']);
 
+  Route::get('/', 'UserDashboard@dashboard')->name('home');
+  Route::get('/home', 'UserDashboard@dashboard')->name('home');
+  Route::get('/organisation/{organisationName}', 'OrganisationController@index');
 
-  //TODO add folowing routes to api
+  Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);
+  Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
+
+  //TODO add following routes to api
   Route::resource('groups', 'JsonGroupController')->only([
     'update', 'destroy'
   ]);
@@ -31,11 +37,6 @@ Route::group(['middleware' => 'checklogin'], function() {
   Route::resource('projects.groups', 'JsonProjectGroupController')->only([
     'index', 'store'
   ]);
-
-  Route::get('/', 'UserDashboard@dashboard')->name('home');
-  Route::get('/home', 'UserDashboard@dashboard')->name('home');
-  Route::get('/organisation/{organisationName}', 'OrganisationController@index');
-
 });
 
 Auth::routes();

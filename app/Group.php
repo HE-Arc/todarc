@@ -8,11 +8,18 @@ use Illuminate\Database\Eloquent\Collection;
 class Group extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['order, group_id'];
+
+    /**
      * The labels that belong to the task.
      */
     public function tasks()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany('App\Task')->orderBy('order');
     }
 
     /**
@@ -20,7 +27,7 @@ class Group extends Model
      */
     public function groups()
     {
-        return $this->hasMany('App\Group');
+        return $this->hasMany('App\Group')->orderBy('order');
     }
 
     /**

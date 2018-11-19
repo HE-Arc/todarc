@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
-use App\Task;
+use App\Group;
 
 class JsonProjectGroupController extends Controller
 {
@@ -22,23 +22,26 @@ class JsonProjectGroupController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($id)
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request, Project $project)
     {
-        //
+        //TODO Create a Group
+    }
+
+    /**
+     * Update groups order and of a project
+     * 
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Project $project
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Project $project)
+    {
+        //TODO Change this request
     }
 }

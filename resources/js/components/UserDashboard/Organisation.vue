@@ -4,7 +4,7 @@
     <div class="card-body">
       <h6>Members : </h6>
       <ul>
-        <li v-for="member in members">{{member}}</li>
+        <li v-for="member in members" :key="member.id">{{member}}</li>
       </ul>
     </div>
     <div class="card-footer">

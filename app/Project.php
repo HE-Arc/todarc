@@ -21,7 +21,7 @@ class Project extends Model
   */
   public function groups()
   {
-    return $this->hasMany('App\Group', 'project_id', 'id');
+    return $this->hasMany('App\Group')->orderBy('order');
   }
 
   /**
@@ -35,17 +35,26 @@ class Project extends Model
   /**
    * get all tasks of the project
    */
-   public function tasks($user = null)
-   {
-     $tasks = new Collection();
+  public function tasks()
+  {
+    return $this->hasManyThrough('App\Task', 'App\Group')->orderBy('order');
+  }
 
-     foreach ($this->groups as $group)
-     {
-       $tasks = $tasks->merge($group->getTasksGroupAndChildren($user));
-     }
+  /**
+   * get all task of the project for a user
+   */
+  public function tasksUser($user = null)
+  {
+    //TODO Function renamed where it was used
+    $tasks = new Collection();
 
-     return $tasks;
-   }
+    foreach ($this->groups as $group)
+    {
+      $tasks = $tasks->merge($group->getTasksGroupAndChildren($user));
+    }
+
+    return $tasks;
+  }
 
    /**
     * get all tasks name in a collection

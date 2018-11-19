@@ -26,21 +26,8 @@ body
   background-color: #222 !important;
 }
 
-#projects-container
+.card
 {
-  // grid
-  display: grid;
-  grid-template-columns: repeat(3, 33.3333%);
-  grid-row-gap: 20px;
-  grid-column-gap: 15px;
-
-  //margin and padding
-  padding-top: 20px;
-  margin-bottom: 30px;
-
-  .card
-  {
-    background-color: $card-background;
-    border-color: $card-border-color;
-  }
+  background-color: $card-background;
+  border-color: $card-border-color;
 }

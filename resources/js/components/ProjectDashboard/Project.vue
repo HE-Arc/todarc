@@ -12,14 +12,67 @@
 </template>
 
 <script>
-
-import TreeGroups from "./TreeGroups";
+import treeGroups from "./TreeGroups";
 
 export default {
-  props: ["project", "groups"],
+  props: {
+    project: {
+      required: true
+    },
+    groups: {
+      required: true
+    },
+    tasks: {
+      required: true
+    }
+  },
   components: {
-    TreeGroups
-  }
+    treeGroups
+  },
+  methods:{
+    addGroup(){
+
+    },
+    updateGroups(data, group_id){
+      data.map((group,index)=>{
+        group.order = index;
+        group.group_id = group_id;
+      });
+
+      return axios
+        .post('/projects/'+this.project.id+'/groups-hierarchy',{
+          groups: data
+        })
+        .then(() => {
+          console.log("Groups updated successfully");
+        })
+        .catch();
+    },
+    updateTasks(data, group_id){
+      data.map((task,index)=>{
+        task.order = index;
+        task.group_id = group_id;
+      });
+
+      return axios
+        .post('/projects/'+this.project.id+'/tasks-hierarchy',{
+          tasks: data
+        })
+        .then(() => {
+          console.log("Tasks updated successfully");
+        })
+        .catch();
+    }
+  },
+  provide(){
+    return {
+      tasks : this.tasks,
+      groups : this.groups,
+      addGroup : this.addGroup,
+      updateTasks : this.updateTasks,
+      updateGroups : this.updateGroups,
+    }
+  },
 };
 </script>
 

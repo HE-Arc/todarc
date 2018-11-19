@@ -47,7 +47,7 @@
           v-bind:members="{{ $organisation->userNames()->toJson() }}"
           button-text="{{ __('See the organisation') }}"
           uri-organisation="{{ $organisation->url }}"
-          ></user-dashboard-organis ation>
+          ></user-dashboard-organisation>
         @endforeach
       </div>
     </div>

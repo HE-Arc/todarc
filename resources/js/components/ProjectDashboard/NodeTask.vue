@@ -1,6 +1,6 @@
 <template>
-  <div class="node-task">
-    <span v-if="task(id)" font-color="green" class="label">{{ task(id).name }}</span>
+  <div class="node node-task">
+    <span v-if="task" font-color="green" class="label">{{ task.name }}</span>
   </div>
 </template>
 
@@ -12,13 +12,19 @@ export default {
   props: {
     id: Number
   },
-  computed: {
-    task2(){
-      return this.$store.getters["tasksModule/task"](this.id);
-    },
-    ...mapGetters({
-      task: 'tasksModule/task',
-    })
+  data() {
+    return {
+      task: null,
+    };
+  },
+  inject:['tasks'],
+  mounted(){
+    this.task = this.tasks.find(task => task.id == this.id);
   }
 };
 </script>
+
+
+<style lang="scss" scoped>
+
+</style>

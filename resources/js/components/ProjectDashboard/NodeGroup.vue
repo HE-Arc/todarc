@@ -1,32 +1,66 @@
 <template>
-  <li class="node-tree">
-    <span v-if="group(id)" font-color="green" class="label">{{ group(id).name }}</span>
-    <ul v-if="groups.filter(x=>x.id==id)">
-      <node-group v-for="group in groups.filter(x=>x.group_id==id)" :key="group.id" v-bind:id="group.id"></node-group>
-    </ul>
-    <task-group v-for="task in tasks.filter(x=>x.group_id==id)" :key="task.id" v-bind:id="task.id"></task-group>
+  <li class="node node-group">
+    <span v-if="group" class="label">{{ group.name }} <i class="fas fa-arrows-alt"></i></span>
+
+    <draggable element="ul" class="min-height" :list="groupsNew" :options="{group:'group', draggable:'.node-task', animation:200}" @change="changeGroups">
+    
+      <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id"></node-group>
+    
+      <!-- <task-group v-for="task in tasks.filter(x=>x.group_id==id)" :key="task.id" v-bind:id="task.id" class="node node-task"></task-group> -->
+    
+    </draggable>
+    <draggable element="ul" class="min-height" :list="tasksNew" :options="{group:'task', draggable:'.node-task', animation:200}" @change="changeTasks">
+    
+      <task-group v-for="task in tasksNew" :key="task.id" v-bind:id="task.id"></task-group>
+    
+    </draggable>
+    <!-- <button>Add group</button> -->
   </li>
 </template>
 
 <script>
-import TaskGroup from "./NodeTask";
-import { mapState, mapGetters } from 'vuex';
+import taskGroup from "./NodeTask";
+import { mapState, mapGetters } from "vuex";
+
+import draggable from "vuedraggable";
 
 export default {
-  name: "nodeGroup",
+  name: 'NodeGroup',
   props: {
     id: Number
   },
-  computed: {
-    ...mapState({ groups: state => state.groupsModule.groups,
-                  tasks: state => state.tasksModule.tasks}),
-    ...mapGetters({
-      group: 'groupsModule/group',
-      subGroup: 'groupsModule/subGroups',
-    })
+  inject: ['groups', 'tasks', 'updateGroups', 'updateTasks'],
+  data() {
+    return {
+      group: null,
+      groupsNew: [],
+      tasksNew: [],
+    };
+  },
+  methods:{
+    changeGroups(evt){
+      if(this.groupsNew.length>0)
+        this.updateGroups(this.groupsNew, this.id);
+    },
+    changeTasks(evt){
+      if(this.tasksNew.length>0)
+        this.updateTasks(this.tasksNew, this.id);
+    }
   },
   components: {
-    TaskGroup
+    taskGroup,
+    draggable
   },
+  mounted(){
+    this.groupsNew = this.groups.filter(group => group.group_id === this.id);
+    this.tasksNew = this.tasks.filter(task => task.group_id === this.id);
+    this.group = this.groups.find(group => group.id === this.id);
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+.min-height{
+  min-height: 20px;
+}
+</style>

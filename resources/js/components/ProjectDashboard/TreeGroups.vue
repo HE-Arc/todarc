@@ -2,17 +2,9 @@
   <div class="tree">
     <h2>List 1</h2>
     
-    <draggable element="ul" :list="groupsNew1" :options="{group:'group', draggable:'.node-group', animation:200}" @change="change" class="tree-list min-height">
+    <draggable element="ul" :list="groupsNew" :options="{group:'group', draggable:'.node-group', animation:200}" @change="change" class="tree-list min-height">
     
-      <node-group v-for="group in groupsNew1" :key="group.id" v-bind:id="group.id"></node-group>
-    
-    </draggable>
-
-    <!-- TODO Remove the second list -->
-    <h2>List 2</h2>
-    <draggable element="ul" :list="groupsNew2" :options="{group:'group', draggable:'.node-group', animation:200}" class="tree-list min-height">
-    
-      <node-group v-for="group in groupsNew2" :key="group.id" v-bind:id="group.id"></node-group>
+      <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id"></node-group>
     
     </draggable>
   </div>
@@ -25,30 +17,18 @@ import { mapState, mapGetters } from 'vuex';
 import draggable from 'vuedraggable';
 export default {
   name: "treeGroups",
-  inject: ["groups"],
+  inject: ['groups', 'updateGroups'],
   mounted() {
     this.$store.dispatch('groupsModule/fetch');
   },
   data: function() {
     return {
-      groupsNew1: [],
-      groupsNew2: []
+      groupsNew: []
     }
   },
   methods:{
     change(evt){
-      console.log(evt);
-
-      // added: contains information of an element added to the array
-      //     newIndex: the index of the added element
-      //     element: the added element
-      // removed: contains information of an element removed from to the array
-      //     oldIndex: the index of the element before remove
-      //     element: the removed element
-      // moved: contains information of an element moved within the array
-      //     newIndex: the current index of the moved element
-      //     oldIndex: the old index of the moved element
-      //     element: the moved element
+      this.updateGroups(this.groupsNew, null);
     }
   },
   components: {
@@ -56,13 +36,12 @@ export default {
     draggable
   },
   computed: { ...mapState({
-      groupsD: state => state.groupsModule.groups,
-      groupsData: state => state.groupsModule.groupsData
+      // groupsD: state => state.groupsModule.groups,
+      // groupsData: state => state.groupsModule.groupsData
     }),
   },
   mounted() {
-    this.groupsNew1 = this.groups.filter(g => g.group_id === null);
-    this.groupsNew2 = this.groups.filter(g => g.group_id === null);
+    this.groupsNew = this.groups.filter(g => g.group_id === null);
   }
 }; 
 </script>

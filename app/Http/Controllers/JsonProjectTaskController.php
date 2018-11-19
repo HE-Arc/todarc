@@ -21,23 +21,14 @@ class JsonProjectTaskController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Project $project)
-    {
-        
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function store(Project $project)
+    public function store(Request $request, Project $project)
     {
-        //
+        //TODO Create a new Task
     }
 }

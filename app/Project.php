@@ -21,7 +21,7 @@ class Project extends Model
   */
   public function groups()
   {
-    return $this->hasMany('App\Group', 'project_id', 'id');
+    return $this->hasMany('App\Group')->orderBy('order');
   }
 
   /**

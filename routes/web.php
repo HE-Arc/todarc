@@ -11,26 +11,25 @@
 |
 */
 
-
-
 Route::group(['middleware' => 'checklogin'], function() {
 
-
   Route::resource('projects', 'ProjectController')->except(['store']);
-  Route::resource('projects', 'UserProjectController')->only(['store']);
+  Route::resource('projects', 'UserProjectController')->only(['store']); //TODO Change route name to users.projects
   Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
   Route::resource('organisations', 'OrganisationController')->only(['show']);
 
-  Route::resource('groups', 'JsonGroupController')->except([
-    'create', 'index', 'store'
+
+  //TODO add folowing routes to api
+  Route::resource('groups', 'JsonGroupController')->only([
+    'update', 'destroy'
   ]);
 
   Route::resource('projects.tasks', 'JsonProjectTaskController')->only([
-    'index', 'create', 'store'
+    'index', 'store'
   ]);
 
   Route::resource('projects.groups', 'JsonProjectGroupController')->only([
-    'index', 'create', 'store'
+    'index', 'store'
   ]);
 
   Route::get('/', 'UserDashboard@dashboard')->name('home');

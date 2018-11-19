@@ -27,9 +27,31 @@ export default {
   components: {
     treeGroups
   },
+  methods:{
+    addGroup(){
+
+    },
+    updateGroups(data, parent_id){
+      data.map((obj,index)=>{
+        obj.order = index;
+        obj.group_id = parent_id;
+      });
+      
+      return axios
+        .post('/projects/'+this.project.id+'/groups',{
+          groups: data
+        })
+        .then(axios.spread((tasks, groups) => {
+          console.log("Groups updated successfully")
+        }))
+        .catch();
+    }
+  },
   provide(){
     return {
-      groups : this.groups
+      groups : this.groups,
+      addGroup : this.addGroup,
+      updateGroups : this.updateGroups,
     }
   },
 };

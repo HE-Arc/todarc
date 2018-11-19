@@ -1,13 +1,12 @@
 <template>
-  <div class="node node-group">
-    <span v-if="group" class="label">{{ group.name }}</span>
-    <draggable :list="groupsNew" :options="{group:'group'}">
+  <li class="node node-group">
+    <span v-if="group" class="label">{{ group.name }} <i class="fas fa-arrows-alt"></i></span>
+    <draggable element="ul" class="min-height" :list="groupsNew" :options="{group:'group', draggable:'.group', animation:200}">
       <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id" class="group"></node-group>
-      <!-- <hr>
-      <button>Add group</button> -->
       <!-- <task-group v-for="task in tasks.filter(x=>x.group_id==id)" :key="task.id" v-bind:id="task.id"></task-group> -->
     </draggable>
-  </div>
+    <!-- <button>Add group</button> -->
+  </li>
 </template>
 
 <script>
@@ -49,3 +48,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.min-height{
+  min-height: 20px;
+}
+</style>

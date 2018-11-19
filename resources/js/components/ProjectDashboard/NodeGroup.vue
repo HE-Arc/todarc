@@ -1,9 +1,13 @@
 <template>
   <li class="node node-group">
     <span v-if="group" class="label">{{ group.name }} <i class="fas fa-arrows-alt"></i></span>
-    <draggable element="ul" class="min-height" :list="groupsNew" :options="{group:'group', draggable:'.group', animation:200}">
-      <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id" class="group"></node-group>
-      <!-- <task-group v-for="task in tasks.filter(x=>x.group_id==id)" :key="task.id" v-bind:id="task.id"></task-group> -->
+
+    <draggable element="ul" class="min-height" :list="groupsNew" :options="{group:'group', draggable:'.node', animation:200}">
+    
+      <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id"></node-group>
+    
+      <!-- <task-group v-for="task in tasks.filter(x=>x.group_id==id)" :key="task.id" v-bind:id="task.id" class="node node-task"></task-group> -->
+    
     </draggable>
     <!-- <button>Add group</button> -->
   </li>

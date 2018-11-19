@@ -14,17 +14,21 @@
 
 
 Route::group(['middleware' => 'checklogin'], function() {
-  
-  Route::resource('projects', 'ProjectController');
+
+
+  Route::resource('projects', 'ProjectController')->except(['store']);
+  Route::resource('projects', 'UserProjectController')->only(['store']);
+  Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
+  Route::resource('organisations', 'OrganisationController')->only(['show']);
 
   Route::resource('groups', 'JsonGroupController')->except([
     'create', 'index', 'store'
   ]);
- 
+
   Route::resource('projects.tasks', 'JsonProjectTaskController')->only([
     'index', 'create', 'store'
   ]);
-  
+
   Route::resource('projects.groups', 'JsonProjectGroupController')->only([
     'index', 'create', 'store'
   ]);
@@ -32,8 +36,6 @@ Route::group(['middleware' => 'checklogin'], function() {
   Route::get('/', 'UserDashboard@dashboard')->name('home');
   Route::get('/home', 'UserDashboard@dashboard')->name('home');
   Route::get('/organisation/{organisationName}', 'OrganisationController@index');
-  Route::post('/storeProjectOrg/{organisationName}', 'ProjectController@storeForOrganisation');
-  Route::post('/storeProject', 'ProjectController@store');
 
 });
 

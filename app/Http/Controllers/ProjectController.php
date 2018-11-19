@@ -34,21 +34,22 @@ class ProjectController extends Controller
     */
     public function store(Request $request, $owner)
     {
-      $project = new Project;
+        $project = new Project;
 
-      $project->name = $request->projectName;
-      $project->owner()->associate($owner);
-      $project->save();
+        $project->name = $request->projectName;
+        $project->owner()->associate($owner);
+        $project->save();
 
-      //Add a default group
-      $group = new Group;
-      $group->name = self::DEFAULT_GROUPNAME;
-      $group->project()->associate($project);
-      $group->save();
+        //Add a default group
+        $group = new Group;
+        $group->name = self::DEFAULT_GROUPNAME;
+        $group->project()->associate($project);
+        $group->order = 0;
+        $group->save();
 
-      $redirectTo = action('ProjectController@show', ['id' => $project->id]);
+        $redirectTo = action('ProjectController@show', ['id' => $project->id]);
 
-      return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
+        return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
     }
 
     /**

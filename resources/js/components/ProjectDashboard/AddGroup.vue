@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#add-group">Add Group</button>
+    <button @click="open" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#add-group">Add Group</button>
     <div class="modal fade" id="add-group" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -15,9 +15,9 @@
               <div class="row">
                 <div class="col-md-12 mb-3">
                   <label for="firstName">Name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Name" value required>
-                  <div class="invalid-feedback">
-                    Valid first name is required.
+                  <input v-model="name" type="text" class="form-control" id="firstName" placeholder="Name" value required>
+                  <div id="invalid-name" class="invalid-feedback">
+                    Valid name is required.
                   </div>
                 </div>
               </div>
@@ -25,36 +25,16 @@
               <div class="row">
                 <div class="col-md-12 mb-3">
                   <label for="country">Group</label>
-                  <select class="custom-select d-block w-100" id="group" required>
-                    <option value="">Choose...</option>
+                  <select v-model="group_id" class="custom-select d-block w-100" id="group" required>
+                    <option :value="group_default">Root location</option>
                     <option v-for="group in groups" :key="group.id" :value="group.id">{{ group.name }}</option>
                   </select>
-                  <div class="invalid-feedback">
+                  <div id="invalid-group" class="invalid-feedback">
                     Please select a valid group.
                   </div>
                 </div>
               </div>
-
-              <hr class="mb-3">
-              <h4 class="mb-3">Status</h4>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="same-address">
-                <label class="custom-control-label" for="same-address">Done</label>
-              </div>
-              <!-- <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button> -->
             </form>
-            <!-- name -> OK -->
-            <!-- order -> OK -->
-            <!-- group_id -> TODO fill list -->
-            <!-- from Date -> OK -->
-            <!-- until date -> OK -->
-            <!-- done -> TODO -->
-            <!-- 
-              TODO :
-              -> check date order
-              -> valid group_id
-              -> Add task
-              -->
           </div>
           <div class="card-footer">
             <button @click="add" type="button" class="btn btn-primary">Add Group</button>
@@ -69,20 +49,50 @@
 export default {
   name:"add-group",
   props:{
-    groups: Array
+    groups: {
+      type: Array,
+      required: true,
+    },
+    group_root:{
+      type: Number,
+      default: -1
+    }
+  },
+  data(){
+    return {
+      group_id: -1,
+      name: "",
+      order: Number.MAX_SAFE_INTEGER
+    }
   },
   methods:{
+    open(){
+      this.group_id = -1;
+      this.data = "";
+    },
     close(){
       $(`#add-group`).modal('hide');
     },
     add(){
-      //TODO Check data
-      let data = {
-        group_id:2,
-        name:"New Group Added :)",
-        order:12,
-        };
-      this.$emit('add',data);
+      //Wrong group param
+      if(!(parseInt(this.group_id) == this.group_root || parseInt(this.group_id) in this.groups.map(group=>{return group.id;}))){
+        $('#invalid-group').show(true);
+        return;
+      }
+      $('#invalid-group').hide(false);
+
+
+      //Invalid name
+      if(this.name == null || this.name.trim() == ""){
+        $('#invalid-name').show(true);
+        return;
+      }
+      $('#invalid-name').hide(false);
+
+      if(this.group_id == -1) {
+        this.group_id = null;
+      }
+      this.$emit('add',this.$data);
       this.close();
     }
   }

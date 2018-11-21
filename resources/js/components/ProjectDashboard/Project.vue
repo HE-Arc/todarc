@@ -56,6 +56,7 @@ export default {
   },
   methods:{
     addTask(task){
+      task.group_id = task.group_id?task.group_id:"";
       return axios
         .post('/projects/'+this.project.id+'/tasks',task)
         .then((taskAdded) => {
@@ -68,6 +69,8 @@ export default {
     },
     addGroup(group){
       group.project_id = this.project.id;
+      console.log("Debug")
+      console.log(group.group_id);
 
       return axios
         .post('/projects/'+this.project.id+'/groups',group)

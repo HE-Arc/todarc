@@ -32,9 +32,9 @@ class JsonProjectGroupController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'group_id' => 'required|integer',
+            'group_id' => 'nullable|integer',
             'order' => 'integer',
-            'project_id' => 'nullable|integer'
+            'project_id' => 'required|integer'
         ]);
         
         if($request->input('project_id') != $project->id){

@@ -26,7 +26,7 @@
                 <div class="col-md-12 mb-3">
                   <label for="country">Group</label>
                   <select v-model="group_id" class="custom-select d-block w-100" id="group" required>
-                    <option :value="group_default">Root location</option>
+                    <option :value="group_root">Root location</option>
                     <option v-for="group in groups" :key="group.id" :value="group.id">{{ group.name }}</option>
                   </select>
                   <div id="invalid-group" class="invalid-feedback">
@@ -60,38 +60,38 @@ export default {
   },
   data(){
     return {
-      group_id: -1,
+      group_id: this.group_root,
       name: "",
-      order: Number.MAX_SAFE_INTEGER
+      order: 2147483647, // Equivalent to MySQL max int value
     }
   },
   methods:{
     open(){
-      this.group_id = -1;
+      this.group_id = this.group_root;
       this.data = "";
     },
     close(){
       $(`#add-group`).modal('hide');
     },
     add(){
-      //Wrong group param
-      if(!(parseInt(this.group_id) == this.group_root || parseInt(this.group_id) in this.groups.map(group=>{return group.id;}))){
-        $('#invalid-group').show(true);
-        return;
-      }
-      $('#invalid-group').hide(false);
-
-
       //Invalid name
       if(this.name == null || this.name.trim() == ""){
-        $('#invalid-name').show(true);
+        $('#invalid-name').show();
         return;
       }
-      $('#invalid-name').hide(false);
+      $('#invalid-name').hide();
 
-      if(this.group_id == -1) {
+      //Wrong group param
+      if(!(parseInt(this.group_id) == this.group_root || parseInt(this.group_id) in this.groups.map(group=>{return group.id;}))){
+        $('#invalid-group').show();
+        return;
+      }
+      $('#invalid-group').hide();
+
+      if(this.group_id == this.group_root) {
         this.group_id = null;
       }
+      console.log(this.$data)
       this.$emit('add',this.$data);
       this.close();
     }

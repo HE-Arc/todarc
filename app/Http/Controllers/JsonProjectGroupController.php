@@ -51,14 +51,6 @@ class JsonProjectGroupController extends Controller
             'order',
         ]));
         
-        return response()->json([
-            'id' => $group->id,
-            'name' => $group->name,
-            'group_id' => $group->group_id,
-            'order' => $group->order,
-            'all' => $request->all()
-        ]);
-
         return response()->json($group);
     }
 }

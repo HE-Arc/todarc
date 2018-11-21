@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-6">
+  <div>
     <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#add-task">Add Task</button>
     <div class="modal fade" id="add-task" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
@@ -92,11 +92,9 @@ export default {
         created_at:null,
         done:0,
         from_date:null,
-        group_id:1,
-        id:33,
-        name:"New task added",
+        group_id:2,
+        name:"New task NOT Added :)",
         order:12,
-        project_id:1,
         until_date:null,
         updated_at:null,
         };

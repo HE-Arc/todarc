@@ -47,6 +47,7 @@ export default {
         this.updateTasks(this.tasksNew, this.id);
     },
     addGroup(group){
+      console.log(group.group_id)
       if(group.group_id == this.id){
         this.groupsNew.push(group);
       }
@@ -67,6 +68,7 @@ export default {
     this.group = this.groups.find(group => group.id === this.id);
     
     bus.$on('addTask', this.addTask);
+    bus.$on('addGroup', this.addGroup);
   }
 };
 </script>

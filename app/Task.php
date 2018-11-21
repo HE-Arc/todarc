@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'group_id', 'from_date', 'until_date', 'order', 'done'];
+
     /**
      * The labels that belong to the task.
      */

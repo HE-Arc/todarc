@@ -15,12 +15,9 @@
     <div class="card-footer">
       <div class="row">
         <AddTask @add="addTask" v-bind:groups="groups" class="col-md-6"></AddTask>
-        <div class="col-md-6">
-          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#add-group">Add Group</button>
-        </div>
+        <AddGroup @add="addGroup" v-bind:groups="groups" class="col-md-6"></AddGroup>
       </div>
     </div>
-    <AddGroup @add="addGroup"></AddGroup>
   </div>
 </template>
 
@@ -59,12 +56,28 @@ export default {
   },
   methods:{
     addTask(task){
-      this.tasksData.push(task);
-      //TODO Add task to DB
-      bus.$emit('addTask', task);
+      return axios
+        .post('/projects/'+this.project.id+'/tasks',task)
+        .then((taskAdded) => {
+          console.log(taskAdded.data)
+          this.tasksData.push(taskAdded.data);
+          console.log(taskAdded.data)
+          bus.$emit('addTask', taskAdded.data);
+        })
+        .catch();
     },
-    addGroup(){
+    addGroup(group){
+      group.project_id = this.project.id;
 
+      return axios
+        .post('/projects/'+this.project.id+'/groups',group)
+        .then((groupAdded) => {
+          console.log(groupAdded.data)
+          this.groupsData.push(groupAdded.data);
+          console.log(groupAdded.data)
+          bus.$emit('addGroup', groupAdded.data);
+        })
+        .catch();
     },
     updateGroups(data, group_id){
       data.map((group,index)=>{

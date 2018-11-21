@@ -22,9 +22,9 @@
           </li>
         @else
           <li class="nav-item">
-            <p class="nav-link">
+            <span class="navbar-text pr-3">
               Hi {{ Auth::user()->name }} !
-            </p>
+            </span>
           </li>
           <li class="nav-item">
             <a href="{{ route('logout') }}"

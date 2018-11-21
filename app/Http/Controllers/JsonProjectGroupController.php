@@ -18,7 +18,7 @@ class JsonProjectGroupController extends Controller
         //abort_unless($project->belongsTo(Auth::user()), 404);
         // TODO add verification for rights to see this project
 
-        return response()->json($project->groups);
+        return response()->json($project->groups->first());
     }
 
     /**
@@ -50,6 +50,14 @@ class JsonProjectGroupController extends Controller
             'group_id',
             'order',
         ]));
+        
+        return response()->json([
+            'id' => $group->id,
+            'name' => $group->name,
+            'group_id' => $group->group_id,
+            'order' => $group->order,
+            'all' => $request->all()
+        ]);
 
         return response()->json($group);
     }

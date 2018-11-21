@@ -12,7 +12,7 @@ class Group extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','order, group_id'];
+    protected $fillable = ['name','order', 'group_id'];
 
     /**
      * The labels that belong to the task.

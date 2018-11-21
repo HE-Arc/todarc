@@ -1,12 +1,15 @@
 <template>
   <div class="node node-task list-group-item bg-secondary">
-    <span v-if="task" font-color="green" class="label">{{ task.name }}</span>
+    <span v-on:dblclick="editMe" class="label">{{ task.name }}</span>
   </div>
 </template>
 
 <script>
+import { bus } from "./BusEvent";
+
 export default {
   name: "nodeTask",
+  inject:['tasks','editTask'],
   props: {
     id: Number
   },
@@ -15,9 +18,19 @@ export default {
       task: null,
     };
   },
-  inject:['tasks'],
+  methods:{
+    editMe(){
+      this.editTask(this.task);
+    },
+    editedTask(task){
+      if(task.id == this.id){
+        this.task = task;
+      }
+    }
+  },
   mounted(){
     this.task = this.tasks.find(task => task.id == this.id);
+    bus.$on('editedTask', this.editedTask);
   }
 };
 </script>

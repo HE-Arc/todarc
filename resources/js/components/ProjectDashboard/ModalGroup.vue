@@ -69,9 +69,9 @@ export default {
     emptyGroup: {
       type: Object,
       default: ()=>Object.freeze({
+        id: 0,
         group_id: this.group_root,
         name: "",
-        id: 0,
         order: 2147483647, // Equivalent to MySQL max int value
         editionMode: false 
       })
@@ -101,30 +101,34 @@ export default {
       //Invalid name
       if(this.group.name == null || this.group.name.trim() == ""){
         $('#invalid-name').show();
-        return;
+        return false;
       }
       $('#invalid-name').hide();
 
       //Wrong group param
       if(!(parseInt(this.group.group_id) == this.group_root || parseInt(this.group.group_id) in this.groups.map(group=>{return group.id;}))){
         $('#invalid-group').show();
-        return;
+        return false;
       }
       $('#invalid-group').hide();
 
       if(this.group.group_id == this.group_root) {
         this.group.group_id = null;
       }
+      
+      return true;
     },
     add(){
-      this.check();
-      this.$emit('add',this.group);
-      this.close();
+      if(this.check()){
+        this.$emit('add',this.group);
+        this.close();
+      }
     },
     edit(){
-      this.check();
-      this.$emit('edit',this.group);
-      this.close();
+      if(this.check()){
+        this.$emit('edit',this.group);
+        this.close();
+      }
     }
   },
   mounted(){

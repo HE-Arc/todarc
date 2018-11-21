@@ -67,7 +67,7 @@ export default {
         .then((taskUpdated) => {
           let i = this.tasksData.indexOf(this.tasksData.find(task=>task.id==taskUpdated.data.id));
           this.tasksData[i] = taskUpdated.data;
-          bus.$emit('editedtask', taskUpdated.data);
+          bus.$emit('editedTask', taskUpdated.data);
         })
         .catch();
     },

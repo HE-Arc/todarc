@@ -1,5 +1,5 @@
 <template>
-  <draggable element="ul" :list="groupsNew" :options="{group:'group', draggable:'.node-group', animation:200}" @change="change" class="min-height list-group list-group-root">
+  <draggable element="ol" :list="groupsNew" :options="{group:'group', draggable:'.node-group', animation:200}" @change="change" class="min-height list-group list-group-root">
     <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id"></node-group>
   </draggable>
 </template>

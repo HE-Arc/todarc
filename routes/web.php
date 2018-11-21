@@ -29,6 +29,9 @@ Route::group(['middleware' => 'checklogin'], function() {
   Route::resource('groups', 'JsonGroupController')->only([
     'update', 'destroy'
   ]);
+  Route::resource('tasks', 'JsonTaskController')->only([
+    'update', 'destroy'
+  ]);
 
   Route::resource('projects.tasks', 'JsonProjectTaskController')->only([
     'index', 'store'

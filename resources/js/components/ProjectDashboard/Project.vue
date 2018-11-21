@@ -14,8 +14,8 @@
     </div>
     <div class="card-footer">
       <div class="row">
-        <AddTask @add="addTask" v-bind:groups="groups" class="col-md-6"></AddTask>
-        <AddGroup @add="addGroup" v-bind:groups="groups" class="col-md-6"></AddGroup>
+        <ModalTask ref="modalTask" @add="addTask" @edit="editedTask" v-bind:groups="groups" class="col-md-6"></ModalTask>
+        <ModalGroup ref="modalGroup" @add="addGroup" @edit="editedGroup" v-bind:groups="groups" class="col-md-6"></ModalGroup>
       </div>
     </div>
   </div>
@@ -23,8 +23,8 @@
 
 <script>
 import TreeGroups from "./TreeGroups";
-import AddTask from "./AddTask";
-import AddGroup from "./AddGroup";
+import ModalTask from "./ModalTask";
+import ModalGroup from "./ModalGroup";
 import { bus } from "./BusEvent";
 
 export default {
@@ -51,33 +51,52 @@ export default {
   },
   components: {
     TreeGroups,
-    AddTask,
-    AddGroup,
+    ModalTask,
+    ModalGroup,
   },
   methods:{
+    editTask(task){
+      this.$refs.modalTask.openEdition(task);
+    },
+    editGroup(group){
+      this.$refs.modalGroup.openEdition(group);
+    },
+    editedTask(task){
+      return axios
+        .patch('/tasks/'+task.id,task)
+        .then((taskUpdated) => {
+          let i = this.tasksData.indexOf(this.tasksData.find(task=>task.id==taskUpdated.data.id));
+          this.tasksData[i] = taskUpdated.data;
+          bus.$emit('editedtask', taskUpdated.data);
+        })
+        .catch();
+    },
+    editedGroup(group){
+      return axios
+        .patch('/groups/'+group.id,group)
+        .then((groupUpdated) => {
+          let i = this.groupsData.indexOf(this.groupsData.find(group=>group.id==groupUpdated.data.id));
+          this.groupsData[i] = groupUpdated.data;
+          bus.$emit('editedGroup', groupUpdated.data);
+        })
+        .catch();
+    },
     addTask(task){
       task.group_id = task.group_id?task.group_id:"";
       return axios
         .post('/projects/'+this.project.id+'/tasks',task)
         .then((taskAdded) => {
-          console.log(taskAdded.data)
           this.tasksData.push(taskAdded.data);
-          console.log(taskAdded.data)
           bus.$emit('addTask', taskAdded.data);
         })
         .catch();
     },
     addGroup(group){
       group.project_id = this.project.id;
-      console.log("Debug")
-      console.log(group.group_id);
-
       return axios
         .post('/projects/'+this.project.id+'/groups',group)
         .then((groupAdded) => {
-          console.log(groupAdded.data)
           this.groupsData.push(groupAdded.data);
-          console.log(groupAdded.data)
           bus.$emit('addGroup', groupAdded.data);
         })
         .catch();
@@ -117,7 +136,8 @@ export default {
     return {
       tasks : this.tasks,
       groups : this.groups,
-      addGroup : this.addGroup,
+      editTask : this.editTask,
+      editGroup : this.editGroup,
       updateTasks : this.updateTasks,
       updateGroups : this.updateGroups,
     }

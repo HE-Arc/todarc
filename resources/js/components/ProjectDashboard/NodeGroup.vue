@@ -1,6 +1,6 @@
 <template>
   <li class="node node-group">
-    <span v-if="group" class="list-group-item">{{ group.name }}<i class="fas fa-arrows-alt"></i></span>
+    <span v-on:dblclick="editMe" v-if="group" class="list-group-item">{{ group.name }}<i class="fas fa-arrows-alt"></i></span>
 
     <draggable element="ol" class="min-height list-group" :list="groupsNew" :options="{group:'group', draggable:'.node-group', animation:200}" @change="changeGroups">
     
@@ -28,7 +28,7 @@ export default {
   props: {
     id: Number
   },
-  inject: ['tasks', 'groups', 'updateGroups', 'updateTasks'],
+  inject: ['tasks', 'groups', 'updateGroups', 'updateTasks', 'editGroup'],
   data() {
     return {
       group: null,
@@ -56,6 +56,14 @@ export default {
       if(task.group_id == this.id){
         this.tasksNew.push(task);
       }
+    },
+    editMe(){
+      this.editGroup(this.group);
+    },
+    editedGroup(group){
+      if(group.id == this.id){
+        this.group = group;
+      }
     }
   },
   components: {
@@ -69,6 +77,7 @@ export default {
     
     bus.$on('addTask', this.addTask);
     bus.$on('addGroup', this.addGroup);
+    bus.$on('editedGroup', this.editedGroup);
   }
 };
 </script>

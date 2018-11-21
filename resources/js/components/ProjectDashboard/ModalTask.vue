@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="open" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#add-task">Add Task</button>
+    <button @click="openCreation" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#add-task">Add Task</button>
     <div class="modal fade" id="add-task" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -56,16 +56,11 @@
               </div>
               <!-- <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button> -->
             </form>
-            <!-- name -> OK -->
-            <!-- order -> OK -->
-            <!-- group_id -> TODO fill list -->
-            <!-- from Date -> OK -->
-            <!-- until date -> OK -->
-            <!-- done -> TODO -->
             <!-- 
               TODO :
-              -> Add task
-              -->
+              - Labels
+              - Edition inside this same modal
+            -->
           </div>
           <div class="card-footer">
             <button @click="add" type="button" class="btn btn-primary">Add task</button>
@@ -79,7 +74,7 @@
 
 <script>
 export default {
-  name:"add-task",
+  name:"modal-task",
   props:{
     groups: {
       type: Array,
@@ -101,12 +96,15 @@ export default {
     }
   },
   methods:{
-    open(){
+    openCreation(){
       this.done=0;
       this.from_date="";
       this.group_id=this.group_root;
       this.name="";
       this.until_date="";
+    },
+    openEdition(){
+
     },
     close(){
       $(`#add-task`).modal('hide');

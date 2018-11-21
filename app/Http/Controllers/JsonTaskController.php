@@ -3,40 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Group;
+use App\Task;
 
-class JsonGroupController extends Controller
+class JsonTaskController extends Controller
 {
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Group  $group
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(Request $request, Task $task)
     {
         $request->validate([
             'name' => 'required|max:255',
-            'group_id' => 'nullable|integer',
+            'group_id' => 'required|integer',
+            'from_date' => 'nullable|date',
+            'until_date' => 'nullable|date',
             'order' => 'integer',
+            'done' => 'boolean'
         ]);
         
-        if($request->input('group_id') != Null){
-            Group::where('project_id',$group->project_id)->findOrFail($request->input('group_id'));
-
-            if($request->input('group_id') == $group->id){
-                abort(403, 'Unauthorized action. Self referencing group');
-            }
-        }
+        Group::where('project_id',$task->group->project_id)->findOrFail($request->input('group_id'));
         
-        $group->update(request([
+        $task->update(request([
             'name',
             'group_id',
+            'from_date',
+            'until_date',
             'order',
+            'done',
         ]));
-        
-        return response()->json($group);
+
+        return response()->json($task);
     }
 
     /**

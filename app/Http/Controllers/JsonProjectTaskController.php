@@ -29,7 +29,26 @@ class JsonProjectTaskController extends Controller
      */
     public function store(Request $request, Project $project)
     {
-        //TODO Create a new Task
+        $request->validate([
+            'name' => 'required|max:255',
+            'group_id' => 'required|integer',
+            'from_date' => 'nullable|date',
+            'until_date' => 'nullable|date',
+            'order' => 'integer',
+            'done' => 'boolean'
+        ]);
         
+        $project->groups()->findOrFail($request->input('group_id'));
+        
+        $task = $project->tasks()->create(request([
+            'name',
+            'group_id',
+            'from_date',
+            'until_date',
+            'order',
+            'done',
+        ]));
+
+        return response()->json($task);
     }
 }

@@ -30,18 +30,27 @@ class JsonProjectGroupController extends Controller
      */
     public function store(Request $request, Project $project)
     {
-        //TODO Create a Group
-    }
+        $request->validate([
+            'name' => 'required|max:255',
+            'group_id' => 'nullable|integer',
+            'order' => 'integer',
+            'project_id' => 'required|integer'
+        ]);
+        
+        if($request->input('project_id') != $project->id){
+            abort(403, 'Unauthorized action.');
+        }
 
-    /**
-     * Update groups order and of a project
-     * 
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Project $project
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Project $project)
-    {
-        //TODO Change this request
+        if($request->input('group_id') != Null){
+            $project->groups()->findOrFail($request->input('group_id'));
+        }
+        
+        $group = $project->groups()->create(request([
+            'name',
+            'group_id',
+            'order',
+        ]));
+
+        return response()->json($group);
     }
 }

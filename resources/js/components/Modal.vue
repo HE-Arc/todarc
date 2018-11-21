@@ -1,7 +1,7 @@
 <template>
-  <div class="modal fade" tabindex="-1" role="dialog" :id="id">
+  <div class="modal" tabindex="-1" role="dialog" :id="id">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content bg-light">
         <form action="#" v-on:submit.prevent="submit">
           <div class="modal-header">
             <h5 class="modal-title">{{title}}</h5>
@@ -74,14 +74,4 @@
 </script>
 
 <style lang="scss" scoped>
-  .modal
-  {
-    color: black;
-  }
-  input, input:focus
-  {
-    background-color: white;
-    border-color: #CCC;
-    color: black;
-  }
 </style>

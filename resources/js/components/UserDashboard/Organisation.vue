@@ -1,5 +1,5 @@
 <template>
-  <div class="card text-center bg-secondary">
+  <div class="card text-center bg-light">
     <h4 class="card-header">{{ name }}</h4>
     <div class="card-body">
       <h5>Members : </h5>

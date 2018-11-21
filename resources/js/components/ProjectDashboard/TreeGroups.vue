@@ -10,7 +10,7 @@ import draggable from 'vuedraggable';
 
 export default {
   name: "treeGroups",
-  inject: ['groups', 'updateGroups'],
+  inject: ['groups'],
   mounted(){
     this.$store.dispatch('groupsModule/fetch');
   },
@@ -22,6 +22,11 @@ export default {
   methods:{
     change(evt){
       this.updateGroups(this.groupsNew, null);
+    },
+    addGroup(group){
+      if(group.group_id == this.id){
+        this.groupsNew.push(group);
+      }
     }
   },
   components: {
@@ -39,9 +44,7 @@ export default {
   padding-left: 16px;
   margin: 6px 0;
 }
-.node-task {
-  background-color: red;
-}
+
 .min-height{
   min-height: 20px;
 }

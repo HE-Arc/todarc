@@ -21,17 +21,20 @@
 import taskGroup from "./NodeTask";
 import draggable from "vuedraggable";
 
+import { bus } from "./BusEvent";
+
 export default {
   name: 'NodeGroup',
   props: {
     id: Number
   },
-  inject: ['groups', 'tasks', 'updateGroups', 'updateTasks'],
+  inject: ['tasks', 'groups', 'updateGroups', 'updateTasks'],
   data() {
     return {
       group: null,
       groupsNew: [],
       tasksNew: [],
+      tasksData: []
     };
   },
   methods:{
@@ -42,6 +45,16 @@ export default {
     changeTasks(evt){
       if(this.tasksNew.length>0)
         this.updateTasks(this.tasksNew, this.id);
+    },
+    addGroup(group){
+      if(group.group_id == this.id){
+        this.groupsNew.push(group);
+      }
+    },
+    addTask(task){
+      if(task.group_id == this.id){
+        this.tasksNew.push(task);
+      }
     }
   },
   components: {
@@ -52,6 +65,8 @@ export default {
     this.groupsNew = this.groups.filter(group => group.group_id === this.id);
     this.tasksNew = this.tasks.filter(task => task.group_id === this.id);
     this.group = this.groups.find(group => group.id === this.id);
+    
+    bus.$on('addTask', this.addTask);
   }
 };
 </script>

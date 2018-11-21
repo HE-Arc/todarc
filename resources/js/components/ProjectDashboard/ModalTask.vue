@@ -36,6 +36,13 @@
               </div>
 
               <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="country">Description</label>
+                  <textarea v-model="task.description" class="form-control"></textarea>
+                </div>
+              </div>
+
+              <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="drom-date">From date</label>
                   <input v-model="task.from_date" type="date" class="form-control" id="from-date">
@@ -103,6 +110,7 @@ export default {
         name : "",
         order : 2147483647,
         id : 0,
+        description : "",
       })
     }
   },

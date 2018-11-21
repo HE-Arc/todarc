@@ -22,6 +22,7 @@ class JsonTaskController extends Controller
             'group_id' => 'required|integer',
             'from_date' => 'nullable|date',
             'until_date' => 'nullable|date',
+            'description' => 'nullable|max:1000',
             'order' => 'integer',
             'done' => 'boolean'
         ]);
@@ -33,6 +34,7 @@ class JsonTaskController extends Controller
             'group_id',
             'from_date',
             'until_date',
+            'description',
             'order',
             'done',
         ]));

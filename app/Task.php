@@ -12,7 +12,7 @@ class Task extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'group_id', 'from_date', 'until_date', 'order', 'done'];
+    protected $fillable = ['name', 'group_id', 'from_date', 'until_date', 'description', 'order', 'done'];
 
     /**
      * The labels that belong to the task.

@@ -1,6 +1,6 @@
 <template>
   <li class="node node-group">
-    <span v-on:dblclick="editMe" v-if="group" class="list-group-item">{{ group.name }}<i class="fas fa-arrows-alt"></i></span>
+    <span @contextmenu.prevent="contextMenuGroup($event, group)" v-on:dblclick="editMe" v-if="group" class="list-group-item">{{ group.name }}<i class="fas fa-arrows-alt"></i></span>
 
     <draggable element="ol" class="min-height list-group" :list="groupsNew" :options="{group:'group', draggable:'.node-group', animation:200}" @change="changeGroups">
     
@@ -28,7 +28,7 @@ export default {
   props: {
     id: Number
   },
-  inject: ['tasks', 'groups', 'updateGroups', 'updateTasks', 'editGroup'],
+  inject: ['tasks', 'groups', 'updateGroups', 'updateTasks', 'editGroup', 'contextMenuGroup'],
   data() {
     return {
       group: null,

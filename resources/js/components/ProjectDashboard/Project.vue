@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header modal-header">
-      <h4>
+      <h4 @contextmenu.prevent="$refs.menuGroup.open">
         Tasks
       </h4>
       <div class="custom-control custom-checkbox">
@@ -18,10 +18,30 @@
         <ModalGroup ref="modalGroup" @add="addGroup" @edit="editedGroup" v-bind:groups="groups" class="col-md-6"></ModalGroup>
       </div>
     </div>
+    <vue-context ref="menuGroup" id="menuGroup">
+      <div class="dropdown-menu dropdown-menu-sm show" slot-scope="group">
+        <a @click="createGroup()" class="dropdown-item" href="#"><i class="fas fa-plus"></i> Add new Group</a>
+        <a @click="editGroup(group.data)" class="dropdown-item" href="#"><i class="fas fa-pencil-alt"></i> Edit</a>
+        <!-- <a @click="" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a> -->
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Have some fun</a>
+      </div>
+    </vue-context>
+    <vue-context ref="menuTask" id="menuTask">
+      <div class="dropdown-menu dropdown-menu-sm show" slot-scope="task">
+        <a @click="createTask()" class="dropdown-item" href="#"><i class="fas fa-plus"></i> Add new Task</a>
+        <a @click="editTask(task.data)" class="dropdown-item" href="#"><i class="fas fa-pencil-alt"></i> Edit</a>
+        <!-- <a @click="" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a> -->
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Have some fun</a>
+      </div>
+    </vue-context>
   </div>
 </template>
 
 <script>
+import { VueContext } from 'vue-context';
+
 import TreeGroups from "./TreeGroups";
 import ModalTask from "./ModalTask";
 import ModalGroup from "./ModalGroup";
@@ -43,6 +63,10 @@ export default {
     return {
       tasksData: [],
       groupsData: [],
+      options: [
+        {name:"add"},
+        {name:"edit"}
+      ]
     };
   },
   mounted(){
@@ -53,13 +77,26 @@ export default {
     TreeGroups,
     ModalTask,
     ModalGroup,
+    VueContext,
   },
   methods:{
+    createTask(){
+      this.$refs.modalTask.openCreation();
+    },
+    createGroup(){
+      this.$refs.modalGroup.openCreation();
+    },
     editTask(task){
       this.$refs.modalTask.openEdition(task);
     },
     editGroup(group){
       this.$refs.modalGroup.openEdition(group);
+    },
+    contextMenuGroup(event, group){
+      this.$refs.menuGroup.open(event, group);
+    },
+    contextMenuTask(event, task){
+      this.$refs.menuTask.open(event, task);
     },
     editedTask(task){
       return axios
@@ -140,10 +177,15 @@ export default {
       editGroup : this.editGroup,
       updateTasks : this.updateTasks,
       updateGroups : this.updateGroups,
+      contextMenuTask : this.contextMenuTask,
+      contextMenuGroup : this.contextMenuGroup,
     }
   },
 };
 </script>
 
 <style lang="scss" scoped>
+#menuGroup, #menuTask {
+  border: none;
+}
 </style>

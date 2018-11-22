@@ -1,6 +1,6 @@
 <template>
   <div class="node node-task list-group-item bg-secondary">
-    <span v-if="task" v-on:dblclick="editMe" class="label">{{ task.name }}</span>
+    <span @contextmenu.prevent="contextMenuTask($event, task)" v-if="task" v-on:dblclick="editMe" class="label">{{ task.name }}</span>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import { bus } from "./BusEvent";
 
 export default {
   name: "nodeTask",
-  inject:['tasks','editTask'],
+  inject:['tasks','editTask', 'contextMenuTask'],
   props: {
     id: Number
   },

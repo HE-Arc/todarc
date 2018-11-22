@@ -70,7 +70,7 @@ export default {
       type: Object,
       default: ()=>Object.freeze({
         id: 0,
-        group_id: this.group_root,
+        group_id: -1,
         name: "",
         order: 2147483647, // Equivalent to MySQL max int value
         editionMode: false 
@@ -106,7 +106,7 @@ export default {
       $('#invalid-name').hide();
 
       //Wrong group param
-      if(!(parseInt(this.group.group_id) == this.group_root || parseInt(this.group.group_id) in this.groups.map(group=>{return group.id;}))){
+      if(!(parseInt(this.group.group_id) == this.group_root || this.groups.map(group=>group.id).includes(parseInt(this.group.group_id)))){
         $('#invalid-group').show();
         return false;
       }

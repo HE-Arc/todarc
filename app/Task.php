@@ -27,7 +27,7 @@ class Task extends Model
      */
     public function group()
     {
-        return $this->belongsTo('App\Label');
+        return $this->belongsTo('App\Group');
     }
 
     /**

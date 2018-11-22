@@ -1,6 +1,6 @@
 <template>
   <div class="node node-task list-group-item bg-secondary">
-    <span v-on:dblclick="editMe" class="label">{{ task.name }}</span>
+    <span v-if="task" v-on:dblclick="editMe" class="label">{{ task.name }}</span>
   </div>
 </template>
 

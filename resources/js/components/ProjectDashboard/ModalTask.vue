@@ -143,7 +143,7 @@ export default {
       $('#invalid-name').hide();
 
       //Wrong group param
-      if(!(parseInt(this.task.group_id) in this.groups.map(group=>{return group.id;}))){
+      if(!this.groups.map(group=>group.id).includes(parseInt(this.task.group_id))){
         $('#invalid-group').show();
         return false;
       }

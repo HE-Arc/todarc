@@ -12,7 +12,7 @@ import { bus } from "./BusEvent";
 
 export default {
   name: "treeGroups",
-  inject: ['groups'],
+  inject: ['groups', "updateGroups"],
   data: function() {
     return {
       groupsNew: []

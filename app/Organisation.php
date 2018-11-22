@@ -36,4 +36,11 @@ class Organisation extends Model
       return $userNames;
     }
 
+    public function getUrlAttribute()
+   {
+       return action('OrganisationController@show', ['id' => $this->id]);
+   }
+
+    protected $appends = ['url'];
+
 }

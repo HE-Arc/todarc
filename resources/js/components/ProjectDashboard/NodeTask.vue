@@ -1,24 +1,41 @@
 <template>
-  <div class="node-task">
-    <span v-if="task(id)" font-color="green" class="label">{{ task(id).name }}</span>
+  <div class="node node-task list-group-item bg-secondary">
+    <span v-if="task" v-on:dblclick="editMe" class="label">{{ task.name }}</span>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { bus } from "./BusEvent";
 
 export default {
   name: "nodeTask",
+  inject:['tasks','editTask'],
   props: {
     id: Number
   },
-  computed: {
-    task2(){
-      return this.$store.getters["tasksModule/task"](this.id);
+  data() {
+    return {
+      task: null,
+    };
+  },
+  methods:{
+    editMe(){
+      this.editTask(this.task);
     },
-    ...mapGetters({
-      task: 'tasksModule/task',
-    })
+    editedTask(task){
+      if(task.id == this.id){
+        this.task = task;
+      }
+    }
+  },
+  mounted(){
+    this.task = this.tasks.find(task => task.id == this.id);
+    bus.$on('editedTask', this.editedTask);
   }
 };
 </script>
+
+
+<style lang="scss" scoped>
+
+</style>

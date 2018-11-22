@@ -17,27 +17,40 @@ class JsonProjectTaskController extends Controller
         //abort_unless($project->belongsTo(Auth::user()), 404);
         // TODO add verification for rights to see this project
 
-        return response()->json($project->tasks());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Project $project)
-    {
-        
+        return response()->json($project->tasks);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function store(Project $project)
+    public function store(Request $request, Project $project)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'group_id' => 'required|integer',
+            'from_date' => 'nullable|date',
+            'until_date' => 'nullable|date',
+            'description' => 'nullable|max:1000',
+            'order' => 'integer',
+            'done' => 'boolean'
+        ]);
+        
+        $project->groups()->findOrFail($request->input('group_id'));
+        
+        $task = $project->tasks()->create(request([
+            'name',
+            'group_id',
+            'from_date',
+            'until_date',
+            'description',
+            'order',
+            'done',
+        ]));
+
+        return response()->json($task);
     }
 }

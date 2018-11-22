@@ -1,14 +1,12 @@
 <template>
-  <div class="card text-center">
+  <div class="card text-center bg-light">
     <h4 class="card-header">{{ name }}</h4>
     <div class="card-body">
-      <h6>Tasks running : </h6>
+      <h5>Tasks running : </h5>
       <ul>
-        <li v-for="todo in tasksToDo">{{todo}}</li>
+        <li v-for="todo in tasksToDo" :key="todo.id">{{todo}}</li>
       </ul>
-    </div>
-    <div class="card-footer">
-      <a v-bind:href="uriProject"><button class="btn btn-light btn-block">{{buttonText}}</button></a>
+      <a v-bind:href="uriProject"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>

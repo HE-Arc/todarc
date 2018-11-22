@@ -56,7 +56,14 @@ class OrganisationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $organisation = new Organisation;
+        $organisation->name = $request->orgName;
+        $organisation->save();
+        $organisation->Users()->attach([Auth::user()->id]);
+
+        $redirectTo = action('OrganisationController@show', ['id' => $organisation->id]);
+
+        return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
     }
 
     /**

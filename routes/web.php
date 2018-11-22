@@ -11,29 +11,35 @@
 |
 */
 
-
-
 Route::group(['middleware' => 'checklogin'], function() {
 
   Route::resource('projects', 'ProjectController')->except(['store']);
-  Route::resource('projects', 'UserProjectController')->only(['store']);
+  Route::resource('projects', 'UserProjectController')->only(['store']); //TODO Change route name to users.projects
   Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
-
-  Route::resource('groups', 'JsonGroupController')->except([
-    'create', 'index', 'store'
-  ]);
-
-  Route::resource('projects.tasks', 'JsonProjectTaskController')->only([
-    'index', 'create', 'store'
-  ]);
-
-  Route::resource('projects.groups', 'JsonProjectGroupController')->only([
-    'index', 'create', 'store'
-  ]);
+  Route::resource('organisations', 'OrganisationController')->only(['show', 'store']);
 
   Route::get('/', 'UserDashboard@dashboard')->name('home');
   Route::get('/home', 'UserDashboard@dashboard')->name('home');
   Route::get('/organisation/{organisationName}', 'OrganisationController@dashboard');
+
+  Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);
+  Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
+
+  //TODO add following routes to api
+  Route::resource('groups', 'JsonGroupController')->only([
+    'update', 'destroy'
+  ]);
+  Route::resource('tasks', 'JsonTaskController')->only([
+    'update', 'destroy'
+  ]);
+
+  Route::resource('projects.tasks', 'JsonProjectTaskController')->only([
+    'index', 'store'
+  ]);
+
+  Route::resource('projects.groups', 'JsonProjectGroupController')->only([
+    'index', 'store'
+  ]);
 
 });
 

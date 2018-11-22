@@ -1,14 +1,12 @@
 <template>
-  <div class="card text-center">
+  <div class="card text-center bg-light">
     <h4 class="card-header">{{ name }}</h4>
     <div class="card-body">
-      <h6>Members : </h6>
+      <h5>Members : </h5>
       <ul>
-        <li v-for="member in members">{{member}}</li>
+        <li v-for="member in members" :key="member.id">{{member}}</li>
       </ul>
-    </div>
-    <div class="card-footer">
-      <a v-bind:href="uriOrganisation"><button class="btn btn-light btn-block">{{buttonText}}</button></a>
+      <a v-bind:href="uriOrganisation"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>

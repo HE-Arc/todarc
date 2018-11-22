@@ -1492,7 +1492,7 @@ pre code {
 
   .col-lg-6 {
     -webkit-box-flex: 0;
-        -ms-flex: 0 0 50%;
+        -ms-flex: 0 0 50%;dashboard
             flex: 0 0 50%;
     max-width: 50%;
   }
@@ -2691,7 +2691,7 @@ textarea.form-control {
         -ms-flex-align: center;
             align-items: center;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
+        -ms-flex-pack: center;dashboard
             justify-content: center;
     margin-bottom: 0;
   }
@@ -16091,4 +16091,3 @@ li {
   border-radius: 0;
   border-width: 1px 0 0 0;
 }
-

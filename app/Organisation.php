@@ -10,7 +10,7 @@ class Organisation extends Model
     /**
      * The taks that belong to the label.
      */
-    public function Users()
+    public function users()
     {
         return $this->belongsToMany('App\User');
     }

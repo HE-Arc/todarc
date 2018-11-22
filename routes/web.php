@@ -20,7 +20,7 @@ Route::group(['middleware' => 'checklogin'], function() {
 
   Route::get('/', 'UserDashboard@dashboard')->name('home');
   Route::get('/home', 'UserDashboard@dashboard')->name('home');
-  Route::get('/organisation/{organisationName}', 'OrganisationController@index');
+  Route::get('/organisation/{organisationName}', 'OrganisationController@dashboard');
 
   Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);
   Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
@@ -40,6 +40,7 @@ Route::group(['middleware' => 'checklogin'], function() {
   Route::resource('projects.groups', 'JsonProjectGroupController')->only([
     'index', 'store'
   ]);
+
 });
 
 Auth::routes();

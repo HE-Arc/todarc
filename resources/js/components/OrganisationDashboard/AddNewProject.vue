@@ -3,7 +3,7 @@
     <button class="btn btn-primary btn-lg" href="#" role="button" v-on:click="newProject">{{ buttonText }}</button>
     <modal
       v-on:confirmed="sendProject"
-      v-model="newProject"
+      v-model="projectName"
       ref="modalNewProject"
       title="New Project"
       input-label="Project name"
@@ -34,7 +34,7 @@
       sendProject: function()
       {
         axios.post(
-          '/storeProject',
+          '/projects',
           this.$data,
           {
             headers : {

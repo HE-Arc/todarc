@@ -15,15 +15,6 @@ class Task extends Model
     protected $fillable = ['name', 'group_id', 'from_date', 'until_date', 'description', 'order', 'done'];
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name'
-    ];
-
-    /**
      * The labels that belong to the task.
      */
     public function labels()

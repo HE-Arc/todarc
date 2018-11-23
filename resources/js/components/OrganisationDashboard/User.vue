@@ -4,7 +4,7 @@
     <div class="card-body">
     </div>
     <div class="card-footer">
-      <button class="btn btn-primary btn-lg" href="#" role="button" @click="kick">{{buttonText}}</button>
+      <button class="btn btn-primary btn-lg" href="#" role="button" @click="kick">Kick</button>
     </div>
   </div>
 </template>
@@ -14,7 +14,6 @@
   {
     props: {
       user: Object,
-      buttonText: String,
       organisation: Object,
     },
     methods:{

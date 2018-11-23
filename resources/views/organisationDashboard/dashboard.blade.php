@@ -43,8 +43,6 @@
         </div>
         <div class="col-md-3 text-right">
           <add-existing-user
-          title="Add existing user"
-          button-text="{{__('+ Existing user')}}"
           v-bind:users=@json($users)
           v-bind:organisation='{!! $organisation->toJson(); !!}'
           ></add-existing-user>
@@ -54,7 +52,6 @@
           @foreach($users as $user)
           <organisation-dashboard-user
           v-bind:user="{{ $user->toJson() }}"
-          button-Text="{{ __('Kick user') }}"
           v-bind:organisation='{!! $organisation->toJson(); !!}'
           ></organisation-dashboard-user>
           @endforeach

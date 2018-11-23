@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#add-new-project-modal" @click="addExistingUser">{{ buttonText }}</button>
+    <button class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#add-new-project-modal" @click="addExistingUser">+ New project</button>
     <div class="modal fade" id="add-new-project-modal" tabindex="-1" role="dialog" >
       <div class="modal-dialog" role="document">
         <div class="modal-content bg-light">
@@ -32,8 +32,6 @@
   {
     props:
     {
-      title: String,
-      buttonText: String,
       newProjectName: String,
     },
     methods:

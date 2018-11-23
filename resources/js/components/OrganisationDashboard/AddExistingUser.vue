@@ -1,12 +1,12 @@
 <template>
   <div>
-    <button class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#add-existing-user-model" @click="addExistingUser">{{ buttonText }}</button>
+    <button class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#add-existing-user-model" @click="addExistingUser">+ Existing user</button>
     <div class="modal fade" id="add-existing-user-model" tabindex="-1" role="dialog" >
       <div class="modal-dialog" role="document">
         <div class="modal-content bg-light">
           <form action="#" v-on:submit.prevent="submit">
             <div class="modal-header">
-              <h5 class="modal-title">{{title}}</h5>
+              <h5 class="modal-title">Add existing user</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -42,8 +42,6 @@
     },
     props:
     {
-      title: String,
-      buttonText: String,
       users: Array,
       organisation: Object,
       user_root:{

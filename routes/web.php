@@ -40,6 +40,11 @@ Route::group(['middleware' => 'checklogin'], function() {
     'index', 'store'
   ]);
 
+  Route::resource('organisations.users', 'JsonOrganisationUserController')->only([
+    'store', 'destroy'
+  ]);
+
+  Route::resource('users', 'JsonUserController')->only(['index']);
 });
 
 Auth::routes();

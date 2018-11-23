@@ -13,14 +13,14 @@
             </div>
             <div class="modal-body">
               <div class="form-group text-left">
-                <select>
-                  <option value="test" v-for="user in users" :key="user.id">{{ user.name }}</option>
+                <select v-model="userId">
+                  <option :value="user.id" v-for="user in usersFiltered" :key="user.id">{{ user.name }}</option>
                 </select>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="$emit('cancelled')">Close</button>
-              <button type="submit" class="btn btn-primary" v-on:click="buttonConfirmedClicked">Confirm</button>
+              <button type="button" class="btn btn-primary" @click="addUser">Confirm</button>
             </div>
           </form>
         </div>
@@ -32,15 +32,20 @@
 <script>
   module.exports =
   {
-    // data: function ()
-    // {
-    //   return null;
-    // },
+    data: function ()
+    {
+      return {
+        userId: Number,
+        usersAll: Array,
+        usersFiltered: Array,
+      };
+    },
     props:
     {
       title: String,
       buttonText: String,
       users: Array,
+      project: Object,
       user_root:{
         type: Number,
         default: -1,
@@ -48,7 +53,7 @@
     },
     methods:
     {
-      addExistingUser: function()
+      addExistingUser()
       {
       $(`#add-existing-user-modal`).modal();
       },
@@ -56,10 +61,27 @@
       {
         $(`#add-existing-user-modal`).modal('hide');
       },
-      buttonConfirmedClicked: function()
+      addUser()
       {
-        // rien
-      }
+        return axios
+          .post('/organisations/'+this.project.id+'/users', {id:this.userId})
+          .then((response) => {
+            console.log("user add");
+            window.location = response.data.redirectTo;
+          })
+          .catch();
+      },
+    },
+    mounted()
+    {
+      axios
+        .get('/users')
+        .then((users) => {
+          console.log("list user received");
+          this.usersAll = users.data;
+          this.usersFiltered = this.usersAll.filter(function(user) { return this.indexOf(user.id) < 0 }, this.users.map((userA) => userA.id));
+        })
+        .catch();
     }
   }
 </script>

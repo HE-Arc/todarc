@@ -46,6 +46,7 @@
           title="Add existing user"
           button-text="{{__('+ Existing user')}}"
           v-bind:users=@json($users)
+          v-bind:project='{!! $project->toJson(); !!}'
           ></add-existing-user>
         </div>
       </div>

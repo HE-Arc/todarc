@@ -45,7 +45,7 @@
           <add-existing-user
           title="Add existing user"
           button-text="{{__('+ Existing user')}}"
-          users="{{$users}}"
+          v-bind:users=@json($users)
           ></add-existing-user>
         </div>
       </div>

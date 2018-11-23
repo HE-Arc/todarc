@@ -12,9 +12,10 @@
               </button>
             </div>
             <div class="modal-body">
-              <div class="form-group text-left">
-                <select>
-                  <option value="test" v-for="user in users">{{ user.name }}</option>
+              <div class="form-user text-left">
+                <select class="custom-select d-block w-100" id="user" required>
+                  <option :value="user_root">Choose...</option>
+                  <option v-for="user in users" :key="user.name" :value="user.name">{{ user.name }}</option>
                 </select>
               </div>
             </div>
@@ -41,13 +42,20 @@
       title: String,
       buttonText: String,
       users: Array,
+      user_root:{
+        type: Number,
+        default: -1,
+      },
     },
     methods:
     {
       addExistingUser: function()
       {
       $(`#add-existing-user-modal`).modal();
-      console.log(this.users);
+      },
+      close()
+      {
+        $(`#add-existing-user-modal`).modal('hide');
       },
       buttonConfirmedClicked: function()
       {

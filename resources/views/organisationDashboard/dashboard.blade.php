@@ -26,7 +26,7 @@
       <div id="projects-container">
           @foreach($projects as $project)
           <organisation-dashboard-project name="{{$project->name}}"
-          v-bind:tasks-to-do="{{$projectTasks[$project->name]}}"
+          v-bind:tasks-to-do="{{$project->tasksNameJson()}}"
           button-text="{{ __('See the project') }}"
           uri-project="https://github.com"
           ></organisation-dashboard-project>
@@ -42,10 +42,10 @@
           <h2>{{ __('Users') }}</h2>
         </div>
         <div class="col-md-3 text-right">
-          <add-existing-user button-text="{{__('+ Existing user')}}"
-          org-Name="{{$organisation->name}}"
-          v-bind:org-Users="['user1', 'user2', 'user3']"
-          user-Name="test"
+          <add-existing-user
+          title="Add existing user"
+          button-text="{{__('+ Existing user')}}"
+          users="{{$users}}"
           ></add-existing-user>
         </div>
       </div>

@@ -19,7 +19,9 @@
           <h2>{{ __('Projects') }}</h2>
         </div>
         <div class="col-md-3 text-right">
-          <add-new-project button-text="{{__('+ New project')}}"></add-new-project>
+          <add-new-project
+          v-bind:organisation='{!! $organisation->toJson(); !!}'
+          ></add-new-project>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#add-new-project-modal" @click="addExistingUser">+ New project</button>
+    <button class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#add-new-project-modal" @click="openModalAddNewProject">+ New project</button>
     <div class="modal fade" id="add-new-project-modal" tabindex="-1" role="dialog" >
       <div class="modal-dialog" role="document">
         <div class="modal-content bg-light">
@@ -30,15 +30,21 @@
 <script>
   module.exports =
   {
+    data: function()
+    {
+      return {
+        newProjectName: "",
+      }
+    },
     props:
     {
-      newProjectName: String,
+      organisation: Object,
     },
     methods:
     {
-      addExistingUser()
+      openModalAddNewProject()
       {
-      $(`#add-new-project-modal`).modal();
+        $(`#add-new-project-modal`).modal();
       },
       close()
       {
@@ -47,9 +53,9 @@
       addNewProject()
       {
         return axios
-          .post('/organisations/'+this.organisation.id+'/users', {id:this.userId})
+          .post('/organisations/' + this.organisation.id + '/projects', {projectName: this.newProjectName})
           .then((response) => {
-            console.log("user add");
+            console.log("new project added to organisation");
             window.location = response.data.redirectTo;
           })
           .catch();

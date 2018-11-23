@@ -67,7 +67,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         // show the view and pass the project to it
-        return View::make('project.dashboard', ['groups'=>$project->groups, 'tasks'=>$project->tasks])->with('project', $project);
+        return View::make('project.dashboard', ['groups'=>$project->groups, 'tasks'=>$project->tasks, 'labels' => $project->labels])->with('project', $project);
     }
 
     /**

@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  // TODO : C'est un copier coller de celui dans userdashboard? Pourquoi pas importer directement l'autre... C'est le but d'un component
   module.exports =
   {
     data: function ()

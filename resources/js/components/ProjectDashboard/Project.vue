@@ -167,12 +167,35 @@ export default {
         })
         .catch();
     },
-    getNbTasksDone() {
-      let nbTasksDone = 0;
 
-      this.tasks.forEach(function() {
-        nbTasksDone++;
-      })
+  },
+  watch:
+  {
+    tasksData: {
+      immediate: true, 
+      handler: function()
+      {
+        this.$emit('tasksChanged', this.nbTasksDone, this.nbTasksRunning);
+      },
+      deep: true,
+    }
+  },
+  computed:
+  {
+    nbTasksDone: function() {
+      let nbTasksDone = 1;
+
+      this.tasks.forEach(function(task) {
+        if(task.done)
+        {
+          nbTasksDone++;
+        }
+      });
+
+      return nbTasksDone;
+    },
+    nbTasksRunning: function() {
+      return this.tasks.length - this.nbTasksDone
     }
   },
   provide(){

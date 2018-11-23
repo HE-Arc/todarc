@@ -19,5 +19,20 @@ Vue.component('project-dashboard', require('./components/ProjectDashboard/Projec
 Vue.component('project-summary', require('./components/ProjectDashboard/ProjectSummary.vue'));
 
 const app = new Vue({
-    el: '#project-dashboard'
+    el: '#project-dashboard',
+    data () {
+      return {
+        nbTasksDone: 0,
+        nbTasksRunning: 0
+      }
+    },
+    methods: {
+      updateNbTasks(nbTasksDone, nbTasksRunning)
+      {
+        console.log('enfin')
+        this.nbTasksDone = nbTasksDone;
+        this.nbTasksRunning = nbTasksRunning;
+      }
+    }
+
 });

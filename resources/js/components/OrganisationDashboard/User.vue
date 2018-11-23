@@ -1,6 +1,6 @@
 <template>
   <div class="card text-center">
-    <h4 class="card-header">{{ userName }}</h4>
+    <h4 class="card-header">{{ user.name }}</h4>
     <div class="card-body">
     </div>
     <div class="card-footer">
@@ -13,14 +13,20 @@
   module.exports =
   {
     props: {
-      userName: String,
+      user: Object,
       buttonText: String,
-      buttonUri: String,
+      organisation: Object,
     },
     methods:{
-      kick:function()
+      kick()
       {
-        console.log("Kick");
+        return axios
+          .delete('/organisations/'+ this.organisation.id +'/users/' + this.user.id)
+          .then((response) => {
+            console.log("Kicked user");
+            window.location = response.data.redirectTo;
+          })
+          .catch();
       }
     }
   }

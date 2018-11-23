@@ -20,7 +20,6 @@ class JsonOrganisationUserController extends Controller
        $organisation->users()->attach($request->input("id"));
 
        $redirectTo = action('OrganisationController@show', ['organisationName' => $organisation->name]);
-
        return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
     }
 
@@ -39,11 +38,16 @@ class JsonOrganisationUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Organisation $organisation
+     * @param int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Organisation $organisation, $userId)
     {
-      //
+      $organisation->users()->detach($userId);
+
+      $redirectTo = action('OrganisationController@show', ['organisationName' => $organisation->name]);
+
+      return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
     }
 }

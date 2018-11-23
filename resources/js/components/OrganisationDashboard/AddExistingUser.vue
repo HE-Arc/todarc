@@ -45,7 +45,7 @@
       title: String,
       buttonText: String,
       users: Array,
-      project: Object,
+      organisation: Object,
       user_root:{
         type: Number,
         default: -1,
@@ -64,7 +64,7 @@
       addUser()
       {
         return axios
-          .post('/organisations/'+this.project.id+'/users', {id:this.userId})
+          .post('/organisations/'+this.organisation.id+'/users', {id:this.userId})
           .then((response) => {
             console.log("user add");
             window.location = response.data.redirectTo;

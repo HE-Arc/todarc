@@ -46,16 +46,16 @@
           title="Add existing user"
           button-text="{{__('+ Existing user')}}"
           v-bind:users=@json($users)
-          v-bind:project='{!! $project->toJson(); !!}'
+          v-bind:organisation='{!! $organisation->toJson(); !!}'
           ></add-existing-user>
         </div>
       </div>
       <div id="users-container">
           @foreach($users as $user)
           <organisation-dashboard-user
-          user-Name="{{$user->name}}"
+          v-bind:user="{{ $user->toJson() }}"
           button-Text="{{ __('Kick user') }}"
-          button-Uri=""
+          v-bind:organisation='{!! $organisation->toJson(); !!}'
           ></organisation-dashboard-user>
           @endforeach
       </div>

@@ -1,54 +1,72 @@
 <template>
   <div>
-    <button class="btn btn-primary btn-lg" href="#" role="button" v-on:click="newProject">{{ buttonText }}</button>
-    <modal
-      v-on:confirmed="sendProject"
-      v-model="projectName"
-      ref="modalNewProject"
-      title="New Project"
-      input-label="Project name"
-      data-input=""
-    ></modal>
+    <button class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#add-new-project-modal" @click="addExistingUser">{{ buttonText }}</button>
+    <div class="modal fade" id="add-new-project-modal" tabindex="-1" role="dialog" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-light">
+          <form action="#" v-on:submit.prevent="submit">
+            <div class="modal-header">
+              <h5 class="modal-title">Add new project</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group text-left">
+                <input v-model="newProjectName" type="text" class="form-control" id="newProjectName" placeholder="ProjectName" value required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="$emit('cancelled')">Close</button>
+              <button type="button" class="btn btn-primary" @click="addNewProject">Confirm</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   module.exports =
   {
-    data: function ()
-    {
-      return {
-        projectName: ''
-      }
-    },
     props:
     {
-      buttonText: String
+      title: String,
+      buttonText: String,
+      newProjectName: String,
     },
     methods:
     {
-      newProject: function()
+      addExistingUser()
       {
-        this.$refs.modalNewProject.open();
+      $(`#add-new-project-modal`).modal();
       },
-      sendProject: function()
+      close()
       {
-        axios.post('/projects', this.$data,
-          {
-            headers : {
-              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-          }
-        ).then(response =>
-        {
-          window.location = response.data.redirectTo;
-        }, response =>
-        {
-          console.log("error");
-        });
-
-        return false;
-      }
+        $(`#add-new-project-modal`).modal('hide');
+      },
+      addNewProject()
+      {
+        return axios
+          .post('/organisations/'+this.organisation.id+'/users', {id:this.userId})
+          .then((response) => {
+            console.log("user add");
+            window.location = response.data.redirectTo;
+          })
+          .catch();
+      },
+    },
+    mounted()
+    {
+      axios
+        .get('/users')
+        .then((users) => {
+          console.log("list user received");
+          this.usersAll = users.data;
+          this.usersFiltered = this.usersAll.filter(function(user) { return this.indexOf(user.id) < 0 }, this.users.map((userA) => userA.id));
+        })
+        .catch();
     }
   }
 </script>

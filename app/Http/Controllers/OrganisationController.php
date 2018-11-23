@@ -20,21 +20,16 @@ class OrganisationController extends Controller
 
     public function dashboard($organisationName)
     {
+      $user = Auth::user();
       $organisation = Organisation::where('name', $organisationName)->get()[0];
 
       $projects = $organisation->projects;
       $users = $organisation->users;
-      $projectTasks = [];
 
-      foreach($projects as $project)
-      {
-        $projectTasks[$project->name] = $project->tasks();
-      }
-
-      return view('organisationDashboard.dashboard', ['organisation' => $organisation,
+      return view('organisationDashboard.dashboard', ['user' => $user,
+                                                      'organisation' => $organisation,
                                                       'projects' => $projects,
-                                                      'users' => $users,
-                                                      'projectTasks' => $projectTasks
+                                                      'users' => $users
                                                     ]);
     }
 

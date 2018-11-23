@@ -14,7 +14,7 @@
             <div class="modal-body">
               <div class="form-group text-left">
                 <select>
-                  <option value="test" v-for="user in users">{{ user.name }}</option>
+                  <option value="test" v-for="user in users" :key="user.id">{{ user.name }}</option>
                 </select>
               </div>
             </div>

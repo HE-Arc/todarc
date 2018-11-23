@@ -4,7 +4,7 @@
     <div class="card-body">
       <h6>Tasks running : </h6>
       <ul>
-        <li v-for="task in tasksToDo">{{ task.name }}</li>
+        <li v-for="task in tasksToDo" :key="task.id">{{ task.name }}</li>
       </ul>
     </div>
     <div class="card-footer">

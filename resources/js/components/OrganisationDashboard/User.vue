@@ -4,7 +4,7 @@
     <div class="card-body">
     </div>
     <div class="card-footer">
-      <button class="btn btn-primary btn-lg" href="#" role="button" v-on:click="kick">{{buttonText}}</button></a>
+      <button class="btn btn-primary btn-lg" href="#" role="button" @click="kick">{{buttonText}}</button>
     </div>
   </div>
 </template>

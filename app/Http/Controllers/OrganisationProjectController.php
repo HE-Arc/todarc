@@ -24,8 +24,7 @@ class OrganisationProjectController extends ProjectController
   {
     $organisation = Organisation::find($ownerId);
 
-    // ??
-    //$organisation->users()->findOrFail('user.id', Auth::user()->id);
+    $organisation->users()->findOrFail(Auth::user()->id);
 
     return parent::store($request, $organisation);
   }

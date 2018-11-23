@@ -17,13 +17,14 @@ class UserProjectController extends ProjectController
   * Store a newly created resource in storage.
   *
   * @param  \Illuminate\Http\Request  $request
-  * @param  \App\User $user
+  * @param  Integer $ownerId
   * @return \Illuminate\Http\Response
   */
-  public function store(Request $request, $user)
+  public function store(Request $request, $ownerId)
   {
-    if($user != Auth::user()){
-      abort(404, 'Invalid rights');
+    $user = Auth::user();
+    if($ownerId != $user->id){
+      abort(404, 'Invalid rights '.$ownerId);
     }
 
     return parent::store($request, $user);

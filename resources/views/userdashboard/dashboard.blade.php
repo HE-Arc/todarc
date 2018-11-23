@@ -13,7 +13,7 @@
           <h2>{{ __('Projects') }}</h2>
         </div>
         <div class="col-md-3 text-right">
-          <add-new-project button-text="{{__('+ New project')}}"></add-new-project>
+          <add-new-project button-text="{{__('+ New project')}}" user-id="{{ $user->id }}"></add-new-project>
         </div>
       </div>
 
@@ -37,7 +37,7 @@
           <h2>{{ __('Organisation') }}</h2>
         </div>
         <div class="col-md-3 text-right">
-          <add-new-org button-text="{{__('+ New organisation')}}"></add-new-org>
+        <add-new-org button-text="{{__('+ New organisation')}}" user-id="{{ $user->id }}"></add-new-org>
         </div>
       </div>
 

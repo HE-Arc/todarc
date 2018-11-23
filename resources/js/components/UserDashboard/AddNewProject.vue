@@ -15,35 +15,27 @@
 <script>
   module.exports =
   {
-    data: function ()
-    {
+    data: function () {
       return {
-        orgId: Number,
         projectName: String,
       }
     },
-    props:
-    {
+    props: {
+      userId: Number,
       buttonText: String
     },
-    methods:
-    {
-      newProject: function()
-      {
+    methods: {
+      newProject: function() {
         this.$refs.modalNewProject.open();
       },
-      sendProject: function()
-      {
-        /*
+      sendProject: function() {
         return axios
-          .post('/organisations', {id:this.userId})
+          .post('/users/'+this.userId+"/projects", { projectName : this.projectName }
+            )
           .then((response) => {
-            console.log("user add");
             window.location = response.data.redirectTo;
           })
           .catch();
-          */
-
         return false;
       }
     }

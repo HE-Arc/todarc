@@ -16,37 +16,28 @@
 <script>
   module.exports =
   {
-    data: function ()
-    {
+    data: function () {
       return {
         orgName: ''
       }
     },
-    props:
-    {
-      buttonText: String
+    props: {
+      buttonText: String,
+      userId: Number,
     },
-    methods:
-    {
-      newOrganisation: function()
-      {
+    methods: {
+      newOrganisation: function() {
         this.$refs.modalNewOrganisation.open();
       },
-      sendOrganisation: function()
-      {
-        axios.post(
-          '/organisations',
-          this.$data,
-          {
+      sendOrganisation: function() {
+        axios.post('/organisations', this.$data, {
             headers : {
               'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
           }
-        ).then(response =>
-        {
+        ).then(response => {
           window.location = response.data.redirectTo;
-        }, response =>
-        {
+        }, response => {
           console.log("error");
         });
 

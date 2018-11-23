@@ -42,7 +42,7 @@ class ProjectController extends Controller
     {
         $project = new Project;
 
-        $project->name = $request->projectName;
+        $project->name = $request->input('projectName');
         $project->owner()->associate($owner);
         $project->save();
 

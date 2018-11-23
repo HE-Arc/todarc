@@ -10,6 +10,12 @@ use View;
 
 class ProjectController extends Controller
 {
+
+    public function __construct()
+    {
+       $this->middleware('checkowner');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +42,7 @@ class ProjectController extends Controller
     {
         $project = new Project;
 
-        $project->name = $request->projectName;
+        $project->name = $request->input('projectName');
         $project->owner()->associate($owner);
         $project->save();
 

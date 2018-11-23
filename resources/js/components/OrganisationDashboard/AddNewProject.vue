@@ -33,9 +33,7 @@
       },
       sendProject: function()
       {
-        axios.post(
-          '/projects',
-          this.$data,
+        axios.post('/projects', this.$data,
           {
             headers : {
               'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -43,8 +41,7 @@
           }
         ).then(response =>
         {
-          //window.location.pathname = response.data.redirectTo;
-          console.log('test');
+          window.location = response.data.redirectTo;
         }, response =>
         {
           console.log("error");

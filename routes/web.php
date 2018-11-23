@@ -14,13 +14,12 @@
 Route::group(['middleware' => 'checklogin'], function() {
 
   Route::resource('projects', 'ProjectController')->except(['store']);
-  Route::resource('projects', 'UserProjectController')->only(['store']); //TODO Change route name to users.projects
+  Route::resource('users.projects', 'UserProjectController')->only(['store']);
   Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
   Route::resource('organisations', 'OrganisationController')->only(['show', 'store']);
 
   Route::get('/', 'UserDashboard@dashboard')->name('home');
   Route::get('/home', 'UserDashboard@dashboard')->name('home');
-  Route::get('/organisation/{organisationName}', 'OrganisationController@dashboard');
 
   Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);
   Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
@@ -41,6 +40,11 @@ Route::group(['middleware' => 'checklogin'], function() {
     'index', 'store'
   ]);
 
+  Route::resource('organisations.users', 'JsonOrganisationUserController')->only([
+    'store', 'destroy'
+  ]);
+
+  Route::resource('users', 'JsonUserController')->only(['index']);
 });
 
 Auth::routes();

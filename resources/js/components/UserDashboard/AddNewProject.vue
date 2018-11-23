@@ -18,7 +18,8 @@
     data: function ()
     {
       return {
-        projectName: ''
+        orgId: Number,
+        projectName: String,
       }
     },
     props:
@@ -33,21 +34,15 @@
       },
       sendProject: function()
       {
-        axios.post(
-          '/projects',
-          this.$data,
-          {
-            headers : {
-              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-          }
-        ).then(response =>
-        {
-          window.location = response.data.redirectTo;
-        }, response =>
-        {
-          console.log("error");
-        });
+        /*
+        return axios
+          .post('/organisations', {id:this.userId})
+          .then((response) => {
+            console.log("user add");
+            window.location = response.data.redirectTo;
+          })
+          .catch();
+          */
 
         return false;
       }

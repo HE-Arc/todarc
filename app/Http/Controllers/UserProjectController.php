@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserProjectController extends ProjectController
 {
+  public function __construct()
+  {
+    parent::__construct();
+  }
+  
   /**
   * Store a newly created resource in storage.
   *

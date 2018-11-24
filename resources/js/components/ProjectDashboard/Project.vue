@@ -41,11 +41,10 @@
 
 <script>
 import { VueContext } from 'vue-context';
-
 import TreeGroups from "./TreeGroups";
 import ModalTask from "./ModalTask";
 import ModalGroup from "./ModalGroup";
-import { bus } from "./BusEvent";
+import BUS from "./BusEvent";
 
 export default {
   props: {
@@ -56,6 +55,9 @@ export default {
       required: true
     },
     tasks: {
+      required: true
+    },
+    labels: {
       required: true
     }
   },
@@ -74,10 +76,10 @@ export default {
     this.groupsData = this.groups;
   },
   components: {
+    VueContext,
     TreeGroups,
     ModalTask,
     ModalGroup,
-    VueContext,
   },
   methods:{
     createTask(){
@@ -104,7 +106,7 @@ export default {
         .then((taskUpdated) => {
           let i = this.tasksData.indexOf(this.tasksData.find(task=>task.id==taskUpdated.data.id));
           this.tasksData[i] = taskUpdated.data;
-          bus.$emit('editedTask', taskUpdated.data);
+          BUS.$emit('editedTask', taskUpdated.data);
         })
         .catch();
     },
@@ -114,7 +116,7 @@ export default {
         .then((groupUpdated) => {
           let i = this.groupsData.indexOf(this.groupsData.find(group=>group.id==groupUpdated.data.id));
           this.groupsData[i] = groupUpdated.data;
-          bus.$emit('editedGroup', groupUpdated.data);
+          BUS.$emit('editedGroup', groupUpdated.data);
         })
         .catch();
     },
@@ -124,7 +126,7 @@ export default {
         .post('/projects/'+this.project.id+'/tasks',task)
         .then((taskAdded) => {
           this.tasksData.push(taskAdded.data);
-          bus.$emit('addTask', taskAdded.data);
+          BUS.$emit('addTask', taskAdded.data);
         })
         .catch();
     },
@@ -134,7 +136,7 @@ export default {
         .post('/projects/'+this.project.id+'/groups',group)
         .then((groupAdded) => {
           this.groupsData.push(groupAdded.data);
-          bus.$emit('addGroup', groupAdded.data);
+          BUS.$emit('addGroup', groupAdded.data);
         })
         .catch();
     },
@@ -167,6 +169,36 @@ export default {
           console.log("Tasks updated successfully");
         })
         .catch();
+    },
+
+  },
+  watch:
+  {
+    nbTasksDone: function()
+    {
+      this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
+    },
+    nbTasksRunning: function()
+    {
+      this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
+    }
+  },
+  computed:
+  {
+    nbTasksDone: function() {
+      let nbTasksDone = 1;
+
+      this.tasksData.forEach(function(task) {
+        if(task.done)
+        {
+          nbTasksDone++;
+        }
+      });
+
+      return nbTasksDone;
+    },
+    nbTasksRunning: function() {
+      return this.tasksData.length - this.nbTasksDone
     }
   },
   provide(){

@@ -8,7 +8,7 @@
 import NodeGroup from "./NodeGroup";
 import draggable from 'vuedraggable';
 
-import { bus } from "./BusEvent";
+import { BUS } from "./BusEvent";
 
 export default {
   name: "treeGroups",
@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     this.groupsNew = this.groups.filter(g => g.group_id === null);
-    bus.$on('addGroup', this.addGroup);
+    BUS.$on('addGroup', this.addGroup);
   }
 };
 </script>

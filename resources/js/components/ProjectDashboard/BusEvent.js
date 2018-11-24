@@ -1,2 +1,2 @@
-
-export const bus = new Vue();
+export const BUS = new Vue();
+export default BUS;

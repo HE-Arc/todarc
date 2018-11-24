@@ -15,8 +15,9 @@ window.Vue = Vue;
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('project-dashboard', require('./components/ProjectDashboard/Project.vue'));
+Vue.component('project-dashboard', require('./components/ProjectDashboard/ProjectDashboard.vue'));
+
 
 const app = new Vue({
-    el: '#project-dashboard'
+    el: '#project-dashboard',
 });

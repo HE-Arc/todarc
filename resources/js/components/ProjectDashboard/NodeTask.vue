@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { bus } from "./BusEvent";
+import { BUS } from "./BusEvent";
 
 export default {
   name: "nodeTask",
@@ -30,7 +30,7 @@ export default {
   },
   mounted(){
     this.task = this.tasks.find(task => task.id == this.id);
-    bus.$on('editedTask', this.editedTask);
+    BUS.$on('editedTask', this.editedTask);
   }
 };
 </script>

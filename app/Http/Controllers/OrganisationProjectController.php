@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Organisation;
+use App\User;
 
 class OrganisationProjectController extends ProjectController
 {
@@ -17,10 +20,11 @@ class OrganisationProjectController extends ProjectController
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
-  public function store(Request $request, $owner = null)
+  public function store(Request $request, $ownerId)
   {
-    //TODO change this to add to a real Organisation
-    $organisation = null;
+    $organisation = Organisation::find($ownerId);
+
+    $organisation->users()->findOrFail(Auth::user()->id);
 
     return parent::store($request, $organisation);
   }

@@ -15,40 +15,27 @@
 <script>
   module.exports =
   {
-    data: function ()
-    {
+    data: function () {
       return {
-        projectName: ''
+        projectName: String,
       }
     },
-    props:
-    {
+    props: {
+      userId: Number,
       buttonText: String
     },
-    methods:
-    {
-      newProject: function()
-      {
+    methods: {
+      newProject: function() {
         this.$refs.modalNewProject.open();
       },
-      sendProject: function()
-      {
-        axios.post(
-          '/projects',
-          this.$data,
-          {
-            headers : {
-              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-          }
-        ).then(response =>
-        {
-          window.location = response.data.redirectTo;
-        }, response =>
-        {
-          console.log("error");
-        });
-
+      sendProject: function() {
+        return axios
+          .post('/users/'+this.userId+"/projects", { projectName : this.projectName }
+            )
+          .then((response) => {
+            window.location = response.data.redirectTo;
+          })
+          .catch();
         return false;
       }
     }

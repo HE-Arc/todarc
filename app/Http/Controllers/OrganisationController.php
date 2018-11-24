@@ -18,26 +18,6 @@ class OrganisationController extends Controller
         //
     }
 
-    public function dashboard($organisationName)
-    {
-      $organisation = Organisation::where('name', $organisationName)->get()[0];
-
-      $projects = $organisation->projects;
-      $users = $organisation->users;
-      $projectTasks = [];
-
-      foreach($projects as $project)
-      {
-        $projectTasks[$project->name] = $project->tasks();
-      }
-
-      return view('organisationDashboard.dashboard', ['organisation' => $organisation,
-                                                      'projects' => $projects,
-                                                      'users' => $users,
-                                                      'projectTasks' => $projectTasks
-                                                    ]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -69,12 +49,22 @@ class OrganisationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Organisation  $organisation
+     * @param  \String  $organisationName
      * @return \Illuminate\Http\Response
      */
-    public function show(Organisation $organisation)
+    public function show($organisationName)
     {
-        //
+        $user = Auth::user();
+        $organisation = Organisation::where('name', $organisationName)->first();
+
+        $projects = $organisation->projects;
+        $users = $organisation->users;
+
+        return view('organisationDashboard.dashboard', ['user' => $user,
+                                                        'organisation' => $organisation,
+                                                        'projects' => $projects,
+                                                        'users' => $users
+                                                    ]);
     }
 
     /**

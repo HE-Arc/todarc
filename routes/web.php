@@ -25,6 +25,8 @@ Route::group(['middleware' => 'checklogin'], function() {
   Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);
   Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
 
+  Route::resource('projects.tasks.labels', 'TaskLabelController')->only(['store', 'destroy']);
+
   //TODO add following routes to api
   Route::resource('groups', 'JsonGroupController')->only([
     'update', 'destroy'

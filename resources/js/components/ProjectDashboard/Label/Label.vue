@@ -23,7 +23,20 @@
         };
       },
       deleteLabelFromTask() {
-
+        axios.delete(
+          `${window.location}/tasks/${this.taskId}/labels/${this.id}`,
+          {
+            headers : {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+          }
+        ).then(response =>
+        {
+          console.log("success")
+        }, response =>
+        {
+          console.log("error while deleting label from the task");
+        });
       }
     }
   }

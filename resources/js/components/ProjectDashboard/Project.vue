@@ -56,6 +56,9 @@ export default {
     },
     tasks: {
       required: true
+    },
+    labels: {
+      required: true
     }
   },
   data(){
@@ -171,13 +174,13 @@ export default {
   },
   watch:
   {
-    tasksData: {
-      immediate: true, 
-      handler: function()
-      {
-        this.$emit('tasksChanged', this.nbTasksDone, this.nbTasksRunning);
-      },
-      deep: true,
+    nbTasksDone: function()
+    {
+      this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
+    },
+    nbTasksRunning: function()
+    {
+      this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
     }
   },
   computed:
@@ -185,7 +188,7 @@ export default {
     nbTasksDone: function() {
       let nbTasksDone = 1;
 
-      this.tasks.forEach(function(task) {
+      this.tasksData.forEach(function(task) {
         if(task.done)
         {
           nbTasksDone++;
@@ -195,7 +198,7 @@ export default {
       return nbTasksDone;
     },
     nbTasksRunning: function() {
-      return this.tasks.length - this.nbTasksDone
+      return this.tasksData.length - this.nbTasksDone
     }
   },
   provide(){

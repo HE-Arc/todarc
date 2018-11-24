@@ -5,8 +5,8 @@
         {{ label.name }}
       </div>
       <div class="label-action">
-        <button class="btn btn-link"><i class="fas fa-pen"></i></button>
-        <button class="btn btn-link"><i class="fas fa-trash-alt"></i></button>
+        <button class="btn btn-link" v-on:click="update"><i class="fas fa-pen"></i></button>
+        <button class="btn btn-link" v-on:click="requestDelete"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>
   </div>
@@ -30,8 +30,26 @@
         return {
           backgroundColor: label.color
         };
+      },
+      update() {
+
+      },
+      requestDelete() {
+
       }
-    }
+    },
+    watch: {
+      labelsInput() {
+        this.labels = this.labelsInput
+      },
+      labels: {
+        handler: function(oldVal, newVal) {
+          this.$emit("labels-changed", this.labels)
+        },
+        deep: true,
+        immediate: true
+      }
+    },
   }
 </script>
 

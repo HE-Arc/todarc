@@ -15,24 +15,9 @@ window.Vue = Vue;
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('project-dashboard', require('./components/ProjectDashboard/Project.vue'));
-Vue.component('project-summary', require('./components/ProjectDashboard/ProjectSummary.vue'));
+Vue.component('project-dashboard', require('./components/ProjectDashboard/ProjectDashboard.vue'));
+
 
 const app = new Vue({
     el: '#project-dashboard',
-    data () {
-      return {
-        nbTasksDone: 0,
-        nbTasksRunning: 0
-      }
-    },
-    methods: {
-      updateNbTasks(nbTasksDone, nbTasksRunning)
-      {
-        console.log('enfin')
-        this.nbTasksDone = nbTasksDone;
-        this.nbTasksRunning = nbTasksRunning;
-      }
-    }
-
 });

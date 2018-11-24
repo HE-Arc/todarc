@@ -21,7 +21,7 @@
       </p>
       <div v-if="labels.length > 0">
         <h5>Labels : </h5>
-        <label-manager v-model="labels" v-bind:labelsInput="labels"></label-manager>
+        <label-manager v-model="labels" v-bind:labelsInput.sync="labels" v-on:labels-changed="updateLabels"></label-manager>
       </div>
       <h5>Project updates : </h5>
       <delete-project v-bind:project-id="1"></delete-project>
@@ -47,9 +47,20 @@
       labelsInput : Array
     },
     methods:{
-      requestDelete()
-      {
-
+      updateLabels(labels) {
+        this.labels = labels;
+      }
+    },
+    watch: {
+      labelsInput() {
+        console.log('ici');
+      },
+      labels: {
+        handler: function(oldVal, newVal) {
+          this.$emit("labels-changed", this.labels)
+        },
+        deep: true,
+        immediate: true
       }
     },
     components: {

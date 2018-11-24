@@ -1,0 +1,90 @@
+<template>
+  <div class="modal" tabindex="-1" role="dialog" v-bind:id="id">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-light">
+        <form action="#" v-on:submit.prevent="submit">
+          <div class="modal-header">
+            <h5 class="modal-title">{{title}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group text-left">
+              <label for="nameInput">
+                Name :
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="nameInput"
+                name="nameInput"
+                placeholder="Name"
+                v-model="label.name"
+              />
+            </div>
+            <div class="form-group text-left">
+              <label for="colorInput">
+                Color :
+              </label>
+              <input
+              type="color"
+              class="form-control"
+              id="colorInput"
+              name="colorInput"
+              placeholder="Color"
+              v-model="label.color"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="$emit('cancelled')">Close</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+    export default
+    {
+      data () {
+        return {
+          label: {},
+          id: '',
+          title: ''
+        }
+      },
+      methods:
+      {
+        open: function(title, label)
+        {
+          this.label = label;
+          this.title = title;
+          $(`#${this.id}`).modal('show');
+        },
+        close: function()
+        {
+          $(`#${this.id}`).modal('hide');
+        },
+        confirmed: function()
+        {
+          this.$emit('confirmed', this.label);
+          this.close();
+        },
+        submit: function()
+        {
+          this.confirmed();
+        }
+      },
+      mounted()
+      {
+          this.id = 'modal'+this._uid;
+      },
+    }
+</script>
+
+<style lang="scss" scoped>
+</style>

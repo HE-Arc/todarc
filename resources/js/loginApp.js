@@ -30,7 +30,8 @@ var appLogin = new Vue({
         {
           headers : {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-          }
+          },
+          reponseType: 'json'
         }
       ).then(response =>
       {

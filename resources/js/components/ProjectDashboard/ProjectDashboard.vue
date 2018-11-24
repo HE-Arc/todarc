@@ -15,6 +15,7 @@
             v-bind:labels-input.sync="labels"
             v-bind:nb-tasks-done.sync="nbTasksDone"
             v-bind:nb-tasks-running.sync="nbTasksRunning"
+            v-bind:project-id.sync="project.id"
             v-on:labels-changed="updateLabels"
           ></project-summary>
       </div>

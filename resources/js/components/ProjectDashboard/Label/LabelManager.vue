@@ -5,15 +5,20 @@
         {{ label.name }}
       </div>
       <div class="label-action">
-        <button class="btn btn-link" v-on:click="update"><i class="fas fa-pen"></i></button>
-        <button class="btn btn-link" v-on:click="requestDelete"><i class="fas fa-trash-alt"></i></button>
+        <button class="btn btn-link" v-on:click="update(label)"><i class="fas fa-pen"></i></button>
+        <button class="btn btn-link" v-on:click="deleteLabel(label.id)"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>
+    <button class="btn btn-primary btn-block" v-on:click="newLabel"><i class="fas fa-plus"></i> Add a label</button>
+    <modal-label
+      v-on:confirmed="sendLabel"
+      ref="modalLabel"
+    ></modal-label>
   </div>
 </template>
 
 <script>
-  import Label from "./Label";
+  import ModalLabel from "./ModalLabel"
 
   export default
   {
@@ -23,7 +28,8 @@
       }
     },
     props: {
-      labelsInput : Array
+      labelsInput : Array,
+      projectId : Number
     },
     methods:{
       getStyle(label) {
@@ -31,11 +37,82 @@
           backgroundColor: label.color
         };
       },
-      update() {
-
+      update(label) {
+        this.$refs.modalLabel.open("Add a new label", label);
       },
-      requestDelete() {
-
+      // new label clicked
+      newLabel() {
+        this.$refs.modalLabel.open("Add a new label", {
+          name : '',
+          color : '#0000FF'
+        });
+      },
+      // define if this is a new or updated label
+      sendLabel(label)
+      {
+        if('id' in label)
+        {
+          this.sendUpdatedLabel(label);
+        }
+        else
+        {
+          this.sendNewLabel(label)
+        }
+      },
+      // send the new label to server
+      sendNewLabel(label)
+      {
+        axios.post(
+          `/projects/${this.projectId}/labels`,
+          label,
+          {
+            headers : {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+          }
+        ).then(response =>
+        {
+          this.labels = response.data.labels;
+        }, response =>
+        {
+          console.log("error while add label");
+        });
+      },
+      // send the updated label to server
+      sendUpdatedLabel(label)
+      {
+        axios.put(
+          `/projects/${this.projectId}/labels/${label.id}`,
+          label,
+          {
+            headers : {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+          }
+        ).then(response =>
+        {
+          this.labels = response.data.labels;
+        }, response =>
+        {
+          console.log("error while editing labels");
+        });
+      },
+      // send which label to delete to server
+      deleteLabel(labelId) {
+        axios.delete(
+          `/projects/${this.projectId}/labels/${labelId}`,
+          {
+            headers : {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+          }
+        ).then(response =>
+        {
+          this.labels = response.data.labels;
+        }, response =>
+        {
+          console.log("error while deleting labels");
+        });
       }
     },
     watch: {
@@ -50,6 +127,9 @@
         immediate: true
       }
     },
+    components: {
+      ModalLabel,
+    }
   }
 </script>
 

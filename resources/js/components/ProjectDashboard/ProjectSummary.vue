@@ -21,10 +21,14 @@
       </p>
       <div v-if="labels.length > 0">
         <h5>Labels : </h5>
-        <label-manager v-model="labels" v-bind:labelsInput.sync="labels" v-on:labels-changed="updateLabels"></label-manager>
+        <label-manager
+          v-bind:labels-input.sync="labels"
+          v-bind:project-id.sync="projectId"
+          v-on:labels-changed="updateLabels"
+        ></label-manager>
       </div>
       <h5>Project updates : </h5>
-      <delete-project v-bind:project-id="1"></delete-project>
+      <delete-project v-bind:project-id="projectId"></delete-project>
     </div>
   </div>
 </template>
@@ -44,7 +48,8 @@
       owner : String,
       nbTasksDone : Number,
       nbTasksRunning : Number,
-      labelsInput : Array
+      labelsInput : Array,
+      projectId : Number
     },
     methods:{
       updateLabels(labels) {
@@ -53,7 +58,7 @@
     },
     watch: {
       labelsInput() {
-        console.log('ici');
+        this.labels = this.labelsInput;
       },
       labels: {
         handler: function(oldVal, newVal) {

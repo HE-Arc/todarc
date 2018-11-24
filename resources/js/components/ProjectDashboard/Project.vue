@@ -41,9 +41,9 @@
 
 <script>
 import { VueContext } from 'vue-context';
-import TreeGroups from "./TreeGroups";
-import ModalTask from "./ModalTask";
-import ModalGroup from "./ModalGroup";
+import TreeGroups from "./TasksGroups/TreeGroups";
+import ModalTask from "./TasksGroups/ModalTask";
+import ModalGroup from "./TasksGroups/ModalGroup";
 import BUS from "./BusEvent";
 
 export default {

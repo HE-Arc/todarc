@@ -8,7 +8,7 @@
 import NodeGroup from "./NodeGroup";
 import draggable from 'vuedraggable';
 
-import { BUS } from "./BusEvent";
+import { BUS } from "../BusEvent";
 
 export default {
   name: "treeGroups",

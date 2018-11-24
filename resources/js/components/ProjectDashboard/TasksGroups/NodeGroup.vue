@@ -21,7 +21,7 @@
 import taskGroup from "./NodeTask";
 import draggable from "vuedraggable";
 
-import { BUS } from "./BusEvent";
+import { BUS } from "../BusEvent";
 
 export default {
   name: 'NodeGroup',

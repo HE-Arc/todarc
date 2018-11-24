@@ -13,21 +13,16 @@ class LabelController extends Controller
      $this->middleware('checkowner');
   }
 
-  public function getAllLabels(Project $project)
-  {
-    return $project->labels;
-  }
-
   public function index(Project $project)
   {
-    return $this->getAllLabels($project)->toJson();
+    return $project->labels->toJson();
   }
 
   public function destroy(Project $project, Label $label)
   {
     $label->delete();
 
-    return response()->json(['success' => true, 'labels' => $this->getAllLabels($project)], 200);
+    return response()->json(['success' => true, 'labels' => $project->labels], 200);
   }
 
   public function update(Request $request, Project $project, Label $label)
@@ -36,7 +31,7 @@ class LabelController extends Controller
     $label->color = $request->color;
     $label->save();
 
-    return response()->json(['success' => true, 'labels' => $this->getAllLabels($project)], 200);
+    return response()->json(['success' => true, 'labels' => $project->labels], 200);
   }
 
   public function store(Request $request, Project $project)
@@ -47,6 +42,6 @@ class LabelController extends Controller
     $label->color = $request->color;
     $label->save();
 
-    return response()->json(['success' => true, 'labels' => $this->getAllLabels($project)], 201);
+    return response()->json(['success' => true, 'labels' => $project->labels], 201);
   }
 }

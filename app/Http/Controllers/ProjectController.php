@@ -42,7 +42,7 @@ class ProjectController extends Controller
     {
         $project = new Project;
 
-        $project->name = $request->input('projectName');
+        $project->name = $request->projectName;
         $project->owner()->associate($owner);
         $project->save();
 
@@ -66,8 +66,14 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $tasks = $project->tasks;
+
+        foreach ($tasks as $task) {
+          $tasks->labels = $task->labels;
+        }
+
         // show the view and pass the project to it
-        return View::make('project.dashboard', ['groups'=>$project->groups, 'tasks'=>$project->tasks, 'labels' => $project->labels])->with('project', $project);
+        return View::make('project.dashboard', ['groups'=>$project->groups, 'tasks'=>$tasks, 'labels' => $project->labels])->with('project', $project);
     }
 
     /**
@@ -101,7 +107,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        //$project->
     }
 
     const DEFAULT_GROUPNAME = 'Todo';

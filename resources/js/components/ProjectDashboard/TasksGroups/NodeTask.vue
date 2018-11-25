@@ -12,6 +12,9 @@
         v-bind:color="label.color"
       ></task-label>
     </div>
+    <div class="actions">
+      
+    </div>
   </div>
 </template>
 
@@ -55,7 +58,7 @@ export default {
     display: flex;
     grid-template-columns: auto auto;
 
-    div:first-child {
+    div {
       margin-right: 15px;
     }
   }

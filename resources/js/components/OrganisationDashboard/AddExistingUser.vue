@@ -13,7 +13,7 @@
             </div>
             <div class="modal-body">
               <div class="form-group text-left">
-                <select v-model="userId">
+                <select v-model="userId" class="form-control">
                   <option :value="user.id" v-for="user in usersFiltered" :key="user.id">{{ user.name }}</option>
                 </select>
               </div>
@@ -30,58 +30,53 @@
 </template>
 
 <script>
-  module.exports =
+export default {
+  data: function ()
   {
-    data: function ()
-    {
-      return {
-        userId: Number,
-        usersAll: Array,
-        usersFiltered: Array,
-      };
+    return {
+      userId: Number,
+      usersAll: Array,
+      usersFiltered: Array,
+    };
+  },
+  props:
+  {
+    users: Array,
+    organisation: Object,
+    user_root:{
+      type: Number,
+      default: -1,
     },
-    props:
-    {
-      users: Array,
-      organisation: Object,
-      user_root:{
-        type: Number,
-        default: -1,
-      },
+  },
+  methods:
+  {
+    addExistingUser() {
+    $(`#add-existing-user-modal`).modal();
     },
-    methods:
-    {
-      addExistingUser()
-      {
-      $(`#add-existing-user-modal`).modal();
-      },
-      close()
-      {
-        $(`#add-existing-user-modal`).modal('hide');
-      },
-      addUser()
-      {
-        return axios
-          .post('/organisations/'+this.organisation.id+'/users', {id:this.userId})
-          .then((response) => {
-            console.log("user add");
-            window.location = response.data.redirectTo;
-          })
-          .catch();
-      },
+    close() {
+      $(`#add-existing-user-modal`).modal('hide');
     },
-    mounted()
-    {
-      axios
-        .get('/users')
-        .then((users) => {
-          console.log("list user received");
-          this.usersAll = users.data;
-          this.usersFiltered = this.usersAll.filter(function(user) { return this.indexOf(user.id) < 0 }, this.users.map((userA) => userA.id));
+    addUser() {
+      return axios
+        .post('/organisations/'+this.organisation.id+'/users', {id:this.userId})
+        .then((response) => {
+          console.log("user add");
+          window.location = response.data.redirectTo;
         })
         .catch();
-    }
+    },
+  },
+  mounted() {
+    axios
+      .get('/users')
+      .then((users) => {
+        console.log("list user received");
+        this.usersAll = users.data;
+        this.usersFiltered = this.usersAll.filter(function(user) { return this.indexOf(user.id) < 0 }, this.users.map((userA) => userA.id));
+      })
+      .catch();
   }
+}
 </script>
 
 <style lang="scss" scoped>

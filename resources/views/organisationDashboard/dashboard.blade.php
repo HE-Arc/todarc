@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div id="projects-container">
+      <div id="projects-container" class="cards-container">
           @foreach($projects as $project)
           <organisation-dashboard-project name="{{$project->name}}"
           v-bind:tasks-to-do="{{$project->tasksNameJson()}}"
@@ -50,7 +50,7 @@
           ></add-existing-user>
         </div>
       </div>
-      <div id="users-container">
+      <div id="users-container" class="cards-container">
           @foreach($users as $user)
           <organisation-dashboard-user
           v-bind:user="{{ $user->toJson() }}"

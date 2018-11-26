@@ -28,52 +28,43 @@
 </template>
 
 <script>
-  // TODO : C'est un copier coller de celui dans userdashboard? Pourquoi pas importer directement l'autre... C'est le but d'un component
-  module.exports =
-  {
-    data: function()
-    {
-      return {
-        newProjectName: "",
-      }
+export default {
+  data: function() {
+    return {
+      newProjectName: "",
+    }
+  },
+  props: {
+    organisation: Object,
+  },
+  methods: {
+    openModalAddNewProject() {
+      $(`#add-new-project-modal`).modal();
     },
-    props:
-    {
-      organisation: Object,
+    close() {
+      $(`#add-new-project-modal`).modal('hide');
     },
-    methods:
-    {
-      openModalAddNewProject()
-      {
-        $(`#add-new-project-modal`).modal();
-      },
-      close()
-      {
-        $(`#add-new-project-modal`).modal('hide');
-      },
-      addNewProject()
-      {
-        return axios
-          .post('/organisations/' + this.organisation.id + '/projects', {projectName: this.newProjectName})
-          .then((response) => {
-            console.log("new project added to organisation");
-            window.location = response.data.redirectTo;
-          })
-          .catch();
-      },
-    },
-    mounted()
-    {
-      axios
-        .get('/users')
-        .then((users) => {
-          console.log("list user received");
-          this.usersAll = users.data;
-          this.usersFiltered = this.usersAll.filter(function(user) { return this.indexOf(user.id) < 0 }, this.users.map((userA) => userA.id));
+    addNewProject() {
+      return axios
+        .post('/organisations/' + this.organisation.id + '/projects', {projectName: this.newProjectName})
+        .then((response) => {
+          console.log("new project added to organisation");
+          window.location = response.data.redirectTo;
         })
         .catch();
-    }
+    },
+  },
+  mounted() {
+    axios
+      .get('/users')
+      .then((users) => {
+        console.log("list user received");
+        this.usersAll = users.data;
+        this.usersFiltered = this.usersAll.filter(function(user) { return this.indexOf(user.id) < 0 }, this.users.map((userA) => userA.id));
+      })
+      .catch();
   }
+}
 </script>
 
 <style lang="scss" scoped>

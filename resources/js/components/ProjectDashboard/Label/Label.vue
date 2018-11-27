@@ -8,38 +8,33 @@
 </template>
 
 <script>
-  export default
-  {
-    props: {
-      id: Number,
-      taskId: Number,
-      name: String,
-      color: String,
+export default {
+  props: {
+    id: Number,
+    taskId: Number,
+    name: String,
+    color: String,
+  },
+  methods: {
+    getStyle() {
+      return {
+        backgroundColor: this.color
+      };
     },
-    methods: {
-      getStyle() {
-        return {
-          backgroundColor: this.color
-        };
-      },
-      deleteLabelFromTask() {
-        axios.delete(
-          `${window.location}/tasks/${this.taskId}/labels/${this.id}`,
-          {
-            headers : {
-              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
+    deleteLabelFromTask() {
+      axios.delete(`${window.location}/tasks/${this.taskId}/labels/${this.id}`, {
+          headers : {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
           }
-        ).then(response =>
-        {
-          console.log("success")
-        }, response =>
-        {
-          console.log("error while deleting label from the task");
-        });
-      }
+        }
+      ).then(response => {
+        console.log("success")
+      }).catch(response => {
+        console.log("error while deleting label from the task");
+      });
     }
   }
+};
 </script>
 
 <style lang="scss" scoped>

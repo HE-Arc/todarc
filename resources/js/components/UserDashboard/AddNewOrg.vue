@@ -14,37 +14,37 @@
 </template>
 
 <script>
-  module.exports =
-  {
-    data: function () {
-      return {
-        orgName: ''
-      }
+export default {
+  data() {
+    return {
+      orgName: ''
+    }
+  },
+  props: {
+    buttonText: String,
+    userId: Number,
+  },
+  methods: {
+    newOrganisation() {
+      this.$refs.modalNewOrganisation.open();
     },
-    props: {
-      buttonText: String,
-      userId: Number,
-    },
-    methods: {
-      newOrganisation: function() {
-        this.$refs.modalNewOrganisation.open();
-      },
-      sendOrganisation: function() {
-        axios.post('/organisations', this.$data, {
-            headers : {
-              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
+    sendOrganisation() {
+      axios.post('/organisations', this.$data, {
+          headers : {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
           }
-        ).then(response => {
-          window.location = response.data.redirectTo;
-        }, response => {
-          console.log("error");
-        });
+        }
+      ).then(response => {
+        window.location = response.data.redirectTo;
+      })
+      .catch(response => {
+        console.log("Error while creating organisation");
+      });
 
-        return false;
-      }
+      return false;
     }
   }
+};
 </script>
 
 <style lang="scss" scoped>

@@ -13,33 +13,32 @@
 </template>
 
 <script>
-  module.exports =
-  {
-    data: function () {
-      return {
-        projectName: String,
-      }
+export default {
+  data() {
+    return {
+      projectName: String,
+    }
+  },
+  props: {
+    userId: Number,
+    buttonText: String
+  },
+  methods: {
+    newProject() {
+      this.$refs.modalNewProject.open();
     },
-    props: {
-      userId: Number,
-      buttonText: String
-    },
-    methods: {
-      newProject: function() {
-        this.$refs.modalNewProject.open();
-      },
-      sendProject: function() {
-        return axios
-          .post('/users/'+this.userId+"/projects", { projectName : this.projectName }
-            )
-          .then((response) => {
-            window.location = response.data.redirectTo;
-          })
-          .catch();
-        return false;
-      }
+    sendProject() {
+      return axios
+        .post('/users/'+this.userId+"/projects", { projectName : this.projectName })
+        .then((response) => {
+          window.location = response.data.redirectTo;
+        })
+        .catch();
+
+      return false;
     }
   }
+};
 </script>
 
 <style lang="scss" scoped>

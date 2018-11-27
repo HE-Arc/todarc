@@ -12,15 +12,14 @@
 </template>
 
 <script>
-  module.exports =
-  {
-    props: {
-      name: String,
-      tasksToDo: Array,
-      buttonText: String,
-      uriProject: String
-    }
+export default {
+  props: {
+    name: String,
+    tasksToDo: Array,
+    buttonText: String,
+    uriProject: String
   }
+};
 </script>
 
 <style lang="scss" scoped>

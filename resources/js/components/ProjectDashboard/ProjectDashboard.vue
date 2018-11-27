@@ -23,47 +23,45 @@
 </template>
 
 <script>
-  import Project from "./Project";
-  import ProjectSummary from "./ProjectSummary"
+import Project from "./Project";
+import ProjectSummary from "./ProjectSummary"
 
-  export default
-  {
-    data() {
-      return {
-        nbTasksDone: 0,
-        nbTasksRunning: 0,
-        labels : this.labelsInput
-      }
+export default {
+  data() {
+    return {
+      nbTasksDone: 0,
+      nbTasksRunning: 0,
+      labels : this.labelsInput
+    }
+  },
+  props: {
+    project: {
+      required: true
     },
-    props: {
-      project: {
-        required: true
-      },
-      groups: {
-        required: true
-      },
-      tasks: {
-        required: true
-      },
-      labelsInput: {
-        required: true
-      }
+    groups: {
+      required: true
     },
-    components: {
-      Project,
-      ProjectSummary
+    tasks: {
+      required: true
     },
-    methods: {
-      updateNbTasks(nbTasksDone, nbTasksRunning)
-      {
-        this.nbTasksDone = nbTasksDone;
-        this.nbTasksRunning = nbTasksRunning;
-      },
-      updateLabels(labels) {
-        this.labels = labels;
-      }
+    labelsInput: {
+      required: true
+    }
+  },
+  components: {
+    Project,
+    ProjectSummary
+  },
+  methods: {
+    updateNbTasks(nbTasksDone, nbTasksRunning) {
+      this.nbTasksDone = nbTasksDone;
+      this.nbTasksRunning = nbTasksRunning;
+    },
+    updateLabels(labels) {
+      this.labels = labels;
     }
   }
+};
 </script>
 
 <style lang="scss" scoped>

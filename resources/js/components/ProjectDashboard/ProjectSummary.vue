@@ -34,50 +34,48 @@
 </template>
 
 <script>
-  import LabelManager from "./Label/LabelManager";
-  import DeleteProject from "./DeleteProject";
+import LabelManager from "./Label/LabelManager";
+import DeleteProject from "./DeleteProject";
 
-  export default
-  {
-    data () {
-      return {
-        labels: this.labelsInput,
-      }
-    },
-    props: {
-      owner : String,
-      nbTasksDone : Number,
-      nbTasksRunning : Number,
-      labelsInput : Array,
-      projectId : Number
-    },
-    methods:{
-      updateLabels(labels) {
-        this.labels = labels;
-      }
-    },
-    watch: {
-      labelsInput() {
-        this.labels = this.labelsInput;
-      },
-      labels: {
-        handler: function(oldVal, newVal) {
-          this.$emit("labels-changed", this.labels)
-        },
-        deep: true,
-        immediate: true
-      }
-    },
-    components: {
-      LabelManager,
-      DeleteProject
+export default {
+  data() {
+    return {
+      labels: this.labelsInput,
     }
+  },
+  props: {
+    owner : String,
+    nbTasksDone : Number,
+    nbTasksRunning : Number,
+    labelsInput : Array,
+    projectId : Number
+  },
+  methods: {
+    updateLabels(labels) {
+      this.labels = labels;
+    }
+  },
+  watch: {
+    labelsInput() {
+      this.labels = this.labelsInput;
+    },
+    labels: {
+      handler: function(oldVal, newVal) {
+        this.$emit("labels-changed", this.labels)
+      },
+      deep: true,
+      immediate: true
+    }
+  },
+  components: {
+    LabelManager,
+    DeleteProject
   }
+};
 </script>
 
 <style lang="scss" scoped>
-  h5
-  {
+  h5 {
     margin-top: 20px;
   }
 </style>

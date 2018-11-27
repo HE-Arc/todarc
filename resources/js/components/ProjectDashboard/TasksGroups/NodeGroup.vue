@@ -37,7 +37,7 @@ export default {
       tasksData: []
     };
   },
-  methods:{
+  methods: {
     changeGroups(evt){
       if(this.groupsNew.length>0)
         this.updateGroups(this.groupsNew, this.id);
@@ -70,7 +70,7 @@ export default {
     taskGroup,
     draggable
   },
-  mounted(){
+  mounted() {
     this.groupsNew = this.groups.filter(group => group.group_id === this.id);
     this.tasksNew = this.tasks.filter(task => task.group_id === this.id);
     this.group = this.groups.find(group => group.id === this.id);

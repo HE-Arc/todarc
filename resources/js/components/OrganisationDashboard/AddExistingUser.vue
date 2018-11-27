@@ -31,16 +31,14 @@
 
 <script>
 export default {
-  data: function ()
-  {
+  data() {
     return {
       userId: Number,
       usersAll: Array,
       usersFiltered: Array,
     };
   },
-  props:
-  {
+  props: {
     users: Array,
     organisation: Object,
     user_root:{
@@ -48,10 +46,9 @@ export default {
       default: -1,
     },
   },
-  methods:
-  {
+  methods: {
     addExistingUser() {
-    $(`#add-existing-user-modal`).modal();
+      $(`#add-existing-user-modal`).modal();
     },
     close() {
       $(`#add-existing-user-modal`).modal('hide');

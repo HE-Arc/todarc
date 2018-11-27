@@ -48,42 +48,35 @@
 </template>
 
 <script>
-    export default
-    {
-      data () {
-        return {
-          label: {},
-          id: '',
-          title: ''
-        }
-      },
-      methods:
-      {
-        open: function(title, label)
-        {
-          this.label = label;
-          this.title = title;
-          $(`#${this.id}`).modal('show');
-        },
-        close: function()
-        {
-          $(`#${this.id}`).modal('hide');
-        },
-        confirmed: function()
-        {
-          this.$emit('confirmed', this.label);
-          this.close();
-        },
-        submit: function()
-        {
-          this.confirmed();
-        }
-      },
-      mounted()
-      {
-          this.id = 'modal'+this._uid;
-      },
+export default {
+  data() {
+    return {
+      label: {},
+      id: '',
+      title: ''
     }
+  },
+  methods: {
+    open(title, label) {
+      this.label = label;
+      this.title = title;
+      $(`#${this.id}`).modal('show');
+    },
+    close() {
+      $(`#${this.id}`).modal('hide');
+    },
+    confirmed() {
+      this.$emit('confirmed', this.label);
+      this.close();
+    },
+    submit() {
+      this.confirmed();
+    }
+  },
+  mounted() {
+      this.id = 'modal'+this._uid;
+  }
+};
 </script>
 
 <style lang="scss" scoped>

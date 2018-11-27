@@ -48,13 +48,13 @@
 </template>
 <script>
 export default {
-  name:"modal-group",
-  props:{
+  name: "modal-group",
+  props: {
     groups: {
       type: Array,
       required: true,
     },
-    group_root:{
+    group_root: {
       type: Number,
       default: -1
     },
@@ -77,13 +77,13 @@ export default {
       })
     }
   },
-  data(){
+  data() {
     return {
       group : Object,
       editionMode: false 
     }
   },
-  methods:{
+  methods: {
     openCreation(){
       $(`#add-group`).modal('show');
       this.editionMode = false;
@@ -131,8 +131,8 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted() {
     this.group = Object.assign({}, this.emptyGroup);
   }
-}
+};
 </script>

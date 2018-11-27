@@ -20,7 +20,7 @@ export default {
     buttonText: String,
     buttonUri: String,
   },
-  computed:{
+  computed: {
     href(){
       return "/projects/"+this.projectId;
     }

@@ -36,41 +36,34 @@
 </template>
 
 <script>
-    module.exports =
-    {
-      data () {
-        return {
-          id: null,
-          dataInputValue: this.dataInput
-        }
-      },
-      props:
-      {
-        title: String,
-        dataInput: String,
-        inputLabel: String
-      },
-      methods:
-      {
-        open: function()
-        {
-          $(`#${this.id}`).modal('show');
-        },
-        close: function()
-        {
-          $(`#${this.id}`).modal('hide');
-        },
-        buttonConfirmedClicked: function()
-        {
-          this.$emit('confirmed');
-          this.close();
-        }
-      },
-      mounted()
-      {
-          this.id = 'modal'+this._uid;
-      },
+export default {
+  data() {
+    return {
+      id: null,
+      dataInputValue: this.dataInput
     }
+  },
+  props: {
+    title: String,
+    dataInput: String,
+    inputLabel: String
+  },
+  methods: {
+    open(){
+      $(`#${this.id}`).modal('show');
+    },
+    close() {
+      $(`#${this.id}`).modal('hide');
+    },
+    buttonConfirmedClicked() {
+      this.$emit('confirmed');
+      this.close();
+    }
+  },
+  mounted() {
+      this.id = 'modal'+this._uid;
+  },
+};
 </script>
 
 <style lang="scss" scoped>

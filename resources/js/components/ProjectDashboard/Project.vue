@@ -61,7 +61,7 @@ export default {
       required: true
     }
   },
-  data(){
+  data() {
     return {
       tasksData: [],
       groupsData: [],
@@ -71,7 +71,7 @@ export default {
       ]
     };
   },
-  mounted(){
+  mounted() {
     this.tasksData = this.tasks;
     this.groupsData = this.groups;
   },
@@ -81,7 +81,7 @@ export default {
     ModalTask,
     ModalGroup,
   },
-  methods:{
+  methods: {
     createTask(){
       this.$refs.modalTask.openCreation();
     },
@@ -170,38 +170,32 @@ export default {
         })
         .catch();
     },
-
   },
-  watch:
-  {
-    nbTasksDone: function()
-    {
+  watch: {
+    nbTasksDone() {
       this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
     },
-    nbTasksRunning: function()
-    {
+    nbTasksRunning() {
       this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
     }
   },
-  computed:
-  {
-    nbTasksDone: function() {
+  computed: {
+    nbTasksDone() {
       let nbTasksDone = 1;
 
       this.tasksData.forEach(function(task) {
-        if(task.done)
-        {
+        if(task.done) {
           nbTasksDone++;
         }
       });
 
       return nbTasksDone;
     },
-    nbTasksRunning: function() {
+    nbTasksRunning() {
       return this.tasksData.length - this.nbTasksDone
     }
   },
-  provide(){
+  provide() {
     return {
       tasks : this.tasks,
       groups : this.groups,

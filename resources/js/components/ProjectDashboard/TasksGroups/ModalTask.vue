@@ -83,7 +83,7 @@
 <script>
 export default {
   name:"modal-task",
-  props:{
+  props: {
     groups: {
       type: Array,
       required: true,
@@ -114,13 +114,13 @@ export default {
       })
     }
   },
-  data(){
+  data() {
     return {
       task : Object,
       editionMode: false 
     }
   },
-  methods:{
+  methods: {
     openCreation(){
       $(`#add-task`).modal('show');
       this.editionMode = false;
@@ -173,8 +173,8 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted() {
     this.task = Object.assign({}, this.emptyTask);
   }
-}
+};
 </script>

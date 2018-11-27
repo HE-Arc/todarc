@@ -28,7 +28,8 @@
       <div id="projects-container" class="cards-container">
           @foreach($projects as $project)
           <organisation-dashboard-project name="{{$project->name}}"
-          v-bind:tasks-to-do="{{$project->tasksNameJson()}}"
+          :project-id="{{ $project->id }}"
+          :tasks-to-do="{{$project->tasksNameJson()}}"
           button-text="{{ __('See the project') }}"
           uri-project="https://github.com"
           ></organisation-dashboard-project>

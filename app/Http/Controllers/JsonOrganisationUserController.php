@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Organisation;
 use App\User;
@@ -16,11 +17,15 @@ class JsonOrganisationUserController extends Controller
      */
     public function store(Request $request, Organisation $organisation)
     {
-       // Todo: vérification inexistante
-       $organisation->users()->attach($request->input("id"));
+        // Vérification des droits
+        if(! $organisation->users()->where('users.id', '=', Auth::user()->id)->exists()) {
+            abort(403, 'Access denied');
+        }
 
-       $redirectTo = action('OrganisationController@show', ['organisationName' => $organisation->name]);
-       return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
+        $organisation->users()->attach($request->input("id"));
+
+        $redirectTo = action('OrganisationController@show', ['organisationName' => $organisation->name]);
+        return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
     }
 
     /**

@@ -6,7 +6,7 @@
       <ul>
         <li v-for="task in tasksToDo" :key="task.id">{{ task.name }}</li>
       </ul>
-      <a v-bind:href="buttonUri"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
+      <a :href="href"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>
@@ -14,10 +14,16 @@
 <script>
 export default {
   props: {
+    projectId: Number,
     name: String,
     tasksToDo: Array,
     buttonText: String,
     buttonUri: String,
+  },
+  computed:{
+    href(){
+      return "/projects/"+this.projectId;
+    }
   }
 }
 </script>

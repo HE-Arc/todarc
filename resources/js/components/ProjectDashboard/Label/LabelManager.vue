@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="label in labels" class="label-to-edit" v-bind:style="getStyle(label)">
+    <div v-for="label in labels" :key="label.id" class="label-to-edit" v-bind:style="getStyle(label)">
       <div class="label-name">
         {{ label.name }}
       </div>

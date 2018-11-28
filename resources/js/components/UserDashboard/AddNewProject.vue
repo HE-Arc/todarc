@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn btn-primary btn-lg" href="#" role="button" v-on:click="newProject">{{ buttonText }}</button>
+    <button class="btn btn-primary btn-lg" href="#" role="button" @click="newProject">{{ buttonText }}</button>
     <modal
       v-on:confirmed="sendProject"
       v-model="projectName"

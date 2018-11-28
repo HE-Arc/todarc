@@ -22,12 +22,8 @@ export default {
       };
     },
     deleteLabelFromTask() {
-      axios.delete(`${window.location}/tasks/${this.taskId}/labels/${this.id}`, {
-          headers : {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-          }
-        }
-      ).then(response => {
+      axios.delete(`${window.location}/tasks/${this.taskId}/labels/${this.id}`)
+      .then(response => {
         console.log("success")
       }).catch(response => {
         console.log("error while deleting label from the task");

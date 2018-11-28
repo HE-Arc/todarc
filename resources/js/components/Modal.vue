@@ -26,8 +26,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="$emit('cancelled')">Close</button>
-            <button type="submit" class="btn btn-primary" v-on:click="buttonConfirmedClicked">Confirm</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="$emit('cancelled')">Close</button>
+            <button type="submit" class="btn btn-primary" @click="buttonConfirmedClicked">Confirm</button>
           </div>
         </form>
       </div>

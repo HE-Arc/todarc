@@ -9,7 +9,7 @@
         <button class="btn btn-link" v-on:click="deleteLabel(label.id)"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>
-    <button class="btn btn-primary btn-block" v-on:click="newLabel"><i class="fas fa-plus"></i> Add a label</button>
+    <button class="btn btn-primary btn-block" @click="newLabel"><i class="fas fa-plus"></i> Add a label</button>
     <modal-label
       v-on:confirmed="sendLabel"
       ref="modalLabel"
@@ -56,12 +56,7 @@ export default {
     },
     // send the new label to server
     sendNewLabel(label) {
-      axios.post( `/projects/${this.projectId}/labels`, label, {
-          headers : {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-          }
-        }
-      ).then(response => {
+      axios.post( `/projects/${this.projectId}/labels`, label).then(response => {
         this.labels = response.data.labels;
       })
       .catch(response => {
@@ -70,12 +65,8 @@ export default {
     },
     // send the updated label to server
     sendUpdatedLabel(label) {
-      axios.put(`/projects/${this.projectId}/labels/${label.id}`, label, {
-          headers : {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-          }
-        }
-      ).then(response => {
+      axios.put(`/projects/${this.projectId}/labels/${label.id}`, label)
+      .then(response => {
         this.labels = response.data.labels;
       }).catch(response => {
         console.log("error while editing labels");
@@ -83,12 +74,8 @@ export default {
     },
     // send which label to delete to server
     deleteLabel(labelId) {
-      axios.delete(`/projects/${this.projectId}/labels/${labelId}`, {
-          headers : {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-          }
-        }
-      ).then(response => {
+      axios.delete(`/projects/${this.projectId}/labels/${labelId}`)
+      .then(response => {
         this.labels = response.data.labels;
       }).catch(response => {
         console.log("error while deleting labels");

@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-danger btn-block" v-on:click="requestDelete">Delete Project</button>
+  <button class="btn btn-danger btn-block" @click="requestDelete">Delete Project</button>
 </template>
 
 <script>
@@ -11,12 +11,7 @@ export default {
     requestDelete() {
       let confirmed = confirm('Are you sure you want to delete this project ? ');
       if(confirmed) {
-        axios.delete( `/projects/${this.projectId}`, {
-            headers : {
-              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-          }
-        ).then(response => {
+        axios.delete( `/projects/${this.projectId}`).then(response => {
           window.location = response.data.redirectTo;
         })
         .catch(response => {

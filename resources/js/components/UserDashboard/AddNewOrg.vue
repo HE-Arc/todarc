@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <button class="btn btn-primary btn-lg" href="#" role="button" v-on:click="newOrganisation">{{ buttonText }}</button>
+    <button class="btn btn-primary btn-lg" href="#" role="button" @click="newOrganisation">{{ buttonText }}</button>
     <modal
       v-on:confirmed="sendOrganisation"
       v-model="orgName"
@@ -29,12 +29,7 @@ export default {
       this.$refs.modalNewOrganisation.open();
     },
     sendOrganisation() {
-      axios.post('/organisations', this.$data, {
-          headers : {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-          }
-        }
-      ).then(response => {
+      axios.post('/organisations', this.$data).then(response => {
         window.location = response.data.redirectTo;
       })
       .catch(response => {

@@ -39,9 +39,12 @@ class JsonTaskController extends Controller
             'done',
         ]));
 
-        return response()->json($task);
+        $task->labels()->detach();
+        foreach ($request->input("labels") as $label) {
+            $task->labels()->attach($label["id"]);
+        }
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *

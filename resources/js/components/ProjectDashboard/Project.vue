@@ -14,7 +14,7 @@
     </div>
     <div class="card-footer">
       <div class="row">
-        <ModalTask ref="modalTask" @add="addTask" @edit="editedTask" :groups="groups" class="col-md-6"></ModalTask>
+        <ModalTask ref="modalTask" @add="addTask" @edit="editedTask" :labels="labels" :groups="groups" class="col-md-6"></ModalTask>
         <ModalGroup ref="modalGroup" @add="addGroup" @edit="editedGroup" :groups="groups" class="col-md-6"></ModalGroup>
       </div>
     </div>

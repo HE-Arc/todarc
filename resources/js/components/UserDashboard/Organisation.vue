@@ -6,7 +6,7 @@
       <ul>
         <li v-for="member in members" :key="member.id">{{member}}</li>
       </ul>
-      <a v-bind:href="uriOrganisation"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
+      <a :href="uriOrganisation"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>

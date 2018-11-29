@@ -2,7 +2,7 @@
   <div>
     <button class="btn btn-primary btn-lg" href="#" role="button" @click="newProject">{{ buttonText }}</button>
     <modal
-      v-on:confirmed="sendProject"
+      @confirmed="sendProject"
       v-model="projectName"
       ref="modalNewProject"
       title="New Project"
@@ -30,7 +30,7 @@ export default {
     },
     sendProject() {
       return axios
-        .post('/'+this.ownerType+'/'+this.ownerId+"/projects", { projectName : this.projectName })
+        .post(`/${this.ownerType}/${this.ownerId}/projects`, { projectName : this.projectName })
         .then((response) => {
           window.location = response.data.redirectTo;
         })

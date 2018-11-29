@@ -14,8 +14,8 @@
     </div>
     <div class="card-footer">
       <div class="row">
-        <ModalTask ref="modalTask" @add="addTask" @edit="editedTask" v-bind:groups="groups" class="col-md-6"></ModalTask>
-        <ModalGroup ref="modalGroup" @add="addGroup" @edit="editedGroup" v-bind:groups="groups" class="col-md-6"></ModalGroup>
+        <ModalTask ref="modalTask" @add="addTask" @edit="editedTask" :groups="groups" class="col-md-6"></ModalTask>
+        <ModalGroup ref="modalGroup" @add="addGroup" @edit="editedGroup" :groups="groups" class="col-md-6"></ModalGroup>
       </div>
     </div>
     <vue-context ref="menuGroup" id="menuGroup">
@@ -102,7 +102,7 @@ export default {
     },
     editedTask(task){
       return axios
-        .patch('/tasks/'+task.id,task)
+        .patch(`/tasks/${task.id}`,task)
         .then((taskUpdated) => {
           let i = this.tasksData.indexOf(this.tasksData.find(task=>task.id==taskUpdated.data.id));
           this.tasksData[i] = taskUpdated.data;
@@ -112,7 +112,7 @@ export default {
     },
     editedGroup(group){
       return axios
-        .patch('/groups/'+group.id,group)
+        .patch(`/groups/${group.id}`,group)
         .then((groupUpdated) => {
           let i = this.groupsData.indexOf(this.groupsData.find(group=>group.id==groupUpdated.data.id));
           this.groupsData[i] = groupUpdated.data;
@@ -123,7 +123,7 @@ export default {
     addTask(task){
       task.group_id = task.group_id?task.group_id:"";
       return axios
-        .post('/projects/'+this.project.id+'/tasks',task)
+        .post(`/projects/${this.project.id}/tasks`,task)
         .then((taskAdded) => {
           this.tasksData.push(taskAdded.data);
           BUS.$emit('addTask', taskAdded.data);
@@ -133,7 +133,7 @@ export default {
     addGroup(group){
       group.project_id = this.project.id;
       return axios
-        .post('/projects/'+this.project.id+'/groups',group)
+        .post(`/projects/${this.project.id}/groups`,group)
         .then((groupAdded) => {
           this.groupsData.push(groupAdded.data);
           BUS.$emit('addGroup', groupAdded.data);
@@ -147,7 +147,7 @@ export default {
       });
 
       return axios
-        .post('/projects/'+this.project.id+'/groups-hierarchy',{
+        .post(`/projects/${this.project.id}/groups-hierarchy`,{
           groups: data
         })
         .then(() => {
@@ -162,7 +162,7 @@ export default {
       });
 
       return axios
-        .post('/projects/'+this.project.id+'/tasks-hierarchy',{
+        .post(`/projects/${this.project.id}/tasks-hierarchy`,{
           tasks: data
         })
         .then(() => {

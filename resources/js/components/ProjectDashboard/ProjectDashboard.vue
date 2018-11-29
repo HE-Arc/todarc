@@ -2,21 +2,22 @@
   <div class="row">
       <div class="col-md-8">
           <project
-            v-bind:project="project"
-            v-bind:groups="groups"
-            v-bind:tasks='tasks'
-            v-bind:labels.sync="labels"
-            v-on:tasks-changed="updateNbTasks"
+            :project="project"
+            :groups="groups"
+            :tasks='tasks'
+            :labels.sync="labels"
+            @tasks-changed="updateNbTasks"
           ></project>
       </div>
       <div class="col-md-4">
           <project-summary
-            v-bind:owner="project.owner.name"
-            v-bind:labels-input.sync="labels"
-            v-bind:nb-tasks-done.sync="nbTasksDone"
-            v-bind:nb-tasks-running.sync="nbTasksRunning"
-            v-bind:project-id.sync="project.id"
-            v-on:labels-changed="updateLabels"
+            :project-name="project.name"
+            :owner="project.owner.name"
+            :labels-input.sync="labels"
+            :nb-tasks-done.sync="nbTasksDone"
+            :nb-tasks-running.sync="nbTasksRunning"
+            :project-id.sync="project.id"
+            @labels-changed="updateLabels"
           ></project-summary>
       </div>
   </div>
@@ -36,12 +37,15 @@ export default {
   },
   props: {
     project: {
+      type: Object,
       required: true
     },
     groups: {
+      type: Array,
       required: true
     },
     tasks: {
+      type: Array,
       required: true
     },
     labelsInput: {

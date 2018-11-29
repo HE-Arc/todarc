@@ -1,8 +1,7 @@
 <template>
-  <div class="modal" tabindex="-1" role="dialog" v-bind:id="id">
+  <div class="modal" tabindex="-1" role="dialog" :id="id">
     <div class="modal-dialog" role="document">
       <div class="modal-content bg-light">
-        <form action="#" v-on:submit.prevent="submit">
           <div class="modal-header">
             <h5 class="modal-title">{{title}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -21,6 +20,7 @@
                 name="nameInput"
                 placeholder="Name"
                 v-model="label.name"
+                required
               />
             </div>
             <div class="form-group text-left">
@@ -39,9 +39,8 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="$emit('cancelled')">Close</button>
-            <button type="submit" class="btn btn-primary">Confirm</button>
+            <button type="button" class="btn btn-primary" @click="submit">Confirm</button>
           </div>
-        </form>
       </div>
     </div>
   </div>
@@ -70,6 +69,11 @@ export default {
       this.close();
     },
     submit() {
+      if(this.title == null || this.title.trim() == ""){
+        $('#invalid-title').show();
+        return false;
+      }
+      $('#invalid-title').hide();
       this.confirmed();
     }
   },

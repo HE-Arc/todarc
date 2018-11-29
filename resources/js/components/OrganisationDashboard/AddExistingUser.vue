@@ -4,7 +4,7 @@
     <div class="modal fade" id="add-existing-user-model" tabindex="-1" role="dialog" >
       <div class="modal-dialog" role="document">
         <div class="modal-content bg-light">
-          <form action="#" v-on:submit.prevent="submit">
+          <form action="#" @submit.prevent="submit">
             <div class="modal-header">
               <h5 class="modal-title">Add existing user</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -58,7 +58,7 @@ export default {
     },
     addUser() {
       return axios
-        .post('/organisations/'+this.organisation.id+'/users', {id:this.userId})
+        .post(`/organisations/${this.organisation.id}/users`, {id:this.userId})
         .then((response) => {
           console.log("user add");
           window.location = response.data.redirectTo;

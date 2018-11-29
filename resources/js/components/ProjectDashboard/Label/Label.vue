@@ -1,7 +1,7 @@
 <template>
-  <div class="label-task" v-bind:style="getStyle()">
+  <div class="label-task" :style="getStyle()">
     {{name}}
-    <button class="btn btn-link" v-on:click="deleteLabelFromTask">
+    <button class="btn btn-link" @click="deleteLabelFromTask">
       <i class="fas fa-times"></i>
     </button>
   </div>
@@ -25,6 +25,7 @@ export default {
       axios.delete(`${window.location}/tasks/${this.taskId}/labels/${this.id}`)
       .then(response => {
         console.log("success")
+        //TODO Update interface
       }).catch(response => {
         console.log("error while deleting label from the task");
       });
@@ -36,7 +37,6 @@ export default {
 <style lang="scss" scoped>
 .label-task {
   display: inline;
-  margin-top: -2px;
   padding: 0px 6px;
   border-radius: 3px;
   margin-right: 5px;

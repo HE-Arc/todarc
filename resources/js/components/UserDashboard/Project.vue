@@ -6,7 +6,7 @@
       <ul>
         <li v-for="todo in tasksToDo" :key="todo.id">{{todo}}</li>
       </ul>
-      <a v-bind:href="uriProject"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
+      <a :href="uriProject"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>

@@ -1,17 +1,17 @@
 <template>
   <div>
-    <div v-for="label in labels" :key="label.id" class="label-to-edit" v-bind:style="getStyle(label)">
+    <div v-for="label in labels" :key="label.id" class="label-to-edit" :style="getStyle(label)">
       <div class="label-name">
         {{ label.name }}
       </div>
       <div class="label-action">
-        <button class="btn btn-link" v-on:click="update(label)"><i class="fas fa-pen"></i></button>
-        <button class="btn btn-link" v-on:click="deleteLabel(label.id)"><i class="fas fa-trash-alt"></i></button>
+        <button class="btn btn-link" @click="update(label)"><i class="fas fa-pen"></i></button>
+        <button class="btn btn-link" @click="deleteLabel(label.id)"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>
     <button class="btn btn-primary btn-block" @click="newLabel"><i class="fas fa-plus"></i> Add a label</button>
     <modal-label
-      v-on:confirmed="sendLabel"
+      @confirmed="sendLabel"
       ref="modalLabel"
     ></modal-label>
   </div>

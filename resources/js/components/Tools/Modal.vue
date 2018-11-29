@@ -2,7 +2,7 @@
   <div class="modal" tabindex="-1" role="dialog" :id="id">
     <div class="modal-dialog" role="document">
       <div class="modal-content bg-light">
-        <form action="#" v-on:submit.prevent="submit">
+        <form action="#" @submit.prevent="submit">
           <div class="modal-header">
             <h5 class="modal-title">{{title}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -19,9 +19,9 @@
                 class="form-control"
                 id="dataInput"
                 name="dataInput"
-                v-bind:placeholder="inputLabel"
+                :placeholder="inputLabel"
                 v-model="dataInputValue"
-                v-bind:input="dataInput" v-on:input="$emit('input', dataInputValue)"
+                :input="dataInput" @input="$emit('input', dataInputValue)"
                 required
               />
             </div>
@@ -31,7 +31,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="$emit('cancelled')">Close</button>
-            <button type="submit" class="btn btn-primary" @click="valid">Confirm</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
           </div>
         </form>
       </div>
@@ -59,7 +59,7 @@ export default {
     close() {
       $(`#${this.id}`).modal('hide');
     },
-    valid() {
+    submit() {
       if(this.dataInputValue == null || this.dataInputValue.trim() == ""){
         $('#invalid-input').show();
         return false;

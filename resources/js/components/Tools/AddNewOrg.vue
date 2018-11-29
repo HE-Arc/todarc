@@ -2,7 +2,7 @@
   <div>
     <button class="btn btn-primary btn-lg" href="#" role="button" @click="newOrganisation">{{ buttonText }}</button>
     <modal
-      v-on:confirmed="sendOrganisation"
+      @confirmed="sendOrganisation"
       v-model="orgName"
       ref="modalNewOrganisation"
       title="New Organisation"

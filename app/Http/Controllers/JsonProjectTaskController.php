@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\Task;
 
 class JsonProjectTaskController extends Controller
 {
@@ -38,9 +39,9 @@ class JsonProjectTaskController extends Controller
             'order' => 'integer',
             'done' => 'boolean'
         ]);
-        
+
         $project->groups()->findOrFail($request->input('group_id'));
-        
+
         $task = $project->tasks()->create(request([
             'name',
             'group_id',
@@ -52,5 +53,20 @@ class JsonProjectTaskController extends Controller
         ]));
 
         return response()->json($task);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Project $project
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Project $project, $id)
+    {
+      $task = Task::find($id);
+      $task->delete();
+
+      return response()->json(['message' => 'Task deleted successfully!'], 200);
     }
 }

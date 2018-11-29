@@ -26,9 +26,9 @@ class JsonTaskController extends Controller
             'order' => 'integer',
             'done' => 'boolean'
         ]);
-        
+
         Group::where('project_id',$task->group->project_id)->findOrFail($request->input('group_id'));
-        
+
         $task->update(request([
             'name',
             'group_id',

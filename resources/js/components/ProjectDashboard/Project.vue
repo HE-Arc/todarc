@@ -22,7 +22,7 @@
       <div class="dropdown-menu dropdown-menu-sm show" slot-scope="group">
         <a @click="createGroup()" class="dropdown-item" href="#"><i class="fas fa-plus"></i> Add new Group</a>
         <a @click="editGroup(group.data)" class="dropdown-item" href="#"><i class="fas fa-pencil-alt"></i> Edit</a>
-        <!-- <a @click="" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a> -->
+        <!--<a @click="" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a>-->
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Have some fun</a>
       </div>
@@ -31,7 +31,7 @@
       <div class="dropdown-menu dropdown-menu-sm show" slot-scope="task">
         <a @click="createTask()" class="dropdown-item" href="#"><i class="fas fa-plus"></i> Add new Task</a>
         <a @click="editTask(task.data)" class="dropdown-item" href="#"><i class="fas fa-pencil-alt"></i> Edit</a>
-        <!-- <a @click="" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a> -->
+        <a @click="removeTask(task.data)" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Have some fun</a>
       </div>
@@ -170,6 +170,20 @@ export default {
         })
         .catch();
     },
+    removeTask(task)
+    {
+      /*
+      return axios
+        .delete(`/projects/${this.project.id}/tasks/${task.id}`)
+        .then((taskToRemove) => {
+          this.taskData.splice(this.tasksData.indexOf(taskToRemove), 1);
+          //BUS.$emit('removeTask', taskToRemove.data);
+          console.log("Task removed");
+        })
+        .catch();
+        */
+        console.log("Task removed");
+    }
   },
   watch: {
     nbTasksDone() {

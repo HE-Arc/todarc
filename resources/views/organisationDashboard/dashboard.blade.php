@@ -20,7 +20,9 @@
         </div>
         <div class="col-md-3 text-right">
           <add-new-project
-          v-bind:organisation='{!! $organisation->toJson(); !!}'
+          button-text="{{__('+ New project')}}"
+          :owner-id="{{ $organisation->id }}"
+          owner-type="organisations"
           ></add-new-project>
         </div>
       </div>

@@ -22,12 +22,16 @@
                 v-bind:placeholder="inputLabel"
                 v-model="dataInputValue"
                 v-bind:input="dataInput" v-on:input="$emit('input', dataInputValue)"
+                required
               />
+            </div>
+            <div id="invalid-input" class="invalid-feedback">
+              Invalid entry, can't be empty
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="$emit('cancelled')">Close</button>
-            <button type="submit" class="btn btn-primary" @click="buttonConfirmedClicked">Confirm</button>
+            <button type="submit" class="btn btn-primary" @click="valid">Confirm</button>
           </div>
         </form>
       </div>
@@ -55,7 +59,13 @@ export default {
     close() {
       $(`#${this.id}`).modal('hide');
     },
-    buttonConfirmedClicked() {
+    valid() {
+      if(this.dataInputValue == null || this.dataInputValue.trim() == ""){
+        $('#invalid-input').show();
+        return false;
+      }
+      $('#invalid-input').hide();
+
       this.$emit('confirmed');
       this.close();
     }

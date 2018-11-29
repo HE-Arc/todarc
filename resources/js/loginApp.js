@@ -24,23 +24,12 @@ var appLogin = new Vue({
   methods: {
     submit: function(event) {
       //send data in json
-      axios.post(
-        '/login',
-        this.$data,
-        {
-          headers : {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-          },
-          reponseType: 'json'
-        }
-      ).then(response =>
-      {
+      axios.post('/login', this.$data, { reponseType: 'json' })
+      .then(response => {
         window.location.pathname = response.data.redirectTo;
-      }, response =>
-      {
+      }).catch(response => {
         this.$data.valid = false;
       });
-
       return false;
     }
   }

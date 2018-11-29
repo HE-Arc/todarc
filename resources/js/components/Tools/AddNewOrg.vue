@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <button class="btn btn-primary btn-lg" href="#" role="button" @click="newOrganisation">{{ buttonText }}</button>
     <modal
       v-on:confirmed="sendOrganisation"

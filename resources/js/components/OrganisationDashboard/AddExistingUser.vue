@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import AddNewProject from "../Tools/AddNewProject";
+
 export default {
   data() {
     return {
@@ -46,6 +48,7 @@ export default {
       default: -1,
     },
   },
+  components: ["AddNewProject"],
   methods: {
     addExistingUser() {
       $(`#add-existing-user-modal`).modal();

@@ -20,8 +20,9 @@ export default {
     }
   },
   props: {
-    userId: Number,
-    buttonText: String
+    ownerId: Number,
+    buttonText: String,
+    ownerType: String,
   },
   methods: {
     newProject() {
@@ -29,7 +30,7 @@ export default {
     },
     sendProject() {
       return axios
-        .post('/users/'+this.userId+"/projects", { projectName : this.projectName })
+        .post('/'+this.ownerType+'/'+this.ownerId+"/projects", { projectName : this.projectName })
         .then((response) => {
           window.location = response.data.redirectTo;
         })

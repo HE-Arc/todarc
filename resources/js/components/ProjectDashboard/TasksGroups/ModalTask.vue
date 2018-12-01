@@ -51,20 +51,20 @@
                     :tags="task.labels"
                     :autocomplete-items="filteredLabels"
                     :add-only-from-autocomplete="true"
-                    @tags-changed="newTags => task.labels = newTags">
-                    <template slot="tagCenter" slot-scope="props" >
-                      <span :background='props.tag.color' :id='"color-id-"+props.tag.id' @click="props.performOpenEdit(props.index)" :class="{ hidden: props.edit }">{{ props.tag.text }}</span>
-                    </template>
-                    <template
-                      slot="autocompleteItem"
-                      slot-scope="props">
-                      <h6 @click="props.performAdd(props.item)" class="badge" :style='"background-color:"+props.item.color+";"'>
-                        {{ props.item.text }}
-                      </h6>
-                    </template>
-                  </vue-tags-input>
+                    @tags-changed="updateLabels">
+                      <template slot="tagCenter" slot-scope="props" >
+                        <span :background='props.tag.color' :id='"color-id-"+props.tag.id' @click="props.performOpenEdit(props.index)" :class="{ hidden: props.edit }">{{ props.tag.text }}</span>
+                      </template>
+                      <template
+                        slot="autocompleteItem"
+                        slot-scope="props">
+                        <h6 @click="props.performAdd(props.item)" class="badge" :style='"background-color:"+props.item.color+";"'>
+                          {{ props.item.text }}
+                        </h6>
+                      </template>
+                    </vue-tags-input>
                   </div>
-                </diV>
+                </div>
 
                 <div class="row">
                   <div class="col-md-6 mb-3">
@@ -203,6 +203,9 @@ export default {
         this.$emit('edit',this.task);
         this.close();
       }
+    },
+    updateLabels(labels){
+      this.task.labels = labels;
     }
   },
   mounted() {

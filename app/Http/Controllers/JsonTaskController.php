@@ -15,7 +15,7 @@ class JsonTaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request,Task $task)
     {
         $request->validate([
             'name' => 'required|max:255',
@@ -43,6 +43,10 @@ class JsonTaskController extends Controller
         foreach ($request->input("labels") as $label) {
             $task->labels()->attach($label["id"]);
         }
+
+        $task = Task::with('labels')->find($task->id);
+
+        return response()->json($task);
     }
     
     /**

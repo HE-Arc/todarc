@@ -21,7 +21,7 @@ Route::group(['middleware' => 'checklogin'], function() {
     Route::resource('projects', 'ProjectController')->except(['store']);
     Route::resource('projects.labels', 'LabelController')->except(['show', 'create', 'edit']);
     Route::resource('projects.tasks', 'ProjectTaskController')->only(['index', 'update', 'store', 'destroy']);
-    Route::resource('projects.tasks.labels', 'TaskLabelController')->only(['store', 'destroy']);
+    Route::resource('projects.tasks.labels', 'ProjectTaskLabelController')->only(['destroy']);
     Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
     Route::resource('projects.groups', 'ProjectGroupController')->only(['index', 'update', 'store', 'destroy']);
     Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);

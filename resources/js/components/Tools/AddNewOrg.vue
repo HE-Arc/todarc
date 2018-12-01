@@ -13,12 +13,15 @@
 </template>
 
 <script>
+import Modal from './Modal';
+
 export default {
   data() {
     return {
       orgName: ''
     }
   },
+  components: { Modal },
   props: {
     buttonText: String,
     userId: Number,

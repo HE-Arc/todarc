@@ -49,7 +49,7 @@
         @foreach($organisations as $organisation)
         <user-dashboard-organisation
           name="{{$organisation->name}}"
-          :members="{{ $organisation->userNames()->toJson() }}"
+          :projects="{{ $organisation->projects }}"
           button-text="{{ __('See the organisation') }}"
           uri-organisation="{{ url('/organisations/'.$organisation->name) }}"
           ></user-dashboard-organisation>

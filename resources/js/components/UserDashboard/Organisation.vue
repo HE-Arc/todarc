@@ -2,9 +2,9 @@
   <div class="card text-center bg-light">
     <h4 class="card-header">{{ name }}</h4>
     <div class="card-body">
-      <h5>Members : </h5>
-      <ul>
-        <li v-for="member in members" :key="member.id">{{member}}</li>
+      <h5>Projects :</h5>
+      <ul class="pl-0">
+        <li v-for="project in projects" :key="project.id">{{project.name}}</li>
       </ul>
       <a :href="uriOrganisation"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
     </div>
@@ -17,7 +17,7 @@ export default {
     name: String,
     buttonText: String,
     uriOrganisation: String,
-    members: Array
+    projects: Array
   }
 };
 </script>

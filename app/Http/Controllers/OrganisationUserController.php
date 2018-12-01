@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Organisation;
 use App\User;
 
-class JsonOrganisationUserController extends Controller
+class OrganisationUserController extends Controller
 {
     /**
      * Store a newly created resource in storage.

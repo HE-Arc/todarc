@@ -38,7 +38,6 @@ export default {
       group: null,
       groupsNew: [],
       tasksNew: [],
-      tasksData: []
     };
   },
   methods: {
@@ -68,6 +67,9 @@ export default {
       if(group.id == this.id){
         this.group = group;
       }
+    },
+    removedTask(taskId){
+      this.tasksNew = this.tasksNew.filter(task=>task.id!=taskId);
     }
   },
   components: {
@@ -82,6 +84,7 @@ export default {
     BUS.$on('addTask', this.addTask);
     BUS.$on('addGroup', this.addGroup);
     BUS.$on('editedGroup', this.editedGroup);
+    BUS.$on('removedTask', this.removedTask);
   }
 };
 </script>

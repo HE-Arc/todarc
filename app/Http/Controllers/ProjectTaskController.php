@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Task;
 
-class JsonProjectTaskController extends Controller
+class ProjectTaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -56,17 +56,59 @@ class JsonProjectTaskController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Project $project
+     * @param  \App\Task  $task
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Project $project, Task $task)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'group_id' => 'required|integer',
+            'from_date' => 'nullable|date',
+            'until_date' => 'nullable|date',
+            'description' => 'nullable|max:1000',
+            'order' => 'integer',
+            'done' => 'boolean'
+        ]);
+        
+        Group::where('project_id',$task->group->project_id)->findOrFail($request->input('group_id'));
+        
+        $task->update(request([
+            'name',
+            'group_id',
+            'from_date',
+            'until_date',
+            'description',
+            'order',
+            'done',
+        ]));
+
+        $task->labels()->detach();
+        foreach ($request->input("labels") as $label) {
+            $task->labels()->attach($label["id"]);
+        }
+
+        $task = Task::with('labels')->find($task->id);
+        return response()->json($task);
+    }
+    
+    /**
      * Remove the specified resource from storage.
      *
      * @param Project $project
-     * @param  int  $id
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project, $id)
+    public function destroy(Project $project, Task $task)
     {
-      $task = Task::find($id);
-      $task->delete();
+        $task->users()->detach();
+        $task->labels()->detach();
+        $task->delete();
 
-      return response()->json(['message' => 'Task deleted successfully!'], 200);
+        return response()->json(['message' => 'Task deleted successfully!'], 200);
     }
 }

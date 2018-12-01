@@ -102,7 +102,7 @@ export default {
     },
     editedTask(task){
       return axios
-        .patch(`/tasks/${task.id}`,task)
+        .patch(`/projects/${this.project.id}/tasks/${task.id}`,task)
         .then((taskUpdated) => {
           let i = this.tasksData.indexOf(this.tasksData.find(task=>task.id==taskUpdated.data.id));
           this.tasksData[i] = taskUpdated.data;
@@ -114,7 +114,7 @@ export default {
     },
     editedGroup(group){
       return axios
-        .patch(`/groups/${group.id}`,group)
+        .patch(`/projects/${this.project.id}/groups/${group.id}`,group)
         .then((groupUpdated) => {
           let i = this.groupsData.indexOf(this.groupsData.find(group=>group.id==groupUpdated.data.id));
           this.groupsData[i] = groupUpdated.data;
@@ -172,19 +172,14 @@ export default {
         })
         .catch();
     },
-    removeTask(task)
-    {
-      /*
+    removeTask(task){
       return axios
         .delete(`/projects/${this.project.id}/tasks/${task.id}`)
         .then((taskToRemove) => {
-          this.taskData.splice(this.tasksData.indexOf(taskToRemove), 1);
-          //BUS.$emit('removeTask', taskToRemove.data);
-          console.log("Task removed");
+          this.tasksData = this.tasksData.filter(task => task.id != task.id);
+          BUS.$emit('removedTask', task.id);
         })
         .catch();
-        */
-        console.log("Task removed");
     }
   },
   watch: {

@@ -206,6 +206,11 @@ export default {
     },
     updateLabels(labels){
       this.task.labels = labels;
+
+      //Update labels color
+      setTimeout(function(){
+        this.task.labels.forEach(task => {console.log($('#color-id-'+task.id)); console.log('#color-id-'+task.id) ;$('#color-id-'+task.id).parent().parent().parent().css("background-color",$('#color-id-'+task.id).attr("background"));});
+      }.bind(this), 50);
     }
   },
   mounted() {

@@ -38,8 +38,6 @@ export default {
           window.location = response.data.redirectTo;
         })
         .catch();
-
-      return false;
     }
   }
 };

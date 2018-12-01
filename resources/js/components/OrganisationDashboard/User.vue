@@ -14,7 +14,7 @@ export default {
     organisation: Object,
   },
   methods: {
-    kick() {
+    kick(){
       return axios
         .delete('/organisations/'+ this.organisation.id +'/users/' + this.user.id)
         .then((response) => {

@@ -31,14 +31,12 @@ export default {
       this.$refs.modalNewOrganisation.open();
     },
     sendOrganisation() {
-      axios.post('/organisations', this.$data).then(response => {
+      return axios.post('/organisations', this.$data).then(response => {
         window.location = response.data.redirectTo;
       })
       .catch(response => {
         console.log("Error while creating organisation");
       });
-
-      return false;
     }
   }
 };

@@ -48,7 +48,7 @@ export default {
       default: -1,
     },
   },
-  components: ["AddNewProject"],
+  components: { AddNewProject },
   methods: {
     addExistingUser() {
       $(`#add-existing-user-modal`).modal();
@@ -60,7 +60,6 @@ export default {
       return axios
         .post(`/organisations/${this.organisation.id}/users`, {id:this.userId})
         .then((response) => {
-          console.log("user add");
           window.location = response.data.redirectTo;
         })
         .catch();
@@ -70,7 +69,6 @@ export default {
     axios
       .get('/users')
       .then((users) => {
-        console.log("list user received");
         this.usersAll = users.data;
         this.usersFiltered = this.usersAll.filter(function(user) { return this.indexOf(user.id) < 0 }, this.users.map((userA) => userA.id));
       })

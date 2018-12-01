@@ -52,6 +52,11 @@ class ProjectTaskController extends Controller
             'done',
         ]));
 
+        foreach ($request->input("labels") as $label) {
+            $task->labels()->attach($label["id"]);
+        }
+
+        $task = Task::with('labels')->find($task->id);
         return response()->json($task);
     }
 

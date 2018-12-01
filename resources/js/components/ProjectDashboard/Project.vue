@@ -22,20 +22,19 @@
       <div class="dropdown-menu dropdown-menu-sm show" slot-scope="group">
         <a @click="createGroup()" class="dropdown-item" href="#"><i class="fas fa-plus"></i> Add new Group</a>
         <a @click="editGroup(group.data)" class="dropdown-item" href="#"><i class="fas fa-pencil-alt"></i> Edit</a>
-        <!--<a @click="" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a>-->
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Have some fun</a>
+        <a @click="removeGroup(group.data)" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a>
       </div>
     </vue-context>
     <vue-context ref="menuTask" id="menuTask">
       <div class="dropdown-menu dropdown-menu-sm show" slot-scope="task">
         <a @click="createTask()" class="dropdown-item" href="#"><i class="fas fa-plus"></i> Add new Task</a>
         <a @click="editTask(task.data)" class="dropdown-item" href="#"><i class="fas fa-pencil-alt"></i> Edit</a>
-        <a @click="removeTask(task.data)" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Have some fun</a>
+        <a @click="removeTask(task.data)" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a>
       </div>
     </vue-context>
+    <confirm ref="confirm"/>
   </div>
 </template>
 
@@ -173,11 +172,26 @@ export default {
         .catch();
     },
     removeTask(task){
+      if(!confirm("Are you sure you want to remove this task?\nThis action can't be reversed!")){
+        return;
+      }
       return axios
         .delete(`/projects/${this.project.id}/tasks/${task.id}`)
         .then((taskToRemove) => {
           this.tasksData = this.tasksData.filter(task => task.id != task.id);
           BUS.$emit('removedTask', task.id);
+        })
+        .catch();
+    },
+    removeGroup(group){
+      if(!confirm("Are you sure you want to remove this group?\nThis action can't be reversed!")){
+        return;
+      }
+      return axios
+        .delete(`/projects/${this.project.id}/groups/${group.id}`)
+        .then((message) => {
+          this.tasksData = this.tasksData.filter(task => task.id != task.id);
+          BUS.$emit('removedGroup', group.id);
         })
         .catch();
     }

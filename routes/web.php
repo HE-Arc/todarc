@@ -12,8 +12,8 @@
 */
 
 Route::group(['middleware' => 'checklogin'], function() {
-    
-    //Base routes    
+
+    //Base routes
     Route::get('/', 'UserDashboard@dashboard')->name('home');
     Route::get('/home', 'UserDashboard@dashboard')->name('home');
 
@@ -35,7 +35,7 @@ Route::group(['middleware' => 'checklogin'], function() {
     Route::resource('users', 'JsonUserController')->only(['index']);
     Route::resource('tasks', 'JsonTaskController')->only(['update', 'destroy']);
     Route::resource('groups', 'JsonGroupController')->only(['update', 'destroy']);
-    Route::resource('projects.tasks', 'JsonProjectTaskController')->only(['index', 'store']);
+    Route::resource('projects.tasks', 'JsonProjectTaskController')->only(['index', 'store', 'destroy']);
     Route::resource('projects.groups', 'JsonProjectGroupController')->only(['index', 'store']);
     Route::resource('organisations.users', 'JsonOrganisationUserController')->only(['store', 'destroy']);
 });

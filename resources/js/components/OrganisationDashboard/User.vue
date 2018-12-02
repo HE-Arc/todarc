@@ -18,7 +18,6 @@ export default {
       return axios
         .delete('/organisations/'+ this.organisation.id +'/users/' + this.user.id)
         .then((response) => {
-          console.log("Kicked user");
           window.location = response.data.redirectTo;
         })
         .catch();

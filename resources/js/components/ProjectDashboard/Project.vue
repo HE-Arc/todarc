@@ -5,7 +5,7 @@
         Tasks
       </h4>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+        <input type="checkbox" class="custom-control-input" id="customCheck1" v-model="activeOnly" checked="">
         <label class="custom-control-label" for="customCheck1">Running tasks</label>
       </div>
     </div>
@@ -34,7 +34,6 @@
         <a @click="removeTask(task.data)" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a>
       </div>
     </vue-context>
-    <confirm ref="confirm"/>
   </div>
 </template>
 
@@ -67,7 +66,8 @@ export default {
       options: [
         {name:"add"},
         {name:"edit"}
-      ]
+      ],
+      activeOnly: true
     };
   },
   mounted() {
@@ -105,8 +105,6 @@ export default {
         .then((taskUpdated) => {
           let i = this.tasksData.indexOf(this.tasksData.find(task=>task.id==taskUpdated.data.id));
           this.tasksData[i] = taskUpdated.data;
-          console.log("Edited");
-          console.log(taskUpdated.data);
           BUS.$emit('editedTask', taskUpdated.data);
         })
         .catch();
@@ -190,7 +188,8 @@ export default {
       return axios
         .delete(`/projects/${this.project.id}/groups/${group.id}`)
         .then((message) => {
-          this.tasksData = this.tasksData.filter(task => task.id != task.id);
+          //this.tasksData = this.tasksData.filter(task => task.id != task.id);
+          //TODO Update groups and tasks removed
           BUS.$emit('removedGroup', group.id);
         })
         .catch();
@@ -198,10 +197,13 @@ export default {
   },
   watch: {
     nbTasksDone() {
-      this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
+      this.$emit('tasksChanged', this.nbTasksDone, this.nbTasksRunning);
     },
     nbTasksRunning() {
-      this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
+      this.$emit('tasksChanged', this.nbTasksDone, this.nbTasksRunning);
+    },
+    activeOnly() {
+      BUS.$emit('taskFiltered', this.activeOnly);
     }
   },
   computed: {

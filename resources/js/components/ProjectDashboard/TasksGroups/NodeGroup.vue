@@ -14,7 +14,7 @@
 
     <draggable element="ol" class="min-height list-group" :list="tasksNew" :options="{group:'task', draggable:'.node-task', animation:200}" @change="changeTasks">
 
-      <task-group v-for="task in tasksNew" :key="task.id" :id="task.id"></task-group>
+      <task-group v-for="task in tasksNew" :key="task.id" :id="task.id" v-if="!runningOnly || task.done == false"></task-group>
 
     </draggable>
     <!-- <button>Add group</button> -->
@@ -38,6 +38,7 @@ export default {
       group: null,
       groupsNew: [],
       tasksNew: [],
+      runningOnly: true
     };
   },
   methods: {
@@ -50,7 +51,6 @@ export default {
         this.updateTasks(this.tasksNew, this.id);
     },
     addGroup(group){
-      console.log(group.group_id)
       if(group.group_id == this.id){
         this.groupsNew.push(group);
       }
@@ -68,8 +68,24 @@ export default {
         this.group = group;
       }
     },
+    editedTask(taskEdited){
+      let index = this.tasksNew.findIndex(task => task.id == taskEdited.id);
+      if(index < 0){
+        //Task changed to this group?
+        if(taskEdited.group_id == this.id){
+          this.tasksNew.push(taskEdited);
+        }
+      }else{
+        //Task updated
+        this.tasksNew.splice(index, 1, taskEdited);
+      }
+      this.tasksNew = this.tasksNew.filter(task=>task.group_id == this.id).sort((t1, t2) => t1.sort < t2.sort);
+    },
     removedTask(taskId){
       this.tasksNew = this.tasksNew.filter(task=>task.id!=taskId);
+    },
+    taskFiltered(runningOnly){
+      this.runningOnly = runningOnly;
     }
   },
   components: {
@@ -84,7 +100,9 @@ export default {
     BUS.$on('addTask', this.addTask);
     BUS.$on('addGroup', this.addGroup);
     BUS.$on('editedGroup', this.editedGroup);
+    BUS.$on('editedTask', this.editedTask);
     BUS.$on('removedTask', this.removedTask);
+    BUS.$on('taskFiltered', this.taskFiltered);
   }
 };
 </script>

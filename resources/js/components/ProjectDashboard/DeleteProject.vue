@@ -1,5 +1,9 @@
 <template>
-  <button class="btn btn-danger btn-block" v-on:click="requestDelete">Delete Project</button>
+  <form method="POST" href="#" v-bind:action="deleteUrl">
+    <input type="hidden" name="_method" value="delete" />
+    <button class="btn btn-danger btn-block" v-on:click="requestDelete">Delete Project</button>
+    <input type="hidden" name="_token" v-bind:value="csrfToken()">
+  </form>
 </template>
 
 <script>
@@ -7,6 +11,11 @@
   {
     props : {
       projectId : Number,
+    },
+    data(){
+      return {
+        deleteUrl: `/projects/${this.projectId}`
+      };
     },
     methods : {
       requestDelete()
@@ -29,6 +38,9 @@
             console.log("error while deleting labels");
           });
         }
+      },
+      csrfToken() {
+        return document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       }
     }
   }

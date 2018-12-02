@@ -27,7 +27,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="$emit('cancelled')">Close</button>
-            <button type="submit" class="btn btn-primary" v-on:click="buttonConfirmedClicked">Confirm</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
           </div>
         </form>
       </div>
@@ -60,7 +60,7 @@
         {
           $(`#${this.id}`).modal('hide');
         },
-        buttonConfirmedClicked: function()
+        submit: function()
         {
           this.$emit('confirmed');
           this.close();

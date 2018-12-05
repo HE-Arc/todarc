@@ -12,7 +12,7 @@
         :color="label.color"
       ></task-label>
     </div>
-    <i class="fas fa-bars mr-1"></i>
+    <i @click="contextMenuTask($event, task)" class="fas fa-bars mr-1"></i>
     <i class="fas fa-arrows-alt ml-1 handle"></i>
     <div class="actions mr-0">
       <!-- TODO: Add mennu option to display contextual menu -->

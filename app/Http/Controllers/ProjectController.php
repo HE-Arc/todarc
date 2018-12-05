@@ -106,7 +106,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //$project->
+        $project->delete();
+
+        return redirect()->action('UserDashboard@dashboard');
     }
 
     const DEFAULT_GROUPNAME = 'Todo';

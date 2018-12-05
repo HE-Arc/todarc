@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-3 text-right">
           <add-new-project
-          button-text="{{__('+ New project')}}" 
+          button-text="{{__('+ New project')}}"
           :owner-id="{{ $user->id }}"
           owner-type="users"
           ></add-new-project>

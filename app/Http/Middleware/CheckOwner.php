@@ -26,7 +26,8 @@ class CheckOwner
 
         $project = $request->route('project');
 
-        if(!$project || $project->Owner->is($user) || $user->organisations->contains($project->Owner))        {
+        if(!$project || $project && ($project->Owner->is($user) || $user->organisations->contains($project->Owner)))
+        {
           return $next($request);
         }
         else

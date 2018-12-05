@@ -5,7 +5,7 @@
         {{ label.name }}
       </div>
       <div class="label-action">
-        <button class="btn btn-link" @click="update(label)"><i class="fas fa-pen"></i></button>
+        <button class="btn btn-link" @click="updateLabel(label)"><i class="fas fa-pen"></i></button>
         <button class="btn btn-link" @click="deleteLabel(label.id)"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>
@@ -36,47 +36,51 @@ export default {
         backgroundColor: label.color
       };
     },
-    update(label) {
-      this.$refs.modalLabel.open("Add a new label", label);
+    updateLabel(label) {
+      this.$refs.modalLabel.open("Add a newLabel label", label);
     },
-    // new label clicked
+    // newLabel label clicked
     newLabel() {
-      this.$refs.modalLabel.open("Add a new label", {
+      this.$refs.modalLabel.open("Add a newLabel label", {
         name : '',
         color : '#0000FF'
       });
     },
-    // define if this is a new or updated label
+    // define if this is a newLabel or updateLabeld label
     sendLabel(label) {
       if('id' in label) {
-        this.sendUpdatedLabel(label);
+        this.sendUpdated(label);
       } else {
-        this.sendNewLabel(label)
+        this.sendNew(label)
       }
     },
-    // send the new label to server
-    sendNewLabel(label) {
-      axios.post( `/projects/${this.projectId}/labels`, label).then(response => {
+    // send the newLabel label to server
+    sendNew(label) {
+      axios.post( `/projects/${this.projectId}/labels`, label)
+      .then(response => {
         this.labels = response.data.labels;
+        // TODO: Emit newLabel labels
       })
       .catch(response => {
         console.log("error while add label");
       });
     },
-    // send the updated label to server
-    sendUpdatedLabel(label) {
+    // send the updateLabeld label to server
+    sendUpdated(label) {
       axios.put(`/projects/${this.projectId}/labels/${label.id}`, label)
       .then(response => {
         this.labels = response.data.labels;
+        // TODO: Emit updateLabel labels
       }).catch(response => {
         console.log("error while editing labels");
       });
     },
-    // send which label to delete to server
+    // send which label to deleteLabel to server
     deleteLabel(labelId) {
-      axios.delete(`/projects/${this.projectId}/labels/${labelId}`)
+      axios.deleteLabel(`/projects/${this.projectId}/labels/${labelId}`)
       .then(response => {
         this.labels = response.data.labels;
+        // TODO: Emit deleteLabel labels
       }).catch(response => {
         console.log("error while deleting labels");
       });
@@ -87,7 +91,7 @@ export default {
       this.labels = this.labelsInput
     },
     labels: {
-      handler: function(oldVal, newVal) {
+      handler: function(oldVal, newLabelVal) {
         this.$emit("labels-changed", this.labels)
       },
       deep: true,

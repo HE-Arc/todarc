@@ -189,7 +189,7 @@ export default {
         .delete(`/projects/${this.project.id}/groups/${group.id}`)
         .then((message) => {
           //this.tasksData = this.tasksData.filter(task => task.id != task.id);
-          //TODO Update groups and tasks removed
+          //TODO: Update groups and tasks removed
           BUS.$emit('removedGroup', group.id);
         })
         .catch();

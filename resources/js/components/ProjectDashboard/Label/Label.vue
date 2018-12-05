@@ -25,7 +25,7 @@ export default {
       axios.delete(`${window.location}/tasks/${this.taskId}/labels/${this.id}`)
       .then(response => {
         console.log("success")
-        //TODO Update interface
+        // TODO: Update interface
       }).catch(response => {
         console.log("error while deleting label from the task");
       });

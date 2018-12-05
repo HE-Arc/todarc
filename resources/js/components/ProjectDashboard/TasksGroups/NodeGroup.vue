@@ -1,7 +1,7 @@
 <template>
   <li class="node node-group">
     <span @contextmenu.prevent="contextMenuGroup($event, group)" @dblclick="editMe" v-if="group" class="list-group-item">{{ group.name }}
-      <!-- TODO Change arrow location to end of line -->
+      <!-- TODO: Change arrow location to end of line -->
       <i class="fas fa-arrows-alt"></i>
     </span>
     

@@ -13,9 +13,9 @@
       ></task-label>
     </div>
     <div class="actions">
-      <!-- TODO Change arrow location to end of line -->
+      <!-- TODO: Change arrow location to end of line -->
       <i class="fas fa-arrows-alt"></i>
-      <!-- TODO Add mennu option to display contextual menu -->
+      <!-- TODO: Add mennu option to display contextual menu -->
     </div>
   </div>
 </template>

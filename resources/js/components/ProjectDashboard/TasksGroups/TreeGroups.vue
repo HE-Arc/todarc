@@ -1,6 +1,6 @@
 <template>
   <draggable element="ol" :list="groupsNew" :options="{group:'group', draggable:'.node-group', animation:200}" @change="change" class="min-height list-group list-group-root">
-    <node-group v-for="group in groupsNew" :key="group.id" v-bind:id="group.id"></node-group>
+    <node-group v-for="group in groupsNew" :key="group.id" :id="group.id"></node-group>
   </draggable>
 </template>
 
@@ -13,7 +13,7 @@ import { BUS } from "../BusEvent";
 export default {
   name: "treeGroups",
   inject: ['groups', "updateGroups"],
-  data: function() {
+  data() {
     return {
       groupsNew: []
     }

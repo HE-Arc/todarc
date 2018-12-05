@@ -6,21 +6,20 @@
       <ul>
         <li v-for="todo in tasksToDo" :key="todo.id">{{todo}}</li>
       </ul>
-      <a v-bind:href="uriProject"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
+      <a :href="uriProject"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>
 
 <script>
-  module.exports =
-  {
-    props: {
-      name: String,
-      tasksToDo: Array,
-      buttonText: String,
-      uriProject: String
-    }
+export default {
+  props: {
+    name: String,
+    tasksToDo: Array,
+    buttonText: String,
+    uriProject: String
   }
+};
 </script>
 
 <style lang="scss" scoped>

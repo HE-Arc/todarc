@@ -5,7 +5,7 @@
         Tasks
       </h4>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+        <input type="checkbox" class="custom-control-input" id="customCheck1" v-model="activeOnly" checked="">
         <label class="custom-control-label" for="customCheck1">Running tasks</label>
       </div>
     </div>
@@ -14,26 +14,24 @@
     </div>
     <div class="card-footer">
       <div class="row">
-        <ModalTask ref="modalTask" @add="addTask" @edit="editedTask" v-bind:groups="groups" class="col-md-6"></ModalTask>
-        <ModalGroup ref="modalGroup" @add="addGroup" @edit="editedGroup" v-bind:groups="groups" class="col-md-6"></ModalGroup>
+        <ModalTask ref="modalTask" @add="addTask" @edit="editedTask" :labels="labels" :groups="groups" class="col-md-6"></ModalTask>
+        <ModalGroup ref="modalGroup" @add="addGroup" @edit="editedGroup" :groups="groups" class="col-md-6"></ModalGroup>
       </div>
     </div>
     <vue-context ref="menuGroup" id="menuGroup">
       <div class="dropdown-menu dropdown-menu-sm show" slot-scope="group">
         <a @click="createGroup()" class="dropdown-item" href="#"><i class="fas fa-plus"></i> Add new Group</a>
         <a @click="editGroup(group.data)" class="dropdown-item" href="#"><i class="fas fa-pencil-alt"></i> Edit</a>
-        <!-- <a @click="" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a> -->
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Have some fun</a>
+        <a @click="removeGroup(group.data)" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a>
       </div>
     </vue-context>
     <vue-context ref="menuTask" id="menuTask">
       <div class="dropdown-menu dropdown-menu-sm show" slot-scope="task">
         <a @click="createTask()" class="dropdown-item" href="#"><i class="fas fa-plus"></i> Add new Task</a>
         <a @click="editTask(task.data)" class="dropdown-item" href="#"><i class="fas fa-pencil-alt"></i> Edit</a>
-        <!-- <a @click="" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a> -->
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Have some fun</a>
+        <a @click="removeTask(task.data)" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i> Remove</a>
       </div>
     </vue-context>
   </div>
@@ -61,17 +59,18 @@ export default {
       required: true
     }
   },
-  data(){
+  data() {
     return {
       tasksData: [],
       groupsData: [],
       options: [
         {name:"add"},
         {name:"edit"}
-      ]
+      ],
+      activeOnly: true
     };
   },
-  mounted(){
+  mounted() {
     this.tasksData = this.tasks;
     this.groupsData = this.groups;
   },
@@ -81,7 +80,7 @@ export default {
     ModalTask,
     ModalGroup,
   },
-  methods:{
+  methods: {
     createTask(){
       this.$refs.modalTask.openCreation();
     },
@@ -102,7 +101,7 @@ export default {
     },
     editedTask(task){
       return axios
-        .patch('/tasks/'+task.id,task)
+        .patch(`/projects/${this.project.id}/tasks/${task.id}`,task)
         .then((taskUpdated) => {
           let i = this.tasksData.indexOf(this.tasksData.find(task=>task.id==taskUpdated.data.id));
           this.tasksData[i] = taskUpdated.data;
@@ -112,7 +111,7 @@ export default {
     },
     editedGroup(group){
       return axios
-        .patch('/groups/'+group.id,group)
+        .patch(`/projects/${this.project.id}/groups/${group.id}`,group)
         .then((groupUpdated) => {
           let i = this.groupsData.indexOf(this.groupsData.find(group=>group.id==groupUpdated.data.id));
           this.groupsData[i] = groupUpdated.data;
@@ -123,7 +122,7 @@ export default {
     addTask(task){
       task.group_id = task.group_id?task.group_id:"";
       return axios
-        .post('/projects/'+this.project.id+'/tasks',task)
+        .post(`/projects/${this.project.id}/tasks`,task)
         .then((taskAdded) => {
           this.tasksData.push(taskAdded.data);
           BUS.$emit('addTask', taskAdded.data);
@@ -133,7 +132,7 @@ export default {
     addGroup(group){
       group.project_id = this.project.id;
       return axios
-        .post('/projects/'+this.project.id+'/groups',group)
+        .post(`/projects/${this.project.id}/groups`,group)
         .then((groupAdded) => {
           this.groupsData.push(groupAdded.data);
           BUS.$emit('addGroup', groupAdded.data);
@@ -147,7 +146,7 @@ export default {
       });
 
       return axios
-        .post('/projects/'+this.project.id+'/groups-hierarchy',{
+        .post(`/projects/${this.project.id}/groups-hierarchy`,{
           groups: data
         })
         .then(() => {
@@ -162,7 +161,7 @@ export default {
       });
 
       return axios
-        .post('/projects/'+this.project.id+'/tasks-hierarchy',{
+        .post(`/projects/${this.project.id}/tasks-hierarchy`,{
           tasks: data
         })
         .then(() => {
@@ -170,38 +169,60 @@ export default {
         })
         .catch();
     },
-
-  },
-  watch:
-  {
-    nbTasksDone: function()
-    {
-      this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
+    removeTask(task){
+      if(!confirm("Are you sure you want to remove this task?\nThis action can't be reversed!")){
+        return;
+      }
+      return axios
+        .delete(`/projects/${this.project.id}/tasks/${task.id}`)
+        .then((taskToRemove) => {
+          this.tasksData = this.tasksData.filter(task => task.id != task.id);
+          BUS.$emit('removedTask', task.id);
+        })
+        .catch();
     },
-    nbTasksRunning: function()
-    {
-      this.$emit('tasks-changed', this.nbTasksDone, this.nbTasksRunning);
+    removeGroup(group){
+      if(!confirm("Are you sure you want to remove this group?\nThis action can't be reversed!")){
+        return;
+      }
+      return axios
+        .delete(`/projects/${this.project.id}/groups/${group.id}`)
+        .then((message) => {
+          //this.tasksData = this.tasksData.filter(task => task.id != task.id);
+          //TODO Update groups and tasks removed
+          BUS.$emit('removedGroup', group.id);
+        })
+        .catch();
     }
   },
-  computed:
-  {
-    nbTasksDone: function() {
+  watch: {
+    nbTasksDone() {
+      this.$emit('tasksChanged', this.nbTasksDone, this.nbTasksRunning);
+    },
+    nbTasksRunning() {
+      this.$emit('tasksChanged', this.nbTasksDone, this.nbTasksRunning);
+    },
+    activeOnly() {
+      BUS.$emit('taskFiltered', this.activeOnly);
+    }
+  },
+  computed: {
+    nbTasksDone() {
       let nbTasksDone = 1;
 
       this.tasksData.forEach(function(task) {
-        if(task.done)
-        {
+        if(task.done) {
           nbTasksDone++;
         }
       });
 
       return nbTasksDone;
     },
-    nbTasksRunning: function() {
+    nbTasksRunning() {
       return this.tasksData.length - this.nbTasksDone
     }
   },
-  provide(){
+  provide() {
     return {
       tasks : this.tasks,
       groups : this.groups,

@@ -20,15 +20,18 @@
         </div>
         <div class="col-md-3 text-right">
           <add-new-project
-          v-bind:organisation='{!! $organisation->toJson(); !!}'
+          button-text="{{__('+ New project')}}"
+          :owner-id="{{ $organisation->id }}"
+          owner-type="organisations"
           ></add-new-project>
         </div>
       </div>
 
-      <div id="projects-container">
+      <div id="projects-container" class="cards-container">
           @foreach($projects as $project)
           <organisation-dashboard-project name="{{$project->name}}"
-          v-bind:tasks-to-do="{{$project->tasksNameJson()}}"
+          :project-id="{{ $project->id }}"
+          :tasks-to-do="{{$project->tasksNameJson()}}"
           button-text="{{ __('See the project') }}"
           uri-project="https://github.com"
           ></organisation-dashboard-project>
@@ -45,16 +48,16 @@
         </div>
         <div class="col-md-3 text-right">
           <add-existing-user
-          v-bind:users=@json($users)
-          v-bind:organisation='{!! $organisation->toJson(); !!}'
+          :users=@json($users)
+          :organisation='{!! $organisation->toJson(); !!}'
           ></add-existing-user>
         </div>
       </div>
-      <div id="users-container">
+      <div id="users-container" class="cards-container">
           @foreach($users as $user)
           <organisation-dashboard-user
-          v-bind:user="{{ $user->toJson() }}"
-          v-bind:organisation='{!! $organisation->toJson(); !!}'
+          :user="{{ $user->toJson() }}"
+          :organisation='{!! $organisation->toJson(); !!}'
           ></organisation-dashboard-user>
           @endforeach
       </div>

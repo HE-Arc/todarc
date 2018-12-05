@@ -1,19 +1,21 @@
 <template>
   <div class="node node-task list-group-item bg-secondary">
-    <div @contextmenu.prevent="contextMenuTask($event, task)" v-if="task" v-on:dblclick="editMe" class="label">{{ task.name }}</div>
+    <div @contextmenu.prevent="contextMenuTask($event, task)" v-if="task" @dblclick="editMe" class="label">{{ task.name }}</div>
     <div class="labels">
       <task-label
         v-if="task !== null"
         v-for="label in task.labels"
-        v-bind:key="label.id"
-        v-bind:id="label.id"
-        v-bind:task-id="id"
-        v-bind:name="label.name"
-        v-bind:color="label.color"
+        :key="label.id"
+        :id="label.id"
+        :task-id="id"
+        :name="label.name"
+        :color="label.color"
       ></task-label>
     </div>
     <div class="actions">
-      
+      <!-- TODO Change arrow location to end of line -->
+      <i class="fas fa-arrows-alt"></i>
+      <!-- TODO Add mennu option to display contextual menu -->
     </div>
   </div>
 </template>
@@ -51,7 +53,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
   div {

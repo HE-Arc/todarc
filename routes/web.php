@@ -13,41 +13,29 @@
 
 Route::group(['middleware' => 'checklogin'], function() {
 
-  Route::resource('projects', 'ProjectController')->except(['store']);
-  Route::resource('users.projects', 'UserProjectController')->only(['store']);
-  Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
-  Route::resource('organisations', 'OrganisationController')->only(['show', 'store']);
-  Route::resource('projects.labels', 'LabelController')->except(['show', 'create', 'edit']);
+    //Base routes
+    Route::get('/', 'UserDashboard@dashboard')->name('home');
+    Route::get('/home', 'UserDashboard@dashboard')->name('home');
 
-  Route::get('/', 'UserDashboard@dashboard')->name('home');
-  Route::get('/home', 'UserDashboard@dashboard')->name('home');
+    //Projects
+    Route::resource('projects', 'ProjectController')->except(['store']);
+    Route::resource('projects.labels', 'LabelController')->except(['show', 'create', 'edit']);
+    Route::resource('projects.tasks', 'ProjectTaskController')->only(['index', 'update', 'store', 'destroy']);
+    Route::resource('projects.tasks.labels', 'ProjectTaskLabelController')->only(['destroy']);
+    Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
+    Route::resource('projects.groups', 'ProjectGroupController')->only(['index', 'update', 'store', 'destroy']);
+    Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);
 
-  Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);
-  Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
-
-  Route::resource('projects.tasks.labels', 'TaskLabelController')->only(['store', 'destroy']);
-
-  //TODO add following routes to api
-  Route::resource('groups', 'JsonGroupController')->only([
-    'update', 'destroy'
-  ]);
-  Route::resource('tasks', 'JsonTaskController')->only([
-    'update', 'destroy'
-  ]);
-
-  Route::resource('projects.tasks', 'JsonProjectTaskController')->only([
-    'index', 'store'
-  ]);
-
-  Route::resource('projects.groups', 'JsonProjectGroupController')->only([
-    'index', 'store'
-  ]);
-
-  Route::resource('organisations.users', 'JsonOrganisationUserController')->only([
-    'store', 'destroy'
-  ]);
-
-  Route::resource('users', 'JsonUserController')->only(['index']);
+    //Users
+    Route::resource('users', 'UserController')->only(['index']);
+    
+    //Création of projects
+    Route::resource('users.projects', 'UserProjectController')->only(['store']);
+    Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
+    
+    //Creation of organisation
+    Route::resource('organisations', 'OrganisationController')->only(['show', 'store']);
+    Route::resource('organisations.users', 'OrganisationUserController')->only(['store', 'destroy']);
 });
 
 Auth::routes();

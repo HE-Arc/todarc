@@ -8,6 +8,10 @@
     <div class="card-body">
       <h5>Infos : </h5>
       <p>
+        <span class="font-weight-bold">Project Name : </span>
+        {{ projectName }}
+      </p>
+      <p>
         <span class="font-weight-bold">Owner : </span>
         {{ owner }}
       </p>
@@ -22,62 +26,61 @@
       <div v-if="labels.length > 0">
         <h5>Labels : </h5>
         <label-manager
-          v-bind:labels-input.sync="labels"
-          v-bind:project-id.sync="projectId"
-          v-on:labels-changed="updateLabels"
+          :labels-input.sync="labels"
+          :project-id.sync="projectId"
+          @labels-changed="updateLabels"
         ></label-manager>
       </div>
       <h5>Project updates : </h5>
-      <delete-project v-bind:project-id="projectId"></delete-project>
+      <delete-project :project-id="projectId"></delete-project>
     </div>
   </div>
 </template>
 
 <script>
-  import LabelManager from "./Label/LabelManager";
-  import DeleteProject from "./DeleteProject";
+import LabelManager from "./Label/LabelManager";
+import DeleteProject from "./DeleteProject";
 
-  export default
-  {
-    data () {
-      return {
-        labels: this.labelsInput,
-      }
-    },
-    props: {
-      owner : String,
-      nbTasksDone : Number,
-      nbTasksRunning : Number,
-      labelsInput : Array,
-      projectId : Number
-    },
-    methods:{
-      updateLabels(labels) {
-        this.labels = labels;
-      }
-    },
-    watch: {
-      labelsInput() {
-        this.labels = this.labelsInput;
-      },
-      labels: {
-        handler: function(oldVal, newVal) {
-          this.$emit("labels-changed", this.labels)
-        },
-        deep: true,
-        immediate: true
-      }
-    },
-    components: {
-      LabelManager,
-      DeleteProject
+export default {
+  data() {
+    return {
+      labels: this.labelsInput,
     }
+  },
+  props: {
+    owner : String,
+    nbTasksDone : Number,
+    nbTasksRunning : Number,
+    labelsInput : Array,
+    projectId : Number,
+    projectName : String
+  },
+  methods: {
+    updateLabels(labels) {
+      this.labels = labels;
+    }
+  },
+  watch: {
+    labelsInput() {
+      this.labels = this.labelsInput;
+    },
+    labels: {
+      handler: function(oldVal, newVal) {
+        this.$emit("labels-changed", this.labels)
+      },
+      deep: true,
+      immediate: true
+    }
+  },
+  components: {
+    LabelManager,
+    DeleteProject
   }
+};
 </script>
 
 <style lang="scss" scoped>
-  h5
-  {
+  h5 {
     margin-top: 20px;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="node node-task list-group-item bg-secondary">
-    <div @contextmenu.prevent="contextMenuTask($event, task)" v-if="task" @dblclick="editMe" class="label">{{ task.name }}</div>
-    <div class="labels">
+  <div @contextmenu.prevent="contextMenuTask($event, task)" class="node node-task list-group-item bg-secondary align-items-center d-flex">
+    <div v-if="task" @dblclick="editMe" class="label">{{ task.name }}</div>
+    <div class="labels flex-grow-1">
       <task-label
         v-if="task !== null"
         v-for="label in task.labels"
@@ -12,9 +12,9 @@
         :color="label.color"
       ></task-label>
     </div>
-    <div class="actions">
-      <!-- TODO: Change arrow location to end of line -->
-      <i class="fas fa-arrows-alt handle"></i>
+    <i class="fas fa-bars mr-1"></i>
+    <i class="fas fa-arrows-alt ml-1 handle"></i>
+    <div class="actions mr-0">
       <!-- TODO: Add mennu option to display contextual menu -->
     </div>
   </div>

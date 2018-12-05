@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card mb-3">
     <div class="card-header modal-header">
       <h4 @contextmenu.prevent="$refs.menuGroup.open">
         Tasks
@@ -14,8 +14,8 @@
     </div>
     <div class="card-footer">
       <div class="row">
-        <ModalTask ref="modalTask" @add="addTask" @edit="editedTask" :labels="labels" :groups="groups" class="col-md-6"></ModalTask>
-        <ModalGroup ref="modalGroup" @add="addGroup" @edit="editedGroup" :groups="groups" class="col-md-6"></ModalGroup>
+        <ModalTask ref="modalTask" @add="addTask" @edit="editedTask" :labels="labels" :groups="groups" class="col-6"></ModalTask>
+        <ModalGroup ref="modalGroup" @add="addGroup" @edit="editedGroup" :groups="groups" class="col-6"></ModalGroup>
       </div>
     </div>
     <vue-context ref="menuGroup" id="menuGroup">

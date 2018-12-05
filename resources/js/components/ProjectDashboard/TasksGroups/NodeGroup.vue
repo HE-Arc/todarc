@@ -1,8 +1,9 @@
 <template>
   <li class="node node-group">
-    <span @contextmenu.prevent="contextMenuGroup($event, group)" @dblclick="editMe" v-if="group" class="list-group-item">{{ group.name }}
-      <!-- TODO: Change arrow location to end of line -->
-      <i class="fas fa-arrows-alt handle"></i>
+    <span @contextmenu.prevent="contextMenuGroup($event, group)" @dblclick="editMe" v-if="group" class="list-group-item align-items-center  d-flex">
+      <span class="flex-grow-1">{{ group.name }}</span>
+      <i class="fas fa-bars mr-1"></i>
+      <i class="fas fa-arrows-alt ml-1 handle"></i>
     </span>
     
     <draggable element="ol" class="min-height list-group" :list="groupsNew" :options="{handle:'.handle', group:'group', draggable:'.node-group', animation:200}" @change="changeGroups">

@@ -16011,6 +16011,10 @@ li {
   padding: 15px;
 }
 
+.node.node-task {
+  margin-right: 0px;
+}
+
 .list-group.list-group-root > .node .list-group-item {
   border-radius: 0;
   border-width: 1px 0 0 0;

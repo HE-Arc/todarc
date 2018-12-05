@@ -6,10 +6,9 @@ ul, li{
   padding: 15px;
 }
 
-// .list-group.list-group-root {
-//   padding: 0;
-//   overflow: hidden;
-// }
+.node.node-task{
+  margin-right: 0px;
+}
 
 @mixin one-more-level($level){
   > .list-group {

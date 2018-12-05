@@ -13,6 +13,7 @@ ul, li{
 
 @mixin one-more-level($level){
   > .list-group {
+
     padding-left: ($level*15)*1px;
     > .node {
       > .list-group-item {
@@ -26,14 +27,20 @@ ul, li{
         @include one-more-level($level + 1)
       }
     }
+    > .node-task{
+      padding-left: (($level+2)*15)*1px;
+    }
+  }
+  > .list-task {
+    padding-left: (($level+1)*15)*1px;
   }
 }
 
 .list-group.list-group-root > .node{
-  @include one-more-level(0);
-
   .list-group-item {
     border-radius: 0;
     border-width: 1px 0 0 0;
   }
+
+  @include one-more-level(1);
 }

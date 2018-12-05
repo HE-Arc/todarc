@@ -14,7 +14,7 @@
     </div>
     <div class="actions">
       <!-- TODO: Change arrow location to end of line -->
-      <i class="fas fa-arrows-alt"></i>
+      <i class="fas fa-arrows-alt handle"></i>
       <!-- TODO: Add mennu option to display contextual menu -->
     </div>
   </div>

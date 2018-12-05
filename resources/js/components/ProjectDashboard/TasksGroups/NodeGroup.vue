@@ -2,22 +2,16 @@
   <li class="node node-group">
     <span @contextmenu.prevent="contextMenuGroup($event, group)" @dblclick="editMe" v-if="group" class="list-group-item">{{ group.name }}
       <!-- TODO: Change arrow location to end of line -->
-      <i class="fas fa-arrows-alt"></i>
+      <i class="fas fa-arrows-alt handle"></i>
     </span>
     
-
-    <draggable element="ol" class="min-height list-group" :list="groupsNew" :options="{group:'group', draggable:'.node-group', animation:200}" @change="changeGroups">
-
+    <draggable element="ol" class="min-height list-group" :list="groupsNew" :options="{handle:'.handle', group:'group', draggable:'.node-group', animation:200}" @change="changeGroups">
       <node-group v-for="group in groupsNew" :key="group.id" :id="group.id"></node-group>
-
     </draggable>
 
-    <draggable element="ol" class="min-height list-group" :list="tasksNew" :options="{group:'task', draggable:'.node-task', animation:200}" @change="changeTasks">
-
+    <draggable element="ol" class="min-height list-task" :list="tasksNew" :options="{handle:'.handle', group:'task', draggable:'.node-task', animation:200}" @change="changeTasks">
       <task-group v-for="task in tasksNew" :key="task.id" :id="task.id" v-if="!runningOnly || task.done == false"></task-group>
-
     </draggable>
-    <!-- <button>Add group</button> -->
   </li>
 </template>
 

@@ -30,11 +30,7 @@
             </div>
           </div>
           <div class="modal-footer">
-<<<<<<< HEAD:resources/js/components/Modal.vue
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="$emit('cancelled')">Close</button>
-=======
             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="$emit('cancelled')">Close</button>
->>>>>>> de7985ab7a6d2c2d29f88b0ec7f73c97e348356d:resources/js/components/Tools/Modal.vue
             <button type="submit" class="btn btn-primary">Confirm</button>
           </div>
         </form>
@@ -44,42 +40,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD:resources/js/components/Modal.vue
-    module.exports =
-    {
-      data () {
-        return {
-          id: null,
-          dataInputValue: this.dataInput
-        }
-      },
-      props:
-      {
-        title: String,
-        dataInput: String,
-        inputLabel: String
-      },
-      methods:
-      {
-        open: function()
-        {
-          $(`#${this.id}`).modal('show');
-        },
-        close: function()
-        {
-          $(`#${this.id}`).modal('hide');
-        },
-        submit: function()
-        {
-          this.$emit('confirmed');
-          this.close();
-        }
-      },
-      mounted()
-      {
-          this.id = 'modal'+this._uid;
-      },
-=======
 export default {
   data() {
     return {
@@ -108,7 +68,6 @@ export default {
 
       this.$emit('confirmed');
       this.close();
->>>>>>> de7985ab7a6d2c2d29f88b0ec7f73c97e348356d:resources/js/components/Tools/Modal.vue
     }
   },
   mounted() {

@@ -107,7 +107,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        # $project->delete();
+        $project->delete();
 
         return redirect()->action('UserDashboard@dashboard');
     }

@@ -9,6 +9,11 @@
         <button class="btn btn-link" @click="deleteLabel(label.id)"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>
+    <div v-if="labels.length === 0">
+      <p>
+        No label in this project.
+      </p>
+    </div>
     <button class="btn btn-primary btn-block" @click="newLabel"><i class="fas fa-plus"></i> Add a label</button>
     <modal-label
       @confirmed="sendLabel"

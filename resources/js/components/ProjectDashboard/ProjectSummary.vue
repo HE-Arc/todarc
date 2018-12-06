@@ -23,7 +23,7 @@
         <span class="font-weight-bold">Task done : </span>
         {{ nbTasksDone }}
       </p>
-      <div v-if="labels.length > 0">
+      <div>
         <h5>Labels : </h5>
         <label-manager
           :labels-input.sync="labels"

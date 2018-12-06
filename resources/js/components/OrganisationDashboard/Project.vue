@@ -2,11 +2,16 @@
   <div class="card text-center">
     <h4 class="card-header">{{ name }}</h4>
     <div class="card-body">
-      <h6>Tasks running : </h6>
-      <ul>
+      <h6>Tasks : </h6>
+      <ul v-if="tasksToDo.length > 0">
         <li v-for="task in tasksToDo" :key="task.id">{{ task.name }}</li>
       </ul>
-      <a :href="href"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
+      <p v-else>
+        No tasks in this project
+      </p>
+    </div>
+    <div class="card-footer">
+      <a v-bind:href="href"><button class="btn btn-primary btn-block">{{buttonText}}</button></a>
     </div>
   </div>
 </template>

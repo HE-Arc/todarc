@@ -81,7 +81,7 @@ export default {
       this.tasksNew = taskData.filter(task=>task.group_id==this.id);
     },
     refreshGroups(groupsData){
-      this.groupsNew = groupsData.filter(group=>group.group_id!=this.id);
+      this.groupsNew = groupsData.filter(group=>group.group_id==this.id);
     }
   },
   components: {
@@ -96,7 +96,7 @@ export default {
     BUS.$on('editedGroup', this.editedGroup);
 
     BUS.$on('refreshTasks', this.refreshTasks);
-    BUS.$on('refreshGroups', this.refreshTasks);
+    BUS.$on('refreshGroups', this.refreshGroups);
   }
 };
 </script>

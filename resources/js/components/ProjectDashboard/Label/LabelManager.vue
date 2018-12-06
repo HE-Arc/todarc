@@ -82,7 +82,7 @@ export default {
     },
     labels: {
       handler: function(oldVal, newLabelVal) {
-        this.$emit("labels-changed", this.labels)
+        this.$emit("labels-changed", this.labelsInput)
       },
       deep: true,
       immediate: true

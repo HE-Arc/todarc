@@ -14,8 +14,8 @@
     </div>
     <div class="card-footer">
       <div class="row">
-        <modal-task ref="modalTask" @add="addTask" @edit="editedTask" :labels="labels" :groups="groups" class="col-6"></modal-task>
-        <modal-group ref="modalGroup" @add="addGroup" @edit="editedGroup" :groups="groups" class="col-6"></modal-group>
+        <modal-task ref="modalTask" @add="addTask" @edit="updateTask" :labels="labels" :groups="groups" class="col-6"></modal-task>
+        <modal-group ref="modalGroup" @add="addGroup" @edit="updateGroup" :groups="groups" class="col-6"></modal-group>
       </div>
     </div>
     <vue-context ref="menuGroup" id="menuGroup">

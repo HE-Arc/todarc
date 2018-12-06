@@ -39,8 +39,8 @@ export default {
     editMe(){
       this.editTask(this.task);
     },
-    refreshTask(tasks){
-      let taskClone = tasks.find(task => task.id = this.id)
+    refreshTasks(tasks){
+      let taskClone = tasks.find(taskData => taskData.id == this.id)
       if(taskClone != null){
         this.task = taskClone;
       }

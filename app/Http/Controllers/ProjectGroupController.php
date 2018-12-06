@@ -69,6 +69,7 @@ class ProjectGroupController extends Controller
             'order' => 'integer',
         ]);
         
+        //TODO: Chack wether the new group_id is not a son himself
         if($request->input('group_id') != Null){
             Group::where('project_id',$group->project_id)->findOrFail($request->input('group_id'));
 

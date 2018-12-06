@@ -39,17 +39,19 @@ export default {
     editMe(){
       this.editTask(this.task);
     },
-    editedTask(task){
-      if(task.id == this.id){
-        this.task = task;
+    refreshTask(tasks){
+      let taskClone = tasks.find(task => task.id = this.id)
+      if(taskClone != null){
+        this.task = taskClone;
       }
-    }
+    },
   },
   components: {
     TaskLabel,
   },
   mounted(){
-    BUS.$on('editedTask', this.editedTask);
+    // BUS.$on('editedLabel', this.editedLabel);
+    BUS.$on('refreshTasks', this.refreshTasks);
   }
 };
 </script>

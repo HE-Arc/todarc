@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import BUS from "../BusEvent";
+
 export default {
   name: "modal-group",
   props: {

@@ -12,7 +12,6 @@
 */
 
 Route::group(['middleware' => 'checklogin'], function() {
-
     //Base routes
     Route::get('/', 'UserDashboard@dashboard')->name('home');
     Route::get('/home', 'UserDashboard@dashboard')->name('home');
@@ -28,14 +27,16 @@ Route::group(['middleware' => 'checklogin'], function() {
 
     //Users
     Route::resource('users', 'UserController')->only(['index']);
-    
+
     //Création of projects
     Route::resource('users.projects', 'UserProjectController')->only(['store']);
     Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
-    
+
     //Creation of organisation
     Route::resource('organisations', 'OrganisationController')->only(['show', 'store']);
     Route::resource('organisations.users', 'OrganisationUserController')->only(['store', 'destroy']);
 });
+
+Route::resource('/', 'MainController')->only(['index']);
 
 Auth::routes();

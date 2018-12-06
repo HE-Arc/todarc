@@ -1,5 +1,10 @@
 <template>
-  <button class="btn btn-danger btn-block" @click="requestDelete">Delete Project</button>
+  <form v-bind:action="href" method="post" @submit="requestDelete">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" id="csrf-token" v-bind:value="csrf" />
+    <button type="submit" class="btn btn-danger btn-block">Delete Project</button>
+  </form>
+
 </template>
 
 <script>
@@ -8,16 +13,24 @@ export default {
     projectId : Number,
   },
   methods: {
-    requestDelete() {
+    requestDelete(e)
+    {
       let confirmed = confirm('Are you sure you want to delete this project ? ');
-      if(confirmed) {
-        axios.delete( `/projects/${this.projectId}`).then(response => {
-          window.location = response.data.redirectTo;
-        })
-        .catch(response => {
-          console.log("Error while deleting label");
-        });
+
+      if(!confirmed)
+      {
+        e.preventDefault();
       }
+    }
+  },
+  computed: {
+    href: function()
+    {
+      return `/projects/${this.projectId}`;
+    },
+    csrf: function()
+    {
+      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="openCreation" type="button" class="btn btn-primary btn-block">Add Group</button>
+    <button @click="openCreation" type="button" class="btn btn-primary btn-block open-modal-btn">Add Group</button>
     <div class="modal fade" id="add-group" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -46,6 +46,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: "modal-group",
@@ -73,14 +74,14 @@ export default {
         group_id: -1,
         name: "",
         order: 2147483647, // Equivalent to MySQL max int value
-        editionMode: false 
+        editionMode: false
       })
     }
   },
   data() {
     return {
       group : Object,
-      editionMode: false 
+      editionMode: false
     }
   },
   methods: {
@@ -115,7 +116,7 @@ export default {
       if(this.group.group_id == this.group_root) {
         this.group.group_id = null;
       }
-      
+
       return true;
     },
     add(){

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="openCreation" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#add-task">Add Task</button>
+    <button @click="openCreation" type="button" class="btn btn-primary btn-block open-modal-btn" data-toggle="modal" data-target="#add-task">Add Task</button>
     <div class="modal fade" id="add-task" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -93,9 +93,9 @@
               <button v-if="editionMode" type="submit" class="btn btn-primary">Edit Task</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
-          </form> 
+          </form>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 </template>
@@ -235,7 +235,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+.open-modal-btn {
+  margin-top: 3px;
+}
 .autocomplete{
   margin: 0.525em -0.75rem;
   border-radius: 3px;

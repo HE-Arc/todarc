@@ -2,10 +2,18 @@
   <li class="node node-group">
     <span @contextmenu.prevent="contextMenuGroup($event, group)" @dblclick="editMe" v-if="group" class="list-group-item align-items-center d-flex">
       <span class="flex-grow-1">{{ group.name }}</span>
-      <i class="fas fa-bars mr-1"></i>
+      <button class="btn btn-link">
+        <i class="fas fa-plus"></i>
+      </button>
+      <button class="btn btn-link">
+        <i class="fas fa-pen"></i>
+      </button>
+      <button class="btn btn-link">
+        <i class="fas fa-trash"></i>
+      </button>
       <i class="fas fa-arrows-alt ml-1 handle"></i>
     </span>
-    
+
     <draggable element="ol" class="min-height list-group" :list="groupsNew" :options="{handle:'.handle', group:'group', draggable:'.node-group', animation:200}" @change="changeGroups">
       <node-group v-for="group in groupsNew" :key="group.id" :id="group.id"></node-group>
     </draggable>
@@ -66,7 +74,7 @@ export default {
     editedTask(taskEdited){
       let index = this.tasksNew.findIndex(task => task.id == taskEdited.id);
       if(index < 0){
-        //Task changed to this group?
+        //Task changed to this group ?
         if(taskEdited.group_id == this.id){
           this.tasksNew.push(taskEdited);
         }
@@ -103,7 +111,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.min-height{
+.min-height
+{
   min-height: 20px;
+}
+button
+{
+  color: white;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-top: 2px;
+}
+button:hover
+{
+  color: lightgreen;
+
+
 }
 </style>

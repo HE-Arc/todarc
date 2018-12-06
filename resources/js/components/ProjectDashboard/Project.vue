@@ -114,7 +114,7 @@ export default {
         .post(`/projects/${this.project.id}/groups`,group)
         .then((groupAdded) => {
           this.groupsData.push(groupAdded.data);
-          this.groupsData = this.GroupsData.sort((t1, t2) => t1.sort < t2.sort);
+          this.groupsData = this.groupsData.sort((t1, t2) => t1.sort < t2.sort);
 
           BUS.$emit('refreshGroups', this.groupsData);
         })
@@ -271,7 +271,7 @@ export default {
       this.$emit('tasksChanged', this.nbTasksDone, this.nbTasksRunning);
     },
     activeOnly() {
-      BUS.$emit('taskFiltered', this.activeOnly);
+      BUS.$emit('filteredTasks', this.activeOnly);
     }
   },
   computed: {

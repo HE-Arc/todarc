@@ -66,10 +66,7 @@ export default {
     editMe(){
       this.editGroup(this.group);
     },
-    removedTask(taskId){
-      //this.tasksNew = this.tasksNew.filter(task=>task.id!=taskId);
-    },
-    taskFiltered(runningOnly){
+    filteredTasks(runningOnly){
       this.runningOnly = runningOnly;
     },
     editedGroup(group){
@@ -94,6 +91,7 @@ export default {
     this.group = this.groups.find(group => group.id === this.id);
 
     BUS.$on('editedGroup', this.editedGroup);
+    BUS.$on('filteredTasks', this.filteredTasks)
 
     BUS.$on('refreshTasks', this.refreshTasks);
     BUS.$on('refreshGroups', this.refreshGroups);

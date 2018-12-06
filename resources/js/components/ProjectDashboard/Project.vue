@@ -124,8 +124,9 @@ export default {
       return axios
       .post( `/projects/${this.project.id}/labels`, label)
       .then(response => {
-        this.labelsData = response.data.labels;
-        //TODO: update
+        this.labelsData.push(response.data);
+
+        BUS.$emit('refreshLabels', this.labelsData);
       })
       .catch(response => {
         console.log("error while add label");
@@ -160,21 +161,22 @@ export default {
     updateLabel(labelEdited){
       axios.put(`/projects/${this.project.id}/labels/${labelEdited.id}`, labelEdited)
       .then(response => {
-        this.labelsData.filter(label => label.id == response.data.id);
-        this.labelsData.push(response.data.label)
+        this.labelsData = this.labelsData.filter(label => label.id != response.data.id);
+        this.labelsData.push(response.data)
 
-        this.task.forEach(task => {
-          let label = task.labels.find(label => label.id == labelEdited.id);
+        this.tasksData.forEach(task => {
+          let label = task.labels.find(labelClone => labelClone.id == response.data.id);
+          
           if(label != undefined){
-            task.labels.remove(label);
-            task.push(labelEdited);
+            task.labels = task.labels.filter(labelClone => labelClone.id != labelEdited.id)
+            task.labels.push(response.data);
           }
-        })
+        });
 
-        //Bus.$emit('editedLabel', response.data);
-        Bus.$emit('refreshTasks', this.tasksData);
-        Bus.$emit('refreshLabels', this.labelsData);
-      }).catch(response => {
+        BUS.$emit('refreshTasks', this.tasksData);
+        BUS.$emit('refreshLabels', this.labelsData);
+      })
+      .catch(response => {
         console.log("error while editing labels");
       });
     },
@@ -236,7 +238,6 @@ export default {
         .then((message) => {
           //this.tasksData = this.tasksData.filter(task => task.id != task.id);
           //TODO: Update groups and tasks removed
-          BUS.$emit('removedGroup', group.id);
           BUS.$emit('refreshGroups', this.groupsData);
         })
         .catch();
@@ -244,9 +245,17 @@ export default {
     removeLabel(labelId){
       axios.delete(`/projects/${this.project.id}/labels/${labelId}`)
       .then(response => {
-        BUS.$emit('refreshLabels', this.labelsData);
-      }).catch(response => {
-        console.log("error while deleting labels");
+        this.labelsData = this.labelsData.filter(label => label.id != labelId);
+
+        this.tasksData.forEach(task => {
+          task.labels = task.labels.filter(label => label.id != labelId);
+        })
+
+        Bus.$emit('refreshTasks', this.tasksData);
+        Bus.$emit('refreshLabels', this.labelsData);
+      })
+      .catch(response => {
+        console.log("error while deleting label");
       });
     },
     removeTaskLabel(taskId, labelId){
@@ -258,9 +267,7 @@ export default {
         BUS.$emit('editedTask', task);
         BUS.$emit('refreshTasks', this.tasksData);
         BUS.$emit('refreshLabels', this.labelsData);
-      }).catch(response => {
-        
-      });
+      }).catch();
     },
   },
   watch: {

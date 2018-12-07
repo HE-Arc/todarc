@@ -131,18 +131,11 @@
 
 <script>
 import { VueTagsInput, TagInput } from '@johmun/vue-tags-input';
+import BUS from "../BusEvent";
 
 export default {
   name:"modal-task",
   props: {
-    groups: {
-      type: Array,
-      required: true,
-    },
-    labels: {
-      type: Array,
-      required: true,
-    },
     group_root:{
       type: Number,
       default: -1
@@ -164,6 +157,7 @@ export default {
     users: Array,
   },
   components: { VueTagsInput, TagInput },
+  inject: ['labels', 'groups'],
   data() {
     return {
       task: Object,
@@ -174,6 +168,7 @@ export default {
       editionMode: false,
       selectedLabels: [],
       labelsNew: [],
+      groupsnew: []
     }
   },
   methods: {
@@ -188,6 +183,10 @@ export default {
       this.editionMode = true;
       this.task = Object.assign({}, task);
       this.task.labels.forEach(label=>label.text = label.name);
+
+      setTimeout(function(){
+        this.task.labels.forEach(task => {console.log($('#color-id-'+task.id)); console.log('#color-id-'+task.id) ;$('#color-id-'+task.id).parent().parent().parent().css("background-color",$('#color-id-'+task.id).attr("background"));});
+      }.bind(this), 50);
     },
     close(){
       $(`#add-task`).modal('hide');
@@ -269,8 +268,24 @@ export default {
         this.users.forEach(user=>this.usersNew.push({...user,text:user.name}));
       },
       deep: true
-    }
+    },
+    refreshLabels(labelsData){
+      labelsData.forEach(label => label.text = label.name);
+      this.labelsNew = labelsData;
+    },
+    refreshGroups(groups){
+      this.groupsNew = groups;
+    },
   },
+  // watch:{
+  //   labels: {
+  //     handler: function (val, oldVal) {
+  //       this.labelsNew = [];
+  //       this.labels.forEach(label=>this.labelsNew.push({...label,text:label.name}));
+  //     },
+  //     deep: true
+  //   }
+  // },
   computed: {
     filteredLabels() {
       return this.labelsNew.filter(i => new RegExp(this.tag, 'i').test(i.text));
@@ -278,6 +293,15 @@ export default {
     filteredUsers() {
       return this.usersNew.filter(i => new RegExp(this.user, 'i').test(i.text));
     },
+  },
+  mounted(){
+    this.groupsNew = this.groups;
+    this.task = Object.assign({}, this.emptyTask);
+    this.labelsNew = [];
+    this.labels.forEach(label=>this.labelsNew.push({...label,text:label.name}));
+
+    BUS.$on('refreshLabels', this.refreshLabels);
+    BUS.$on('refreshGroups', this.refreshGroups);
   },
 };
 </script>

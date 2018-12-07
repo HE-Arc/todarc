@@ -2,13 +2,13 @@
   <li class="node node-group">
     <span @contextmenu.prevent="contextMenuGroup($event, group)" @dblclick="editMe" v-if="group" class="list-group-item align-items-center d-flex">
       <span class="flex-grow-1">{{ group.name }}</span>
-      <button class="btn btn-link">
+      <button  @click="addChild" class="btn btn-link">
         <i class="fas fa-plus"></i>
       </button>
-      <button class="btn btn-link">
+      <button  @click="editMe" class="btn btn-link">
         <i class="fas fa-pen"></i>
       </button>
-      <button class="btn btn-link">
+      <button @click="removeMe" class="btn btn-link">
         <i class="fas fa-trash"></i>
       </button>
       <i class="fas fa-arrows-alt ml-1 handle"></i>
@@ -35,7 +35,16 @@ export default {
   props: {
     id: Number
   },
-  inject: ['tasks', 'groups', 'updateGroups', 'updateTasks', 'editGroup', 'contextMenuGroup'],
+  inject: [
+    'tasks',
+    'groups',
+    'editGroup',
+    'createGroup',
+    'removeGroup',
+    'updateTasks',
+    'updateGroups',
+    'contextMenuGroup'
+  ],
   data() {
     return {
       group: null,
@@ -66,29 +75,25 @@ export default {
     editMe(){
       this.editGroup(this.group);
     },
+    removeMe(){
+      this.removeGroup(this.group);
+    },
+    addChild(){
+      this.createGroup(this.id);
+    },
+    filteredTasks(runningOnly){
+      this.runningOnly = runningOnly;
+    },
     editedGroup(group){
       if(group.id == this.id){
         this.group = group;
       }
     },
-    editedTask(taskEdited){
-      let index = this.tasksNew.findIndex(task => task.id == taskEdited.id);
-      if(index < 0){
-        //Task changed to this group ?
-        if(taskEdited.group_id == this.id){
-          this.tasksNew.push(taskEdited);
-        }
-      }else{
-        //Task updated
-        this.tasksNew.splice(index, 1, taskEdited);
-      }
-      this.tasksNew = this.tasksNew.filter(task=>task.group_id == this.id).sort((t1, t2) => t1.sort < t2.sort);
+    refreshTasks(taskData){
+      this.tasksNew = taskData.filter(task=>task.group_id==this.id);
     },
-    removedTask(taskId){
-      this.tasksNew = this.tasksNew.filter(task=>task.id!=taskId);
-    },
-    taskFiltered(runningOnly){
-      this.runningOnly = runningOnly;
+    refreshGroups(groupsData){
+      this.groupsNew = groupsData.filter(group=>group.group_id==this.id);
     }
   },
   components: {
@@ -100,12 +105,11 @@ export default {
     this.tasksNew = this.tasks.filter(task => task.group_id === this.id);
     this.group = this.groups.find(group => group.id === this.id);
 
-    BUS.$on('addTask', this.addTask);
-    BUS.$on('addGroup', this.addGroup);
     BUS.$on('editedGroup', this.editedGroup);
-    BUS.$on('editedTask', this.editedTask);
-    BUS.$on('removedTask', this.removedTask);
-    BUS.$on('taskFiltered', this.taskFiltered);
+    BUS.$on('filteredTasks', this.filteredTasks)
+
+    BUS.$on('refreshTasks', this.refreshTasks);
+    BUS.$on('refreshGroups', this.refreshGroups);
   }
 };
 </script>

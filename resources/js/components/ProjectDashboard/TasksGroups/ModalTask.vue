@@ -36,6 +36,32 @@
                   </div>
                 </div>
 
+                <div class="row" v-if="users">
+                  <div class="col-md-12 mb-3">
+                    <label for="users">Users</label>
+                    <vue-tags-input
+                    name="users"
+                    class="form-control"
+                    placeholder="Add a user"
+                    v-model="user"
+                    :tags="task.users"
+                    :autocomplete-items="filteredUsers"
+                    :add-only-from-autocomplete="true"
+                    @tags-changed="updateUsers">
+                      <template slot="tagCenter" slot-scope="props" >
+                        <span :id='"color-id-"+props.tag.id' @click="props.performOpenEdit(props.index)" :class="{ hidden: props.edit }">{{ props.tag.text }}</span>
+                      </template>
+                      <template
+                        slot="autocompleteItem"
+                        slot-scope="props">
+                        <h6 @click="props.performAdd(props.item)" class="badge">
+                          {{ props.item.text }}
+                        </h6>
+                      </template>
+                    </vue-tags-input>
+                  </div>
+                </div>
+
                 <div class="row">
                   <div class="col-md-12 mb-3">
                     <label for="country">Description</label>
@@ -45,9 +71,12 @@
 
                 <div class="row">
                   <div class="col-md-12 mb-3">
+                    <label for="tags">Labels</label>
                     <vue-tags-input
+                    name="tags"
                     class="form-control"
                     v-model="tag"
+                    placeholder="Add a label"
                     :tags="task.labels"
                     :autocomplete-items="filteredLabels"
                     :add-only-from-autocomplete="true"
@@ -131,13 +160,17 @@ export default {
         labels : [],
         description : "",
       })
-    }
+    },
+    users: Array,
   },
   components: { VueTagsInput, TagInput },
   data() {
     return {
       task: Object,
       tag: '',
+      user: '',
+      selectedUsers: [],
+      usersNew: [],
       editionMode: false,
       selectedLabels: [],
       labelsNew: [],
@@ -211,11 +244,16 @@ export default {
       setTimeout(function(){
         this.task.labels.forEach(task => {console.log($('#color-id-'+task.id)); console.log('#color-id-'+task.id) ;$('#color-id-'+task.id).parent().parent().parent().css("background-color",$('#color-id-'+task.id).attr("background"));});
       }.bind(this), 50);
+    },
+    updateUsers(users)
+    {
+
     }
   },
   mounted() {
     this.task = Object.assign({}, this.emptyTask);
     this.labels.forEach(label=>this.labelsNew.push({...label,text:label.name}));
+    this.users.forEach(user=>this.usersNew.push({...user,text:user.name}));
   },
   watch:{
     labels: {
@@ -224,11 +262,21 @@ export default {
         this.labels.forEach(label=>this.labelsNew.push({...label,text:label.name}));
       },
       deep: true
+    },
+    users: {
+      handler: function (val, oldVal) {
+        this.usersNew = [];
+        this.users.forEach(user=>this.usersNew.push({...user,text:user.name}));
+      },
+      deep: true
     }
   },
   computed: {
     filteredLabels() {
       return this.labelsNew.filter(i => new RegExp(this.tag, 'i').test(i.text));
+    },
+    filteredUsers() {
+      return this.usersNew.filter(i => new RegExp(this.user, 'i').test(i.text));
     },
   },
 };

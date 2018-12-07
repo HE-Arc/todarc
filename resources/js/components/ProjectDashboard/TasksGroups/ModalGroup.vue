@@ -88,7 +88,6 @@ export default {
   },
   methods: {
     openCreation(parentId){
-      console.log(parentId)
       $(`#add-group`).modal('show');
       this.editionMode = false;
       this.group = Object.assign({}, this.emptyGroup);

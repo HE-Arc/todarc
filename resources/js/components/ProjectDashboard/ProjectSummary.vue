@@ -62,7 +62,6 @@ export default {
   },
   methods: {
     refreshTasks(tasks) {
-      console.log("refresh Tasks ProjectSummary")
       this.nbTasksDone = tasks.filter(task => task.done != false).length;
       this.nbTasksRunning = tasks.filter(task => task.done == false).length;
     }

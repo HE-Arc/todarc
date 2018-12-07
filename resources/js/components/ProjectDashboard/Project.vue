@@ -237,8 +237,8 @@ export default {
       return axios
         .delete(`/projects/${this.project.id}/groups/${group.id}`)
         .then((message) => {
-          //this.tasksData = this.tasksData.filter(task => task.id != task.id);
-          //TODO: Update groups and tasks removed
+          this.groupsData = this.groupsData.filter(groupClone => groupClone.id != group.id);
+          
           BUS.$emit('refreshGroups', this.groupsData);
         })
         .catch();

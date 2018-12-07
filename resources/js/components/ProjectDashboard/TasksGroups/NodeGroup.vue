@@ -79,7 +79,6 @@ export default {
       this.removeGroup(this.group);
     },
     addChild(){
-      console.log(this.id)
       this.createGroup(this.id);
     },
     filteredTasks(runningOnly){

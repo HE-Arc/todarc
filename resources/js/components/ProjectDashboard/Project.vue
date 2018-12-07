@@ -78,8 +78,8 @@ export default {
     ModalGroup,
   },
   methods: {
-    createTask(){
-      this.$refs.modalTask.openCreation();
+    createTask(parentId){
+      this.$refs.modalTask.openCreation(parentId);
     },
     createGroup(parentId){
       this.$refs.modalGroup.openCreation(parentId);
@@ -224,7 +224,7 @@ export default {
       return axios
         .delete(`/projects/${this.project.id}/tasks/${task.id}`)
         .then((taskToRemove) => {
-          this.tasksData = this.tasksData.filter(task => task.id != task.id);
+          this.tasksData = this.tasksData.filter(taskClone => taskClone.id != task.id);
 
           BUS.$emit('refreshTasks', this.tasksData);
         })
@@ -264,7 +264,7 @@ export default {
       .then(response => {
         let task = this.tasksData.find(task => task.id == taskId);
         task.labels = task.labels.filter(label => label.id != labelId);
-
+        
         BUS.$emit('editedTask', task);
         BUS.$emit('refreshTasks', this.tasksData);
         BUS.$emit('refreshLabels', this.labelsData);
@@ -306,7 +306,7 @@ export default {
       editTask : this.editTask,
       editGroup : this.editGroup,
 
-      createTask : this.createtask,
+      createTask : this.createTask,
       updateTask : this.updateTask,
       removeTask : this.removeTask,
       createGroup : this.createGroup,

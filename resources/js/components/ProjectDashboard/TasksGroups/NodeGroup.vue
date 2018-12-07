@@ -115,21 +115,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.min-height
-{
+.min-height {
   min-height: 20px;
 }
-button
-{
+
+button {
   color: white;
   padding-left: 6px;
   padding-right: 6px;
   margin-top: 2px;
 }
-button:hover
-{
+
+button:hover {
   color: lightgreen;
-
-
 }
 </style>

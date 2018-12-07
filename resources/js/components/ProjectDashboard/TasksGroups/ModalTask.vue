@@ -27,7 +27,7 @@
                   <div class="col-md-12 mb-3">
                     <label for="country">Group</label>
                     <select v-model="task.group_id" class="custom-select d-block w-100" id="group" required>
-                      <option :value="group_root">Choose...</option>
+                      <option :value="groupRoot">Choose...</option>
                       <option v-for="group in groups" :key="group.id" :value="group.id">{{ group.name }}</option>
                     </select>
                     <div id="invalid-group" class="invalid-feedback">
@@ -107,7 +107,7 @@ import BUS from "../BusEvent";
 export default {
   name:"modal-task",
   props: {
-    group_root:{
+    groupRoot:{
       type: Number,
       default: -1
     },
@@ -117,7 +117,7 @@ export default {
         done : false,
         from_date : "",
         until_date : "",
-        group_id : this.group_root,
+        group_id : this.groupRoot,
         name : "",
         order : 2147483647,
         id : 0,
@@ -139,17 +139,25 @@ export default {
     }
   },
   methods: {
-    openCreation(){
+    openCreation(parentId){
       $(`#add-task`).modal('show');
       this.editionMode = false;
       this.tags = []
       this.task = Object.assign({}, this.emptyTask);
+
+      if(parentId != undefined){
+        this.task.group_id = parentId;
+      }
     },
     openEdition(task){
       $(`#add-task`).modal('show');
       this.editionMode = true;
       this.task = Object.assign({}, task);
       this.task.labels.forEach(label=>label.text = label.name);
+
+      if(this.task.group_id == null){
+        this.task.group_id = this.groupRoot;
+      }
 
       setTimeout(function(){
         this.task.labels.forEach(task => {console.log($('#color-id-'+task.id)); console.log('#color-id-'+task.id) ;$('#color-id-'+task.id).parent().parent().parent().css("background-color",$('#color-id-'+task.id).attr("background"));});

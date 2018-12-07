@@ -311,6 +311,7 @@ export default {
     this.task = Object.assign({}, this.emptyTask);
     this.labelsNew = [];
     this.labels.forEach(label=>this.labelsNew.push({...label,text:label.name}));
+    this.users.forEach(user=>this.usersNew.push({...user,text:user.name}));
 
     BUS.$on('refreshLabels', this.refreshLabels);
     BUS.$on('refreshGroups', this.refreshGroups);

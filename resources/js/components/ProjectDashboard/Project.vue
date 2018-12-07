@@ -148,9 +148,7 @@ export default {
 
         BUS.$emit('refreshLabels', this.labelsData);
       })
-      .catch(response => {
-        console.log("error while add label");
-      });
+      .catch();
     },
     updateTask(task){
       return axios
@@ -196,11 +194,9 @@ export default {
         BUS.$emit('refreshTasks', this.tasksData);
         BUS.$emit('refreshLabels', this.labelsData);
       })
-      .catch(response => {
-        console.log("error while editing labels");
-      });
+      .catch();
     },
-    updateGroups(data, group_id){ //Order
+    updateGroups(data, group_id){
       data.map((group,index)=>{
         group.order = index;
         group.group_id = group_id;
@@ -231,8 +227,16 @@ export default {
       return axios
         .post(`/projects/${this.project.id}/tasks-hierarchy`,{ tasks: data })
         .then(() => {
-          //TODO: Update taskData
-          console.log("Tasks updated successfully");
+          this.tasksData.forEach(task => {
+            let clone = data.find(taskSearch => taskSearch.id == task.id);
+            if(clone != null){
+              task.group_id = clone.group_id;
+              task.order = clone.order;
+            }
+          });
+
+          this.tasksData = this.tasksData.sort((t1, t2) => t1.order > t2.order);
+          BUS.$emit('refreshTasks', this.tasksData);
         })
         .catch();
     },
@@ -275,9 +279,7 @@ export default {
         Bus.$emit('refreshTasks', this.tasksData);
         Bus.$emit('refreshLabels', this.labelsData);
       })
-      .catch(response => {
-        console.log("error while deleting label");
-      });
+      .catch();
     },
     removeTaskLabel(taskId, labelId){
       axios.delete(`${window.location}/tasks/${taskId}/labels/${labelId}`)

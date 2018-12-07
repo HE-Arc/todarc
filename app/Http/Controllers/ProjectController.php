@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Project;
 use App\Group;
 use View;
@@ -67,35 +68,18 @@ class ProjectController extends Controller
     {
         $tasks = $project->tasks;
 
-        foreach ($tasks as $task) {
+        foreach ($tasks as $task)
+        {
           $tasks->labels = $task->labels;
+        }
+
+        if(!$project->Owner->is(Auth::user()))
+        {
+          $project->users = $project->Owner->users;
         }
 
         // show the view and pass the project to it
         return View::make('project.dashboard', ['groups'=>$project->groups, 'tasks'=>$tasks, 'labels' => $project->labels])->with('project', $project);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Project $project)
-    {
-        //
     }
 
     /**

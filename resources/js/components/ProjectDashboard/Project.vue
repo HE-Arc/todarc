@@ -14,8 +14,8 @@
     </div>
     <div class="card-footer">
       <div class="row">
-        <modal-task ref="modalTask" @add="addTask" @edit="updateTask" :labels="labels" :groups="groups" class="col-6"></modal-task>
-        <modal-group ref="modalGroup" @add="addGroup" @edit="updateGroup" :groups="groups" class="col-6"></modal-group>
+        <modal-task ref="modalTask" @add="addTask" @edit="editedTask" :labels="labels" :groups="groups" :users="project.users" class="col-6"></modal-task>
+        <modal-group ref="modalGroup" @add="addGroup" @edit="editedGroup" :groups="groups" class="col-6"></modal-group>
       </div>
     </div>
     <vue-context ref="menuGroup" id="menuGroup">
@@ -152,7 +152,7 @@ export default {
           let index = this.groupsData.findIndex(group => group.id == response.data.id);
           this.groupsData[index] = response.data;
           this.groupsData = this.groupsData.sort((t1, t2) => t1.order > t2.order);
-          
+
           BUS.$emit('editedGroup', response.data);
           BUS.$emit('refreshGroups', this.groupsData);
         })
@@ -166,7 +166,7 @@ export default {
 
         this.tasksData.forEach(task => {
           let label = task.labels.find(labelClone => labelClone.id == response.data.id);
-          
+
           if(label != undefined){
             task.labels = task.labels.filter(labelClone => labelClone.id != labelEdited.id)
             task.labels.push(response.data);
@@ -185,7 +185,7 @@ export default {
         group.order = index;
         group.group_id = group_id;
       });
-      
+
       return axios
         .post(`/projects/${this.project.id}/groups-hierarchy`,{ groups: data })
         .then((response) => {
@@ -196,7 +196,7 @@ export default {
               group.order = clone.order;
             }
           });
-          
+
           this.groupsData = this.groupsData.sort((t1, t2) => t1.order > t2.order);
           BUS.$emit('refreshGroups', this.groupsData);
         })
@@ -238,7 +238,7 @@ export default {
         .delete(`/projects/${this.project.id}/groups/${group.id}`)
         .then((message) => {
           this.groupsData = this.groupsData.filter(groupClone => groupClone.id != group.id);
-          
+
           BUS.$emit('refreshGroups', this.groupsData);
         })
         .catch();
@@ -312,7 +312,7 @@ export default {
       createGroup : this.createGroup,
       updateGroup : this.updateGroup,
       removeGroup : this.removeGroup,
-      
+
       updateTasks : this.updateTasks,
       updateGroups : this.updateGroups,
       contextMenuTask : this.contextMenuTask,

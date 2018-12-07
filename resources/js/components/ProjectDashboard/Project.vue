@@ -96,6 +96,26 @@ export default {
     contextMenuTask(event, task){
       this.$refs.menuTask.open(event, task);
     },
+    editedTask(task){
+      return axios
+        .patch(`/projects/${this.project.id}/tasks/${task.id}`,task)
+        .then((taskUpdated) => {
+          let i = this.tasksData.indexOf(this.tasksData.find(task=>task.id==taskUpdated.data.id));
+          this.tasksData[i] = taskUpdated.data;
+          BUS.$emit('editedTask', taskUpdated.data);
+        })
+        .catch();
+    },
+    editedGroup(group){
+      return axios
+        .patch(`/projects/${this.project.id}/groups/${group.id}`,group)
+        .then((groupUpdated) => {
+          let i = this.groupsData.indexOf(this.groupsData.find(group=>group.id==groupUpdated.data.id));
+          this.groupsData[i] = groupUpdated.data;
+          BUS.$emit('editedGroup', groupUpdated.data);
+        })
+        .catch();
+    },
     addTask(task){
       task.group_id = task.group_id?task.group_id:"";
       return axios
@@ -264,7 +284,7 @@ export default {
       .then(response => {
         let task = this.tasksData.find(task => task.id == taskId);
         task.labels = task.labels.filter(label => label.id != labelId);
-        
+
         BUS.$emit('editedTask', task);
         BUS.$emit('refreshTasks', this.tasksData);
         BUS.$emit('refreshLabels', this.labelsData);

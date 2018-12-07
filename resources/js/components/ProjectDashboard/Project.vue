@@ -81,8 +81,8 @@ export default {
     createTask(){
       this.$refs.modalTask.openCreation();
     },
-    createGroup(){
-      this.$refs.modalGroup.openCreation();
+    createGroup(parentId){
+      this.$refs.modalGroup.openCreation(parentId);
     },
     editTask(task){
       this.$refs.modalTask.openEdition(task);
@@ -305,8 +305,14 @@ export default {
       groups : this.groups,
       editTask : this.editTask,
       editGroup : this.editGroup,
+
+      createTask : this.createtask,
       updateTask : this.updateTask,
+      removeTask : this.removeTask,
+      createGroup : this.createGroup,
       updateGroup : this.updateGroup,
+      removeGroup : this.removeGroup,
+      
       updateTasks : this.updateTasks,
       updateGroups : this.updateGroups,
       contextMenuTask : this.contextMenuTask,

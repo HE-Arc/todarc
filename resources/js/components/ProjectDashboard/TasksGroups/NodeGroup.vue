@@ -2,13 +2,13 @@
   <li class="node node-group">
     <span @contextmenu.prevent="contextMenuGroup($event, group)" @dblclick="editMe" v-if="group" class="list-group-item align-items-center d-flex">
       <span class="flex-grow-1">{{ group.name }}</span>
-      <button class="btn btn-link">
+      <button  @click="addChild" class="btn btn-link">
         <i class="fas fa-plus"></i>
       </button>
-      <button class="btn btn-link">
+      <button  @click="editMe" class="btn btn-link">
         <i class="fas fa-pen"></i>
       </button>
-      <button class="btn btn-link">
+      <button @click="removeMe" class="btn btn-link">
         <i class="fas fa-trash"></i>
       </button>
       <i class="fas fa-arrows-alt ml-1 handle"></i>
@@ -35,7 +35,16 @@ export default {
   props: {
     id: Number
   },
-  inject: ['tasks', 'groups', 'updateGroups', 'updateTasks', 'editGroup', 'contextMenuGroup'],
+  inject: [
+    'tasks',
+    'groups',
+    'editGroup',
+    'createGroup',
+    'removeGroup',
+    'updateTasks',
+    'updateGroups',
+    'contextMenuGroup'
+  ],
   data() {
     return {
       group: null,
@@ -65,6 +74,13 @@ export default {
     },
     editMe(){
       this.editGroup(this.group);
+    },
+    removeMe(){
+      this.removeGroup(this.group);
+    },
+    addChild(){
+      console.log(this.id)
+      this.createGroup(this.id);
     },
     filteredTasks(runningOnly){
       this.runningOnly = runningOnly;

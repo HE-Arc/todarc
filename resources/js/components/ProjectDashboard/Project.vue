@@ -102,7 +102,7 @@ export default {
         .post(`/projects/${this.project.id}/tasks`,task)
         .then((taskAdded) => {
           this.tasksData.push(taskAdded.data);
-          this.tasksData = this.tasksData.sort((t1, t2) => t1.sort < t2.sort);
+          this.tasksData = this.tasksData.sort((t1, t2) => t1.order > t2.order);
 
           BUS.$emit('refreshTasks', this.tasksData);
         })
@@ -114,7 +114,7 @@ export default {
         .post(`/projects/${this.project.id}/groups`,group)
         .then((groupAdded) => {
           this.groupsData.push(groupAdded.data);
-          this.groupsData = this.groupsData.sort((t1, t2) => t1.sort < t2.sort);
+          this.groupsData = this.groupsData.sort((t1, t2) => t1.order > t2.order);
 
           BUS.$emit('refreshGroups', this.groupsData);
         })
@@ -138,7 +138,7 @@ export default {
         .then((taskUpdated) => {
           let index = this.tasksData.findIndex(task => task.id == taskUpdated.data.id);
           this.tasksData[index] = taskUpdated.data;
-          this.tasksData = this.tasksData.sort((t1, t2) => t1.sort < t2.sort);
+          this.tasksData = this.tasksData.sort((t1, t2) => t1.order > t2.order);
 
           BUS.$emit('editedTask', taskUpdated.data);
           BUS.$emit('refreshTasks', this.tasksData);
@@ -151,7 +151,7 @@ export default {
         .then((response) => {
           let index = this.groupsData.findIndex(group => group.id == response.data.id);
           this.groupsData[index] = response.data;
-          this.groupsData = this.groupsData.sort((t1, t2) => t1.sort < t2.sort);
+          this.groupsData = this.groupsData.sort((t1, t2) => t1.order > t2.order);
           
           BUS.$emit('editedGroup', response.data);
           BUS.$emit('refreshGroups', this.groupsData);
@@ -197,6 +197,7 @@ export default {
             }
           });
           
+          this.groupsData = this.groupsData.sort((t1, t2) => t1.order > t2.order);
           BUS.$emit('refreshGroups', this.groupsData);
         })
         .catch();

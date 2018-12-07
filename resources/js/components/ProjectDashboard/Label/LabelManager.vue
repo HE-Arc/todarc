@@ -34,7 +34,6 @@ export default {
   },
   props: {
     labelsInput : Array,
-    projectId : Number
   },
   methods: {
     getStyle(label) {
@@ -76,21 +75,15 @@ export default {
       this.labels = labels;
     }
   },
-  watch: {
-    labelsInput() {
-      this.labels = this.labelsInput
-    },
-    labels: {
-      handler: function(oldVal, newLabelVal) {
-        this.$emit("labels-changed", this.labelsInput)
-      },
-      deep: true,
-      immediate: true
-    }
-  },
   components: {
     ModalLabel,
-  }
+  },
+  mounted() {
+    //BUS.$on('refreshLabels', this.refreshLabels);
+  },
+  beforeDestroy() {
+    //BUS.$off('refreshLabels');
+  },
 };
 </script>
 

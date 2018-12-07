@@ -15,6 +15,7 @@ export default {
     name: String,
     color: String,
   },
+  inject: ["removeTaskLabel"],
   methods: {
     getStyle() {
       return {
@@ -22,13 +23,7 @@ export default {
       };
     },
     deleteLabelFromTask() {
-      axios.delete(`${window.location}/tasks/${this.taskId}/labels/${this.id}`)
-      .then(response => {
-        console.log("success")
-        // TODO: Update interface
-      }).catch(response => {
-        console.log("error while deleting label from the task");
-      });
+      this.removeTaskLabel(this.taskId, this.id);
     }
   }
 };

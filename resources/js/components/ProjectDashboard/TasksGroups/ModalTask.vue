@@ -142,7 +142,7 @@ export default {
     },
     emptyTask: {
       type: Object,
-      default: ()=>Object.freeze({
+      default: () => Object.freeze({
         done : false,
         from_date : "",
         until_date : "",
@@ -151,6 +151,7 @@ export default {
         order : 2147483647,
         id : 0,
         labels : [],
+        users: [],
         description : "",
       })
     },
@@ -258,7 +259,7 @@ export default {
     },
     updateUsers(users)
     {
-
+      this.task.users = users;
     }
   },
   mounted() {
@@ -311,7 +312,11 @@ export default {
     this.task = Object.assign({}, this.emptyTask);
     this.labelsNew = [];
     this.labels.forEach(label=>this.labelsNew.push({...label,text:label.name}));
-    this.users.forEach(user=>this.usersNew.push({...user,text:user.name}));
+    if(this.users !== undefined)
+    {
+        this.users.forEach(user=>this.usersNew.push({...user,text:user.name}));
+    }
+
 
     BUS.$on('refreshLabels', this.refreshLabels);
     BUS.$on('refreshGroups', this.refreshGroups);

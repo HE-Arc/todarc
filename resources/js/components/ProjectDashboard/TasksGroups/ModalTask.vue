@@ -142,7 +142,7 @@ export default {
     },
     emptyTask: {
       type: Object,
-      default: ()=>Object.freeze({
+      default: () => Object.freeze({
         done : false,
         from_date : "",
         until_date : "",
@@ -151,6 +151,7 @@ export default {
         order : 2147483647,
         id : 0,
         labels : [],
+        users: [],
         description : "",
       })
     },
@@ -249,12 +250,12 @@ export default {
 
       //Update labels color
       setTimeout(function(){
-        this.task.labels.forEach(task => {console.log($('#color-id-'+task.id)); console.log('#color-id-'+task.id) ;$('#color-id-'+task.id).parent().parent().parent().css("background-color",$('#color-id-'+task.id).attr("background"));});
+        this.task.labels.forEach(task => {$('#color-id-'+task.id).parent().parent().parent().css("background-color",$('#color-id-'+task.id).attr("background"));});
       }.bind(this), 50);
     },
     updateUsers(users)
     {
-
+      this.task.users = users;
     }
   },
   mounted() {

@@ -102,7 +102,9 @@ export default {
         .then((taskUpdated) => {
           let i = this.tasksData.indexOf(this.tasksData.find(task=>task.id==taskUpdated.data.id));
           this.tasksData[i] = taskUpdated.data;
+
           BUS.$emit('editedTask', taskUpdated.data);
+          BUS.$emit('refreshTasks', this.tasksData);
         })
         .catch();
     },
@@ -112,6 +114,8 @@ export default {
         .then((groupUpdated) => {
           let i = this.groupsData.indexOf(this.groupsData.find(group=>group.id==groupUpdated.data.id));
           this.groupsData[i] = groupUpdated.data;
+          
+          BUS.$emit('refreshGroups', this.groupsData);
           BUS.$emit('editedGroup', groupUpdated.data);
         })
         .catch();
@@ -276,8 +280,8 @@ export default {
           task.labels = task.labels.filter(label => label.id != labelId);
         })
 
-        Bus.$emit('refreshTasks', this.tasksData);
-        Bus.$emit('refreshLabels', this.labelsData);
+        BUS.$emit('refreshTasks', this.tasksData);
+        BUS.$emit('refreshLabels', this.labelsData);
       })
       .catch();
     },
@@ -313,7 +317,6 @@ export default {
           nbTasksDone++;
         }
       });
-
       return nbTasksDone;
     },
     nbTasksRunning() {

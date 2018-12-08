@@ -71,6 +71,7 @@ class ProjectController extends Controller
         foreach ($tasks as $task)
         {
           $tasks->labels = $task->labels;
+          $task->users = $task->users;
         }
 
         if(!$project->Owner->is(Auth::user()))

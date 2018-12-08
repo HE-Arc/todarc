@@ -187,7 +187,8 @@ export default {
       $(`#add-task`).modal('show');
       this.editionMode = true;
       this.task = Object.assign({}, task);
-      this.task.labels.forEach(label=>label.text = label.name);
+      this.task.labels.forEach(label => label.text = label.name);
+      this.task.users.forEach(user => user.text = user.name);
 
       if(this.task.group_id == null){
         this.task.group_id = this.groupRoot;
@@ -262,11 +263,6 @@ export default {
       this.task.users = users;
     }
   },
-  mounted() {
-    this.task = Object.assign({}, this.emptyTask);
-    this.labels.forEach(label=>this.labelsNew.push({...label,text:label.name}));
-    this.users.forEach(user=>this.usersNew.push({...user,text:user.name}));
-  },
   watch:{
     labels: {
       handler: function (val, oldVal) {
@@ -289,6 +285,10 @@ export default {
     refreshGroups(groups){
       this.groupsNew = groups;
     },
+    refreshUsers(users){
+      users.forEach(user => user.text = user.name);
+      this.usersNew = users;
+    }
   },
   // watch:{
   //   labels: {
@@ -320,6 +320,7 @@ export default {
 
     BUS.$on('refreshLabels', this.refreshLabels);
     BUS.$on('refreshGroups', this.refreshGroups);
+    BUS.$on('refreshUsers', this.refreshUsers);
   },
 };
 </script>

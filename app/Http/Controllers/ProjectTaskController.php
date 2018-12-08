@@ -112,6 +112,7 @@ class ProjectTaskController extends Controller
 
         if($users)
         {
+          $task->users()->detach();
           foreach ($users as $user)
           {
             $task->users()->attach($user["id"]);

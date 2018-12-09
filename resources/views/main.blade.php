@@ -32,9 +32,9 @@
 
                 <div class="card-header">TODARC en images</div>
                 <div class="card-body">
-                  <img alt="Project-Dashboard" src="{{ asset('images/Project-Tasks.png') }}" height="50%" widht="50%" align="center"></img>
-                  <img alt="User-Dashboard" src="{{ asset('images/User-Dashboard.png') }}" height="50%" widht="50%" align="center"></img>
-                  <img alt="Organisation-Dashboard" src="{{ asset('images/Organisation-Dashboard.png') }}" height="50%" widht="50%" align="center"></img>
+                  <img alt="Project-Dashboard" src="{{ asset('images/Project-Tasks.png') }}" class="centered-img"></img>
+                  <img alt="User-Dashboard" src="{{ asset('images/User-Dashboard.png') }}" class="centered-img"></img>
+                  <img alt="Organisation-Dashboard" src="{{ asset('images/Organisation-Dashboard.png') }}" class="centered-img"></img>
                 </div>
 
                 <div class="card-header">A Propos</div>

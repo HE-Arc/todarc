@@ -15,10 +15,10 @@
     <div class="col-md-12">
 
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-sm-6">
           <h2>{{ __('Projects') }}</h2>
         </div>
-        <div class="col-md-3 text-right">
+        <div class="col-sm-6 text-right">
           <add-new-project
           button-text="{{__('+ New project')}}"
           :owner-id="{{ $organisation->id }}"
@@ -43,10 +43,10 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-sm-6">
           <h2>{{ __('Users') }}</h2>
         </div>
-        <div class="col-md-3 text-right">
+        <div class="col-sm-6 text-right">
           <add-existing-user
           :users=@json($users)
           :organisation='{!! $organisation->toJson(); !!}'

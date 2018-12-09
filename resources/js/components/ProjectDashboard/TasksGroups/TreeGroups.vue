@@ -26,6 +26,9 @@ export default {
       if(group.group_id == null){
         this.groupsNew.push(group);
       }
+    },
+    refreshGroups(groupsData){
+      this.groupsNew = groupsData.filter(group=>group.group_id==null);
     }
   },
   components: {
@@ -34,7 +37,7 @@ export default {
   },
   mounted() {
     this.groupsNew = this.groups.filter(g => g.group_id === null);
-    BUS.$on('addGroup', this.addGroup);
+    BUS.$on('refreshGroups', this.refreshGroups);
   }
 };
 </script>

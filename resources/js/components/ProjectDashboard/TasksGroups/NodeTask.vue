@@ -12,11 +12,16 @@
         :color="label.color"
       ></task-label>
     </div>
-    <i @click="contextMenuTask($event, task)" class="fas fa-bars mr-1"></i>
+    <button  @click="addTask" class="btn btn-link">
+      <i class="fas fa-plus"></i>
+    </button>
+    <button  @click="editMe" class="btn btn-link">
+      <i class="fas fa-pen"></i>
+    </button>
+    <button @click="removeMe" class="btn btn-link">
+      <i class="fas fa-trash"></i>
+    </button>
     <i class="fas fa-arrows-alt ml-1 handle"></i>
-    <div class="actions mr-0">
-      <!-- TODO: Add mennu option to display contextual menu -->
-    </div>
   </div>
 </template>
 
@@ -26,7 +31,7 @@ import TaskLabel from "../Label/Label";
 
 export default {
   name: "nodeTask",
-  inject:['tasks','editTask', 'contextMenuTask'],
+  inject:['tasks', 'createTask', 'editTask', 'removeTask', 'contextMenuTask'],
   props: {
     id: Number
   },
@@ -36,31 +41,50 @@ export default {
     };
   },
   methods:{
+    addTask(){
+      this.createTask(this.task.group_id);
+    },
     editMe(){
       this.editTask(this.task);
     },
-    editedTask(task){
-      if(task.id == this.id){
-        this.task = task;
+    removeMe(){
+      this.removeTask(this.task);
+    },
+    refreshTasks(tasks){
+      let taskClone = tasks.find(taskData => taskData.id == this.id)
+      if(taskClone != null){
+        this.task = taskClone;
       }
-    }
+    },
   },
   components: {
     TaskLabel,
   },
   mounted(){
-    BUS.$on('editedTask', this.editedTask);
+    // BUS.$on('editedLabel', this.editedLabel);
+    BUS.$on('refreshTasks', this.refreshTasks);
   }
 };
 </script>
 
 <style lang="scss" scoped>
-  div {
-    display: flex;
-    grid-template-columns: auto auto;
+div {
+  display: flex;
+  grid-template-columns: auto auto;
 
-    div {
-      margin-right: 15px;
-    }
+  div {
+    margin-right: 15px;
   }
+}
+
+button {
+  color: white;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-top: 2px;
+}
+
+button:hover {
+  color: lightgreen;
+}
 </style>

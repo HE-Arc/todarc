@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     open(title, label) {
-      this.label = label;
+      this.label = Object.assign({}, label);
       this.title = title;
       $(`#${this.id}`).modal('show');
     },

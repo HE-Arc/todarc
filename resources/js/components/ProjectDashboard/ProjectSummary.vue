@@ -9,11 +9,11 @@
       <h5>Infos : </h5>
       <p>
         <span class="font-weight-bold">Project Name : </span>
-        {{ projectName }}
+        {{ project.name }}
       </p>
       <p>
         <span class="font-weight-bold">Owner : </span>
-        {{ owner }}
+        {{ project.owner.name }}
       </p>
       <p>
         <span class="font-weight-bold">Running Tasks : </span>
@@ -23,16 +23,14 @@
         <span class="font-weight-bold">Task done : </span>
         {{ nbTasksDone }}
       </p>
-      <div v-if="labels.length > 0">
+      <div>
         <h5>Labels : </h5>
         <label-manager
-          :labels-input.sync="labels"
-          :project-id.sync="projectId"
-          @labels-changed="updateLabels"
+          :labels-input="labelsInput"
         ></label-manager>
       </div>
       <h5>Project updates : </h5>
-      <delete-project :project-id="projectId"></delete-project>
+      <delete-project :project-id="project.id"></delete-project>
     </div>
   </div>
 </template>
@@ -41,40 +39,37 @@
 import LabelManager from "./Label/LabelManager";
 import DeleteProject from "./DeleteProject";
 
+import BUS from "./BusEvent";
+
 export default {
-  data() {
-    return {
-      labels: this.labelsInput,
-    }
-  },
   props: {
-    owner : String,
-    nbTasksDone : Number,
-    nbTasksRunning : Number,
-    labelsInput : Array,
-    projectId : Number,
-    projectName : String
-  },
-  methods: {
-    updateLabels(labels) {
-      this.labels = labels;
-    }
-  },
-  watch: {
-    labelsInput() {
-      this.labels = this.labelsInput;
+    project : Object,
+    tasks : {
+      type : Array,
+      required: true,
     },
-    labels: {
-      handler: function(oldVal, newVal) {
-        this.$emit("labels-changed", this.labels)
-      },
-      deep: true,
-      immediate: true
+    labelsInput : Array,
+  },
+  data(){
+    return {
+      nbTasksDone : 0,
+      nbTasksRunning : 0,
     }
   },
   components: {
     LabelManager,
     DeleteProject
+  },
+  methods: {
+    refreshTasks(tasks) {
+      this.nbTasksDone = tasks.filter(task => task.done != false).length;
+      this.nbTasksRunning = tasks.filter(task => task.done == false).length;
+    }
+  },
+  mounted() {
+    this.refreshTasks(this.tasks);
+
+    BUS.$on('refreshTasks', this.refreshTasks);
   }
 };
 </script>

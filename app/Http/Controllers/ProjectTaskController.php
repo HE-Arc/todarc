@@ -57,6 +57,16 @@ class ProjectTaskController extends Controller
             $task->labels()->attach($label["id"]);
         }
 
+        $users = $request->input("users");
+
+        if($users)
+        {
+          foreach ($users as $user)
+          {
+            $task->users()->attach($user);
+          }
+        }
+
         $task = Task::with('labels')->find($task->id);
         return response()->json($task);
     }
@@ -80,9 +90,9 @@ class ProjectTaskController extends Controller
             'order' => 'integer',
             'done' => 'boolean'
         ]);
-        
+
         Group::where('project_id',$task->group->project_id)->findOrFail($request->input('group_id'));
-        
+
         $task->update(request([
             'name',
             'group_id',
@@ -98,10 +108,21 @@ class ProjectTaskController extends Controller
             $task->labels()->attach($label["id"]);
         }
 
-        $task = Task::with('labels')->find($task->id);
+        $users = $request->input("users");
+
+        if($users)
+        {
+          $task->users()->detach();
+          foreach ($users as $user)
+          {
+            $task->users()->attach($user["id"]);
+          }
+        }
+
+        $task = Task::with(['labels', 'users'])->find($task->id);
         return response()->json($task);
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *

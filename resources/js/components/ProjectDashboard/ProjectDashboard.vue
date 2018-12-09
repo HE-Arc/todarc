@@ -4,20 +4,15 @@
           <project
             :project="project"
             :groups="groups"
-            :tasks='tasks'
-            :labels.sync="labels"
-            @tasks-changed="updateNbTasks"
+            :tasks="tasks"
+            :labels="labelsInput"
           ></project>
       </div>
       <div class="col-md-4">
           <project-summary
-            :project-name="project.name"
-            :owner="project.owner.name"
-            :labels-input.sync="labels"
-            :nb-tasks-done.sync="nbTasksDone"
-            :nb-tasks-running.sync="nbTasksRunning"
-            :project-id.sync="project.id"
-            @labels-changed="updateLabels"
+            :project="project"
+            :labels-input="labelsInput"
+            :tasks="tasks"
           ></project-summary>
       </div>
   </div>
@@ -28,13 +23,6 @@ import Project from "./Project";
 import ProjectSummary from "./ProjectSummary"
 
 export default {
-  data() {
-    return {
-      nbTasksDone: 0,
-      nbTasksRunning: 0,
-      labels : this.labelsInput
-    }
-  },
   props: {
     project: {
       type: Object,
@@ -56,15 +44,6 @@ export default {
     Project,
     ProjectSummary
   },
-  methods: {
-    updateNbTasks(nbTasksDone, nbTasksRunning) {
-      this.nbTasksDone = nbTasksDone;
-      this.nbTasksRunning = nbTasksRunning;
-    },
-    updateLabels(labels) {
-      this.labels = labels;
-    }
-  }
 };
 </script>
 

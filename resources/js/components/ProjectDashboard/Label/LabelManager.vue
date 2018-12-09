@@ -9,6 +9,11 @@
         <button class="btn btn-link" @click="deleteLabel(label.id)"><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>
+    <div v-if="labels.length === 0">
+      <p>
+        No label in this project.
+      </p>
+    </div>
     <button class="btn btn-primary btn-block" @click="newLabel"><i class="fas fa-plus"></i> Add a label</button>
     <modal-label
       @confirmed="sendLabel"
@@ -19,6 +24,7 @@
 
 <script>
 import ModalLabel from "./ModalLabel"
+import BUS from "../BusEvent";
 
 export default {
   data() {
@@ -28,7 +34,6 @@ export default {
   },
   props: {
     labelsInput : Array,
-    projectId : Number
   },
   methods: {
     getStyle(label) {
@@ -37,11 +42,11 @@ export default {
       };
     },
     updateLabel(label) {
-      this.$refs.modalLabel.open("Add a newLabel label", label);
+      this.$refs.modalLabel.open("Edit an existing label", label);
     },
     // newLabel label clicked
     newLabel() {
-      this.$refs.modalLabel.open("Add a newLabel label", {
+      this.$refs.modalLabel.open("Add a new label", {
         name : '',
         color : '#0000FF'
       });
@@ -56,51 +61,29 @@ export default {
     },
     // send the newLabel label to server
     sendNew(label) {
-      axios.post( `/projects/${this.projectId}/labels`, label)
-      .then(response => {
-        this.labels = response.data.labels;
-        // TODO: Emit newLabel labels
-      })
-      .catch(response => {
-        console.log("error while add label");
-      });
+      BUS.$emit('addLabel', label);
     },
     // send the updateLabeld label to server
     sendUpdated(label) {
-      axios.put(`/projects/${this.projectId}/labels/${label.id}`, label)
-      .then(response => {
-        this.labels = response.data.labels;
-        // TODO: Emit updateLabel labels
-      }).catch(response => {
-        console.log("error while editing labels");
-      });
+      BUS.$emit('updateLabel', label);
     },
     // send which label to deleteLabel to server
     deleteLabel(labelId) {
-      axios.deleteLabel(`/projects/${this.projectId}/labels/${labelId}`)
-      .then(response => {
-        this.labels = response.data.labels;
-        // TODO: Emit deleteLabel labels
-      }).catch(response => {
-        console.log("error while deleting labels");
-      });
-    }
-  },
-  watch: {
-    labelsInput() {
-      this.labels = this.labelsInput
+      BUS.$emit('removeLabel', labelId);
     },
-    labels: {
-      handler: function(oldVal, newLabelVal) {
-        this.$emit("labels-changed", this.labels)
-      },
-      deep: true,
-      immediate: true
+    refreshLabels(labels){
+      this.labels = labels;
     }
   },
   components: {
     ModalLabel,
-  }
+  },
+  mounted() {
+    //BUS.$on('refreshLabels', this.refreshLabels);
+  },
+  beforeDestroy() {
+    //BUS.$off('refreshLabels');
+  },
 };
 </script>
 

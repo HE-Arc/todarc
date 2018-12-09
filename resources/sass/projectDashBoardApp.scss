@@ -1,3 +1,6 @@
+$indentation : 20;
+$max-level : 10;
+
 ul, li{
   list-style-type: none;
 }
@@ -13,25 +16,24 @@ ul, li{
 @mixin one-more-level($level){
   > .list-group {
 
-    padding-left: ($level*15)*1px;
     > .node {
       > .list-group-item {
-        padding-left: (($level+1)*15)*1px;
+        padding-left: (($level+1)*$indentation)*1px;
       }
-      @if($level >= 8){
+      @if($level >= $max-level){
         > .list-group {
-          padding-left: (($level+1)*15)*1px;
+          padding-left: (($level+1)*$indentation)*1px;
         }
       }@else{
         @include one-more-level($level + 1)
       }
     }
     > .node-task{
-      padding-left: (($level+2)*15)*1px;
+      padding-left: (($level+2)*$indentation)*1px;
     }
   }
   > .list-task {
-    padding-left: (($level+1)*15)*1px;
+    padding-left: (($level+1)*$indentation)*1px;
   }
 }
 

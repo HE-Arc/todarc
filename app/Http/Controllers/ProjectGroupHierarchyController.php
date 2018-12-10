@@ -8,6 +8,14 @@ use App\Group;
 class ProjectGroupHierarchyController extends Controller
 {
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('checkowner');
+    }
+    
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -16,7 +24,6 @@ class ProjectGroupHierarchyController extends Controller
      */
     public function store(Request $request, $project_id)
     {
-        //TODO check rights for this project
         $ids = array_map(function($g){return $g['id'];}, $request->groups);
         $groups = Group::where('project_id',$project_id)->whereIn('id', $ids)->get();
         

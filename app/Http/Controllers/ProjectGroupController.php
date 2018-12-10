@@ -9,15 +9,20 @@ use App\Group;
 class ProjectGroupController extends Controller
 {
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('checkowner');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Project $project)
     {
-        //abort_unless($project->belongsTo(Auth::user()), 404);
-        // TODO add verification for rights to see this project
-
         return response()->json($project->groups->first());
     }
 
@@ -37,10 +42,6 @@ class ProjectGroupController extends Controller
             'project_id' => 'required|integer'
         ]);
         
-        if($request->input('project_id') != $project->id){
-            abort(403, 'Unauthorized action.');
-        }
-
         if($request->input('group_id') != Null){
             $project->groups()->findOrFail($request->input('group_id'));
         }
@@ -69,7 +70,7 @@ class ProjectGroupController extends Controller
             'order' => 'integer',
         ]);
         
-        //TODO: Chack wether the new group_id is not a son himself
+        //TODO: Check wether the new group_id is not a son himself
         if($request->input('group_id') != Null){
             Group::where('project_id',$project->id)->findOrFail($request->input('group_id'));
 

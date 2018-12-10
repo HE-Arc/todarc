@@ -11,9 +11,12 @@ use View;
 
 class ProjectController extends Controller
 {
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-       $this->middleware('checkowner');
+        $this->middleware('checkowner');
     }
 
     /**
@@ -72,11 +75,6 @@ class ProjectController extends Controller
         {
           $tasks->labels = $task->labels;
           $task->users = $task->users;
-        }
-
-        if(!$project->Owner->is(Auth::user()))
-        {
-          $project->users = $project->Owner->users;
         }
 
         // show the view and pass the project to it

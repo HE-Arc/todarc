@@ -61,7 +61,7 @@ class ProjectGroupController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(Request $request, Project $project, Group $group)
     {
         $request->validate([
             'name' => 'required|max:255',
@@ -71,7 +71,7 @@ class ProjectGroupController extends Controller
         
         //TODO: Chack wether the new group_id is not a son himself
         if($request->input('group_id') != Null){
-            Group::where('project_id',$group->project_id)->findOrFail($request->input('group_id'));
+            Group::where('project_id',$project->id)->findOrFail($request->input('group_id'));
 
             if($request->input('group_id') == $group->id){
                 abort(403, 'Unauthorized action. Self referencing group');

@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      task: this.tasks.find(task => task.id == this.id),
+      task: {}
     };
   },
   methods:{
@@ -54,6 +54,7 @@ export default {
       let taskClone = tasks.find(taskData => taskData.id == this.id)
       if(taskClone != null){
         this.task = taskClone;
+        this.task.labels.sort((l1,l2)=>(l1.name+l1.id)>(l2.name+l2.id));
       }
     },
   },
@@ -61,7 +62,8 @@ export default {
     TaskLabel,
   },
   mounted(){
-    // BUS.$on('editedLabel', this.editedLabel);
+    this.task = this.tasks.find(task => task.id == this.id);
+    this.task.labels.sort((l1,l2)=>(l1.name+l1.id)>(l2.name+l2.id));
     BUS.$on('refreshTasks', this.refreshTasks);
   }
 };

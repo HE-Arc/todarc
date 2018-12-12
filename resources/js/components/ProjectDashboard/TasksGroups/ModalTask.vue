@@ -261,6 +261,17 @@ export default {
     updateUsers(users)
     {
       this.task.users = users;
+    },
+    refreshLabels(labelsData){
+      labelsData.forEach(label => label.text = label.name);
+      this.labelsNew = labelsData.sort((l1,l2)=>(l1.name+l1.id)>(l2.name+l2.id));
+    },
+    refreshGroups(groups){
+      this.groupsNew = groups;
+    },
+    refreshUsers(users){
+      users.forEach(user => user.text = user.name);
+      this.usersNew = users;
     }
   },
   watch:{
@@ -278,27 +289,7 @@ export default {
       },
       deep: true
     },
-    refreshLabels(labelsData){
-      labelsData.forEach(label => label.text = label.name);
-      this.labelsNew = labelsData;
-    },
-    refreshGroups(groups){
-      this.groupsNew = groups;
-    },
-    refreshUsers(users){
-      users.forEach(user => user.text = user.name);
-      this.usersNew = users;
-    }
   },
-  // watch:{
-  //   labels: {
-  //     handler: function (val, oldVal) {
-  //       this.labelsNew = [];
-  //       this.labels.forEach(label=>this.labelsNew.push({...label,text:label.name}));
-  //     },
-  //     deep: true
-  //   }
-  // },
   computed: {
     filteredLabels() {
       return this.labelsNew.filter(i => new RegExp(this.tag, 'i').test(i.text));
@@ -312,11 +303,11 @@ export default {
     this.task = Object.assign({}, this.emptyTask);
     this.labelsNew = [];
     this.labels.forEach(label=>this.labelsNew.push({...label,text:label.name}));
+    this.labels.sort((l1,l2)=>(l1.name+l1.id)>(l2.name+l2.id));
     if(this.users !== undefined)
     {
         this.users.forEach(user=>this.usersNew.push({...user,text:user.name}));
     }
-
 
     BUS.$on('refreshLabels', this.refreshLabels);
     BUS.$on('refreshGroups', this.refreshGroups);

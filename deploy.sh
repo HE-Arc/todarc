@@ -17,6 +17,7 @@ echo "npm install" ; npm install ;
 echo "composer install" ; composer install --no-dev ;
 echo migrate ; php artisan migrate ;
 echo routecache ; php artisan route:cache ;
+npm audit fix ; 
 echo rebuilding-sass ; npm rebuild node-sass ;
 echo npmrun ; npm run production'
 git checkout master

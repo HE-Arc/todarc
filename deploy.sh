@@ -2,6 +2,8 @@ USERNAME=poweruser
 SERVER="srvz-webapp.he-arc.ch"
 PORT=2261
 
+git checkout master
+git pull
 git checkout deploy
 git merge master
 git push

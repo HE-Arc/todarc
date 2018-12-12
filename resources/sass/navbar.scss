@@ -1,8 +1,12 @@
 nav.navbar.navbar-dark
 {
-  p.nav-link, p.nav-link:hover
+  .nav-link
   {
     color: white;
     margin: 0 15px;
+  }
+  .nav-link:hover
+  {
+    color: lightgray;
   }
 }

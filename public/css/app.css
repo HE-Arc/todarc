@@ -16150,3 +16150,17 @@ li {
   margin-bottom: 10px;
 }
 
+#main-page ul,
+#main-page li {
+  list-style-type: circle;
+}
+
+nav.navbar.navbar-dark .nav-link {
+  color: white;
+  margin: 0 15px;
+}
+
+nav.navbar.navbar-dark .nav-link:hover {
+  color: lightgray;
+}
+

@@ -11,9 +11,11 @@
 |
 */
 
+
+
 Route::group(['middleware' => 'checklogin'], function() {
     //Base routes
-    Route::get('/', 'UserDashboard@dashboard')->name('home');
+    Route::get('/', 'UserDashboard@dashboard')->name('home'); // changes if not logged in
     Route::get('/home', 'UserDashboard@dashboard')->name('home');
 
     //Projects
@@ -37,6 +39,6 @@ Route::group(['middleware' => 'checklogin'], function() {
     Route::resource('organisations.users', 'OrganisationUserController')->only(['store', 'destroy']);
 });
 
-Route::resource('/', 'MainController')->only(['index']);
+Route::resource('/about', 'MainController')->only(['index']);
 
 Auth::routes();

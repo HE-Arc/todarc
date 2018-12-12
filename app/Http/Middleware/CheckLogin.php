@@ -18,7 +18,7 @@ class CheckLogin
     {
       if (!Auth::check())
       {
-        return redirect('/login');
+        return redirect('/about');
       }
 
       return $next($request);

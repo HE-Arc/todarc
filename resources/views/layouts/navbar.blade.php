@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary navbar-laravel">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
-      {{ config('app.name', 'ToDArc') }}
+      <img src="{{ asset('images/logo.bmp') }}" style="max-height: 50px; margin-bottom: -20px; margin-top: -30px;" alt="{{ config('app.name', 'ToDArc') }}">
     </a>
     <a class="nav-link" href="{{ url('/about') }}">
       About

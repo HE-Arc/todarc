@@ -79,10 +79,7 @@ export default {
     ModalLabel,
   },
   mounted() {
-    //BUS.$on('refreshLabels', this.refreshLabels);
-  },
-  beforeDestroy() {
-    //BUS.$off('refreshLabels');
+    BUS.$on('refreshLabels', this.refreshLabels);
   },
 };
 </script>

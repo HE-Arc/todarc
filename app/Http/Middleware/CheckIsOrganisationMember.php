@@ -11,7 +11,7 @@ use App\Exceptions\Handler;
 
 use Illuminate\Support\Facades\Auth;
 
-class CheckOwner
+class CheckIsOrganisationMember
 {
     /**
      * Handle an incoming request.

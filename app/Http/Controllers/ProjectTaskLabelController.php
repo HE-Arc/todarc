@@ -11,14 +11,6 @@ use App\Task;
 class ProjectTaskLabelController extends Controller
 {
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-      $this->middleware('checkowner');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Project $project

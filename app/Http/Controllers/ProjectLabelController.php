@@ -9,14 +9,6 @@ use Illuminate\Http\Request;
 class ProjectLabelController extends Controller
 {
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->middleware('checkowner');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

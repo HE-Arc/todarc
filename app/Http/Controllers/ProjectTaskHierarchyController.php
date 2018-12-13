@@ -9,14 +9,6 @@ use App\Project;
 class ProjectTaskHierarchyController extends Controller
 {
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->middleware('checkowner');
-    }
-    
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

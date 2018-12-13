@@ -10,14 +10,6 @@ use App\Task;
 class ProjectTaskController extends Controller
 {
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->middleware('checkowner');
-    }
-    
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

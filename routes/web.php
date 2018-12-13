@@ -19,24 +19,26 @@ Route::group(['middleware' => 'checklogin'], function() {
     Route::get('/home', 'UserDashboard@dashboard')->name('home');
 
     //Projects
-    Route::resource('projects', 'ProjectController')->except(['store', 'edit', 'update']);
-    Route::resource('projects.tasks', 'ProjectTaskController')->only(['index', 'update', 'store', 'destroy']);
-    Route::resource('projects.tasks.labels', 'ProjectTaskLabelController')->only(['destroy']);
-    Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
-    Route::resource('projects.labels', 'ProjectLabelController')->except(['show', 'create', 'edit']);
-    Route::resource('projects.groups', 'ProjectGroupController')->only(['index', 'update', 'store', 'destroy']);
-    Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);
+    Route::group(['middleware' => 'project.rights'], function(){
+        Route::resource('projects', 'ProjectController')->except(['store', 'edit', 'update']);
+        Route::resource('projects.tasks', 'ProjectTaskController')->only(['index', 'update', 'store', 'destroy']);
+        Route::resource('projects.tasks.labels', 'ProjectTaskLabelController')->only(['destroy']);
+        Route::resource('projects.tasks-hierarchy', 'ProjectTaskHierarchyController')->only(['store']);
+        Route::resource('projects.labels', 'ProjectLabelController')->except(['show', 'create', 'edit']);
+        Route::resource('projects.groups', 'ProjectGroupController')->only(['index', 'update', 'store', 'destroy']);
+        Route::resource('projects.groups-hierarchy', 'ProjectGroupHierarchyController')->only(['store']);
+    });
 
     //Users
     Route::resource('users', 'UserController')->only(['index']);
-
-    //Création of projects
     Route::resource('users.projects', 'UserProjectController')->only(['store']);
-    Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
 
     //Creation of organisation
     Route::resource('organisations', 'OrganisationController')->only(['show', 'store']);
-    Route::resource('organisations.users', 'OrganisationUserController')->only(['store', 'destroy']);
+    Route::group(['middleware' => 'organisation.member'], function(){
+        Route::resource('organisations.users', 'OrganisationUserController')->only(['store', 'destroy']);
+        Route::resource('organisations.projects', 'OrganisationProjectController')->only(['store']);
+    });
 });
 
 Route::resource('/about', 'MainController')->only(['index']);

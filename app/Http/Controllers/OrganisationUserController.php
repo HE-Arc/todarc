@@ -17,11 +17,6 @@ class OrganisationUserController extends Controller
      */
     public function store(Request $request, Organisation $organisation)
     {
-        // Vérification des droits
-        if(! $organisation->users()->where('users.id', '=', Auth::user()->id)->exists()) {
-            abort(403, 'Access denied');
-        }
-
         $organisation->users()->attach($request->input("id"));
 
         $redirectTo = action('OrganisationController@show', ['organisationName' => $organisation->name]);

@@ -41,6 +41,6 @@ Route::group(['middleware' => 'checklogin'], function() {
     });
 });
 
-Route::resource('/about', 'MainController')->only(['index']);
+Route::resource('/about', 'MainController')->only(['index'])->name('about');
 
 Auth::routes();

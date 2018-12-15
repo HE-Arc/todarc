@@ -1,10 +1,10 @@
 <template>
   <li class="node node-group">
     <span @contextmenu.prevent="contextMenuGroup($event, group)" @dblclick="editMe" v-if="group" class="list-group-item align-items-center d-flex">
-      <button v-if="open" @click="displayDetails(false)" class="btn btn-link">
+      <button v-if="open" @click="switchDetails" class="btn btn-link">
         <i class="fas fa-angle-down"></i>
       </button>
-      <button v-if="!open" @click="displayDetails(true)" class="btn btn-link">
+      <button v-if="!open" @click="switchDetails" class="btn btn-link">
         <i class="fas fa-angle-right"></i>
       </button>
       <span class="flex-grow-1">{{ group.name }}</span>
@@ -61,8 +61,8 @@ export default {
     };
   },
   methods: {
-    displayDetails(state){
-      this.open = state;
+    switchDetails(){
+      this.open = !this.open;
     },
     changeGroups(evt){
       if(this.groupsNew.length>0)

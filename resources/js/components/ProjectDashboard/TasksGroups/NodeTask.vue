@@ -1,6 +1,6 @@
 <template>
-  <div @contextmenu.prevent="contextMenuTask($event, task)" class="node node-task list-group-item bg-secondary align-items-center d-flex">
-    <div v-if="task" @dblclick="editMe" class="label">{{ task.name }}</div>
+  <div @dblclick="editMe" @contextmenu.prevent="contextMenuTask($event, task)" class="node node-task list-group-item bg-secondary align-items-center d-flex">
+    <div v-if="task" class="label">{{ task.name }}</div>
     <div class="labels flex-grow-1">
       <task-label
         v-if="task !== null"

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('scripts')
-<script src="{{ asset('js/organisationDashboardApp.js') }}" defer></script>
+  <script src="{{ asset('js/organisationDashboardApp.js') }}" defer></script>
 @endsection
 
 @section('navbar')
@@ -29,12 +29,13 @@
 
       <div id="projects-container" class="cards-container">
           @foreach($projects as $project)
-          <organisation-dashboard-project name="{{$project->name}}"
+          <organisation-dashboard-project name="{{ $project->name }}"
           :project-id="{{ $project->id }}"
-          :tasks-to-do="{{$project->tasksNameJson()}}"
+          :tasks-to-do="{{ $project->tasksName()->toJson() }}"
           button-text="{{ __('See the project') }}"
           uri-project="https://github.com"
           ></organisation-dashboard-project>
+          {{ $project->tasksName()->toJson() }}
           @endforeach
       </div>
     </div>

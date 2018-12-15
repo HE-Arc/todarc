@@ -62,8 +62,8 @@
                <p>This web application has been developed during the 2018 autumn semester at "HE-Arc Ingénierie" of "Neuchâtel" as part of the course of web development.</p>
                <p>People having contributed to this amazing project are:</p>
                <ul>
-                  <li><a href="https://github.com/Asmoday4949">Fleury Malik</a></li>
                   <li><a href="https://github.com/bull0n">Bulloni Lucas</a></li>
+                  <li><a href="https://github.com/Asmoday4949">Fleury Malik</a></li>
                   <li><a href="https://github.com/Ph0tonic/">Wermeille Bastien</a></li>
                </ul>
             </div>

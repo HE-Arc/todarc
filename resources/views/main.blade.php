@@ -14,9 +14,11 @@
                <p>This web application allow managing todo lists. Users can manage their own list of tasks for each one of their projects.
                   Users can create some organisations to work in team inside a unique entity. It's possible to create a project inside an organisation and all members of this team can edit it.
                </p>
+               @if (!Auth::check())
                <p>The usage of this amazing tools, required you be registered. If you have already created your account, you can <a class="btn btn-outline-success" href="login">log in</a>.
                   If you're still not register down't wait and <a class="btn btn-outline-success" href="register">Register now</a>
                </p>
+               @endif
             </div>
          </div>
       </div>

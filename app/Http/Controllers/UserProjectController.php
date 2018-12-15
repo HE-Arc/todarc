@@ -8,11 +8,6 @@ use App\User;
 
 class UserProjectController extends ProjectController
 {
-  public function __construct()
-  {
-    parent::__construct();
-  }
-  
   /**
   * Store a newly created resource in storage.
   *

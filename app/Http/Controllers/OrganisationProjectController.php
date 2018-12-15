@@ -9,10 +9,6 @@ use App\User;
 
 class OrganisationProjectController extends ProjectController
 {
-    public function __construct()
-    {
-      parent::__construct();
-    }
     /**
     * Store a newly created resource in storage.
     *

@@ -34,7 +34,15 @@ class OrganisationUserController extends Controller
     {
       $organisation->users()->detach($userId);
 
-      $redirectTo = action('OrganisationController@show', ['organisationName' => $organisation->name]);
+      if($organisation->users()->count() == 0)
+      {
+        $organisation->delete();
+        $redirectTo = action('UserDashboard@dashboard');
+      }
+      else
+      {
+        $redirectTo = action('OrganisationController@show', ['organisationName' => $organisation->name]);
+      }
 
       return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
     }

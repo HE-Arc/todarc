@@ -27,16 +27,20 @@
         </div>
       </div>
 
-      <div id="projects-container" class="cards-container">
-          @foreach($projects as $project)
-          <organisation-dashboard-project name="{{ $project->name }}"
-          :project-id="{{ $project->id }}"
-          :tasks-to-do="{{ $project->tasksName()->toJson() }}"
-          button-text="{{ __('See the project') }}"
-          uri-project="https://github.com"
-          ></organisation-dashboard-project>
-          @endforeach
-      </div>
+      @if(!$projects->isEmpty())
+        <div id="projects-container" class="cards-container">
+            @foreach($projects as $project)
+            <organisation-dashboard-project name="{{ $project->name }}"
+            :project-id="{{ $project->id }}"
+            :tasks-to-do="{{ $project->tasksName()->toJson() }}"
+            button-text="{{ __('See the project') }}"
+            uri-project="https://github.com"
+            ></organisation-dashboard-project>
+            @endforeach
+        </div>
+      @else
+        <div class="alert alert-danger center-alert" align="middle">This organisation don't have any project.</div>
+      @endif
     </div>
   </div>
 

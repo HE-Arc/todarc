@@ -21,15 +21,19 @@
         </div>
       </div>
 
-      <div class="cards-container">
-        @foreach($projects as $project)
-          <user-dashboard-project name="{{ $project->name }}"
-            :tasks-to-do="{{ $project->tasksName()->toJson() }}"
-            button-text="{{ __('See the project') }}"
-            uri-project="{{ $project->url }}"
-            ></user-dashboard-project>
-        @endforeach
-      </div>
+      @if(!empty($project))
+        <div class="cards-container">
+          @foreach($projects as $project)
+            <user-dashboard-project name="{{ $project->name }}"
+              :tasks-to-do="{{ $project->tasksName()->toJson() }}"
+              button-text="{{ __('See the project') }}"
+              uri-project="{{ $project->url }}"
+              ></user-dashboard-project>
+          @endforeach
+        </div>
+      @else
+        <div class="alert alert-danger center-alert" align="middle">You don't have any projects.</div>
+      @endif
     </div>
   </div>
 
@@ -44,16 +48,20 @@
         </div>
       </div>
 
-      <div class="cards-container">
-        @foreach($organisations as $organisation)
-        <user-dashboard-organisation
-          name="{{$organisation->name}}"
-          :projects="{{ $organisation->projects }}"
-          button-text="{{ __('See the organisation') }}"
-          uri-organisation="{{ url('/organisations/'.$organisation->name) }}"
-          ></user-dashboard-organisation>
-        @endforeach
-      </div>
+      @if(!$organisations->isEmpty())
+        <div class="cards-container">
+          @foreach($organisations as $organisation)
+          <user-dashboard-organisation
+            name="{{$organisation->name}}"
+            :projects="{{ $organisation->projects }}"
+            button-text="{{ __('See the organisation') }}"
+            uri-organisation="{{ url('/organisations/'.$organisation->name) }}"
+            ></user-dashboard-organisation>
+          @endforeach
+        </div>
+      @else
+        <div class="alert alert-danger center-alert" align="middle">You're not yet a member of an organisation.</div>
+      @endif
     </div>
   </div>
 </div>

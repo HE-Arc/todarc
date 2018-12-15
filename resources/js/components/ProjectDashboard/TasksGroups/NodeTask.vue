@@ -12,6 +12,10 @@
         :color="label.color"
       ></task-label>
     </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" :id="'customCheck'+task.id" v-model="task.done">
+      <label class="custom-control-label" :for="'customCheck'+task.id">Done</label>
+    </div>
     <button  @click="addTask" class="btn btn-link">
       <i class="fas fa-plus"></i>
     </button>

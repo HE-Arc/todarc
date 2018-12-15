@@ -28,7 +28,7 @@
          <div class="card">
             <div class="card-header">Functionalities</div>
             <div class="card-body">
-               <p>ToD'Arc offers you the following functionalities:/p>
+               <p>ToD'Arc offers you the following functionalities:</p>
                <ul>
                   <li>Create/remove an organisation</li>
                   <li>Create/remove project linked to a user or an organisation</li>
@@ -45,7 +45,7 @@
    <div class="pt-3 row justify-content-center">
       <div class="col-md-12">
          <div class="card">
-            <div class="card-header">TODARC in pictures</div>
+            <div class="card-header">ToD'Arc in pictures</div>
             <div class="card-body">
                <img alt="Project-Dashboard" src="{{ asset('images/Project-Tasks.png') }}" class="centered-img"></img>
                <img alt="User-Dashboard" src="{{ asset('images/User-Dashboard.png') }}" class="centered-img"></img>

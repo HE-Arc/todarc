@@ -16002,6 +16002,11 @@ readers do not read off random characters that represent icons */
   }
 }
 
+.center-alert {
+  width: 30%;
+  margin: auto;
+}
+
 ul,
 li {
   list-style-type: none;

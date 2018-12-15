@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      @if(!empty($project))
+      @if(!$projects->isEmpty())
         <div class="cards-container">
           @foreach($projects as $project)
             <user-dashboard-project name="{{ $project->name }}"

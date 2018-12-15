@@ -46,13 +46,20 @@ class OrganisationController extends Controller
         $user = Auth::user();
         $organisation = Organisation::where('name', $organisationName)->first();
 
-        $projects = $organisation->projects;
-        $users = $organisation->users;
+        if($organisation)
+        {
+          $projects = $organisation->projects;
+          $users = $organisation->users;
 
-        return view('organisationDashboard.dashboard', ['user' => $user,
-                                                        'organisation' => $organisation,
-                                                        'projects' => $projects,
-                                                        'users' => $users
-                                                    ]);
+          return view('organisationDashboard.dashboard', ['user' => $user,
+              'organisation' => $organisation,
+              'projects' => $projects,
+              'users' => $users
+          ]);
+        }
+        else
+        {
+          abort(404);
+        }
     }
 }

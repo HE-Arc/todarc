@@ -10,6 +10,9 @@
             </button>
           </div>
           <div class="modal-body">
+            <div class="alert alert-danger text-left" v-if="errorMessage != ''" role="alert">
+              {{ errorMessage }}
+            </div>
             <div class="form-group text-left">
               <label for="dataInput">
                 {{inputLabel}}
@@ -44,7 +47,8 @@ export default {
   data() {
     return {
       id: null,
-      dataInputValue: this.dataInput
+      dataInputValue: this.dataInput,
+      errorMessage : '',
     }
   },
   props: {
@@ -67,7 +71,10 @@ export default {
       $('#invalid-input').hide();
 
       this.$emit('confirmed');
-      this.close();
+    },
+    setError(message)
+    {
+      this.errorMessage = message;
     }
   },
   mounted() {

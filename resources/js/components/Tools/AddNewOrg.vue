@@ -32,10 +32,18 @@ export default {
     },
     sendOrganisation() {
       return axios.post('/organisations', this.$data).then(response => {
+        this.$refs.modalNewOrganisation.close()
         window.location = response.data.redirectTo;
       })
       .catch(response => {
-        console.log("Error while creating organisation");
+        let errorCode = response.response.status;
+
+        if(errorCode == 422) {
+          this.$refs.modalNewOrganisation.setError("Organisation already exists");
+        }
+        else {
+          console.log("error while handling request");
+        }
       });
     }
   }

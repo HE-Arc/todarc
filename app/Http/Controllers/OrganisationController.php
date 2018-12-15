@@ -10,26 +10,6 @@ use Illuminate\Database\QueryException;
 class OrganisationController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -74,39 +54,5 @@ class OrganisationController extends Controller
                                                         'projects' => $projects,
                                                         'users' => $users
                                                     ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Organisation  $organisation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Organisation $organisation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Organisation  $organisation
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Organisation $organisation)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Organisation  $organisation
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Organisation $organisation)
-    {
-        //
     }
 }

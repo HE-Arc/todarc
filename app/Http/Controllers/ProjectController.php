@@ -69,8 +69,15 @@ class ProjectController extends Controller
           $task->users = $task->users;
         }
 
+        if(!$project->Owner->is(Auth::user()))
+        {
+          $project->users = $project->Owner->users;
+        }
+
+        $project->owner = $project->Owner;
+
         // show the view and pass the project to it
-        return View::make('project.dashboard', ['groups'=>$project->groups, 'tasks'=>$tasks, 'labels' => $project->labels])->with('project', $project);
+        return View::make('project.dashboard', ['groups'=>$project->groups, 'tasks'=>$tasks, 'labels' => $project->labels, 'project' => $project]);
     }
 
     /**

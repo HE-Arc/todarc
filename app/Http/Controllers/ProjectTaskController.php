@@ -64,7 +64,7 @@ class ProjectTaskController extends Controller
           }
         }
 
-        $task = Task::with('labels')->find($task->id);
+        $task->labels = $task->labels;
         return response()->json($task);
     }
 
@@ -116,7 +116,8 @@ class ProjectTaskController extends Controller
           }
         }
 
-        $task = Task::with(['labels', 'users'])->find($task->id);
+        $task->labels = $task->labels;
+        $task->users = $task->users;
         return response()->json($task);
     }
 

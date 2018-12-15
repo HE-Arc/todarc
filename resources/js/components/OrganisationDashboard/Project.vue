@@ -7,7 +7,7 @@
         <li v-for="(task, index) in tasksToDo" :key="index">{{ task }}</li>
       </ul>
       <p v-else>
-        No tasks in this project
+        No running tasks in this project
       </p>
     </div>
     <div class="card-footer">

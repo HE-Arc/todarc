@@ -3,8 +3,8 @@
     <h4 class="card-header">{{ name }}</h4>
     <div class="card-body">
       <h6>Tasks : </h6>
-      <ul v-if="tasksToDo.length > 0">
-        <li v-for="task in tasksToDo" :key="task.id">{{ task.name }}</li>
+      <ul class="pl-0" v-if="tasksToDo.length > 0">
+        <li v-for="(task, index) in tasksToDo" :key="index">{{ task }}</li>
       </ul>
       <p v-else>
         No tasks in this project

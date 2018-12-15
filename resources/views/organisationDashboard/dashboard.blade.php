@@ -35,7 +35,6 @@
           button-text="{{ __('See the project') }}"
           uri-project="https://github.com"
           ></organisation-dashboard-project>
-          {{ $project->tasksName()->toJson() }}
           @endforeach
       </div>
     </div>

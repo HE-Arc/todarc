@@ -41,33 +41,15 @@ class Project extends Model
   }
 
   /**
-   * get all task of the project for a user
-   */
-  public function tasksUser($user = null)
-  {
-    $tasks = new Collection();
-
-    foreach ($this->groups as $group)
-    {
-      $tasks = $tasks->merge($group->getTasksGroupAndChildren($user));
-    }
-
-    return $tasks;
-  }
-
-   /**
-    * get all tasks name in a collection
-    */
-  public function tasksName($user = null)
+  * get all tasks name in a collection
+  */
+  public function tasksName()
   {
     $tasksName = new Collection();
-    $tasks = $this->tasks($user);
-
-    foreach ($tasks as $task)
+    foreach ($this->tasks as $task)
     {
       $tasksName->push($task->name);
     }
-
     return $tasksName;
   }
 

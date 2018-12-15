@@ -47,9 +47,9 @@
          <div class="card">
             <div class="card-header">ToD'Arc in pictures</div>
             <div class="card-body">
-               <img alt="Project-Dashboard" src="{{ asset('images/Project-Tasks.png') }}" class="centered-img"/>
-               <img alt="User-Dashboard" src="{{ asset('images/User-Dashboard.png') }}" class="centered-img"/>
-               <img alt="Organisation-Dashboard" src="{{ asset('images/Organisation-Dashboard.png') }}" class="centered-img"/>
+               <img alt="Project-Dashboard" src="{{ asset('images/Todarc-Project.png') }}" class="centered-img"/>
+               <img alt="User-Dashboard" src="{{ asset('images/Todarc-Userdashboard.png') }}" class="centered-img"/>
+               <img alt="Organisation-Dashboard" src="{{ asset('images/Todarc-OrganisationDashboard.png') }}" class="centered-img"/>
             </div>
          </div>
       </div>
@@ -83,4 +83,3 @@
    </div>
 </div>
 @endsection
-

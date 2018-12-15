@@ -18,7 +18,7 @@ export default {
     buttonText: String,
     uriOrganisation: String,
     projects: Array
-  }
+  },
 };
 </script>
 

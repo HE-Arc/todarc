@@ -1,6 +1,6 @@
 <template>
-  <div @contextmenu.prevent="contextMenuTask($event, task)" class="node node-task list-group-item bg-secondary align-items-center d-flex">
-    <div v-if="task" @dblclick="editMe" class="label">{{ task.name }}</div>
+  <div @dblclick="editMe" @contextmenu.prevent="contextMenuTask($event, task)" class="node node-task list-group-item bg-secondary align-items-center d-flex">
+    <div v-if="task" class="label">{{ task.name }}</div>
     <div class="labels flex-grow-1">
       <task-label
         v-if="task !== null"
@@ -11,6 +11,10 @@
         :name="label.name"
         :color="label.color"
       ></task-label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" :id="'customCheck'+task.id" v-model="task.done">
+      <label class="custom-control-label" :for="'customCheck'+task.id">Done</label>
     </div>
     <button  @click="addTask" class="btn btn-link">
       <i class="fas fa-plus"></i>

@@ -37,6 +37,7 @@ export default {
       required: true
     },
     labelsInput: {
+      type: Array,
       required: true
     }
   },

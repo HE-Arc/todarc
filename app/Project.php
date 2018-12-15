@@ -45,7 +45,6 @@ class Project extends Model
    */
   public function tasksUser($user = null)
   {
-    //TODO Function renamed where it was used
     $tasks = new Collection();
 
     foreach ($this->groups as $group)
@@ -59,25 +58,20 @@ class Project extends Model
    /**
     * get all tasks name in a collection
     */
-   public function tasksName($user = null)
-   {
-     $tasksName = new Collection();
-     $tasks = $this->tasks($user);
+  public function tasksName($user = null)
+  {
+    $tasksName = new Collection();
+    $tasks = $this->tasks($user);
 
-     foreach ($tasks as $task)
-     {
-       $tasksName->push($task->name);
-     }
+    foreach ($tasks as $task)
+    {
+      $tasksName->push($task->name);
+    }
 
-     return $tasksName;
-   }
+    return $tasksName;
+  }
 
-   public function tasksNameJson($user = null)
-   {
-     return $this->tasksName($user)->toJson();
-   }
-
-   public function getUrlAttribute()
+  public function getUrlAttribute()
   {
     return action('ProjectController@show', ['id' => $this->id]);
   }

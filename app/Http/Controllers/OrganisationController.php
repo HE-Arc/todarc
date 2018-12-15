@@ -45,7 +45,7 @@ class OrganisationController extends Controller
           $organisation->save();
           $organisation->Users()->attach([Auth::user()->id]);
 
-          $redirectTo = action('OrganisationController@show', ['id' => $organisation->id]);
+          $redirectTo = action('OrganisationController@show', ['name' => $organisation->name]);
 
           return response()->json(['success' => true, 'redirectTo' => $redirectTo], 201);
         }

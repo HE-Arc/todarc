@@ -46,7 +46,7 @@ class Project extends Model
   public function tasksName()
   {
     $tasksName = new Collection();
-    foreach ($this->tasks as $task)
+    foreach ($this->tasks()->where('done', False)->get() as $task)
     {
       $tasksName->push($task->name);
     }

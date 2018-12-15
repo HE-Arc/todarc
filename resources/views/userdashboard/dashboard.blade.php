@@ -24,10 +24,11 @@
       <div class="cards-container">
         @foreach($projects as $project)
           <user-dashboard-project name="{{ $project->name }}"
-            :tasks-to-do="{{ $project->tasksNameJson($user) }}"
+            :tasks-to-do="{{ $project->tasksName($user)->toJson() }}"
             button-text="{{ __('See the project') }}"
             uri-project="{{ $project->url }}"
             ></user-dashboard-project>
+            {{ $project->tasksName($user)->toJson() }}
         @endforeach
       </div>
     </div>

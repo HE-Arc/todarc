@@ -1,6 +1,12 @@
 <template>
   <li class="node node-group">
     <span @contextmenu.prevent="contextMenuGroup($event, group)" @dblclick="editMe" v-if="group" class="list-group-item align-items-center d-flex">
+      <button v-if="open" @click="displayDetails(false)" class="btn btn-link">
+        <i class="fas fa-angle-down"></i>
+      </button>
+      <button v-if="!open" @click="displayDetails(true)" class="btn btn-link">
+        <i class="fas fa-angle-right"></i>
+      </button>
       <span class="flex-grow-1">{{ group.name }}</span>
       <button  @click="addChild" class="btn btn-link">
         <i class="fas fa-plus"></i>
@@ -14,11 +20,11 @@
       <i class="fas fa-arrows-alt ml-1 handle"></i>
     </span>
 
-    <draggable element="ol" class="min-height list-group" :list="groupsNew" :options="{handle:'.handle', group:'group', draggable:'.node-group', animation:200}" @change="changeGroups">
+    <draggable v-if="open" element="ol" class="min-height list-group" :list="groupsNew" :options="{handle:'.handle', group:'group', draggable:'.node-group', animation:200}" @change="changeGroups">
       <node-group v-for="group in groupsNew" :key="group.id" :id="group.id"></node-group>
     </draggable>
 
-    <draggable element="ol" class="min-height list-task" :list="tasksNew" :options="{handle:'.handle', group:'task', draggable:'.node-task', animation:200}" @change="changeTasks">
+    <draggable v-if="open" element="ol" class="min-height list-task" :list="tasksNew" :options="{handle:'.handle', group:'task', draggable:'.node-task', animation:200}" @change="changeTasks">
       <task-group v-for="task in tasksNew" :key="task.id" :id="task.id" v-if="!runningOnly || task.done == false"></task-group>
     </draggable>
   </li>
@@ -47,6 +53,7 @@ export default {
   ],
   data() {
     return {
+      open: true,
       group: null,
       groupsNew: [],
       tasksNew: [],
@@ -54,6 +61,9 @@ export default {
     };
   },
   methods: {
+    displayDetails(state){
+      this.open = state;
+    },
     changeGroups(evt){
       if(this.groupsNew.length>0)
         this.updateGroups(this.groupsNew, this.id);

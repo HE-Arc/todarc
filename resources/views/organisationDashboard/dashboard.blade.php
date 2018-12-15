@@ -39,7 +39,7 @@
             @endforeach
         </div>
       @else
-        <div class="alert alert-danger center-alert" align="middle">This organisation don't have any project.</div>
+        <div class="alert alert-danger center-alert" align="middle">This organisation does not have any project.</div>
       @endif
     </div>
   </div>

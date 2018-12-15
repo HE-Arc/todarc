@@ -14,10 +14,12 @@
                 <div class="card-body">
                   <p>C'est une applicaton web permettant de gérer des todos list. Les utilisateurs peuvent gérer la liste des tâches à faire pour chacun de leurs projets.
                   Les utilisateurs peuvent être regroupés au sein d'une même entité (organisation) qui correspond à tous les membres travaillant sur le(s) projet(s) de cette entité.</p>
-                  <p>Pour avoir accès à cet outil, il est nécessaire de se loguer au site. Si vous avez déjà un compte, vous pouvez vous loguer <a href="login">ici.</a>. Si vous n'avez pas encore de compte,
-                    il est possible de s'inscrire:</p>
-                  <a class="btn btn-outline-success" href="register">Register</a>
-                  <a class="btn btn-outline-success" href="login">Connect</a>
+                  @if (!Auth::check())
+                    <p>Pour avoir accès à cet outil, il est nécessaire de se loguer au site. Si vous avez déjà un compte, vous pouvez vous loguer <a href="login">ici.</a>. Si vous n'avez pas encore de compte,
+                      il est possible de s'inscrire:</p>
+                    <a class="btn btn-outline-success" href="register">Register</a>
+                    <a class="btn btn-outline-success" href="login">Connect</a>
+                  @endif
                 </div>
               </div>
             </div>
@@ -53,7 +55,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="pt-3 row justify-content-center">
             <div class="col-md-12">
               <div class="card">

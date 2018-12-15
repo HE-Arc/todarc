@@ -11,7 +11,7 @@
         <span class="font-weight-bold">Project Name : </span>
         {{ project.name }}
       </p>
-      <p v-if="project.owner">
+      <p>
         <span class="font-weight-bold">Owner : </span>
         {{ project.owner.name }}
       </p>

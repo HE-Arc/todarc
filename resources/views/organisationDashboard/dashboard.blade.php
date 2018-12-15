@@ -48,7 +48,7 @@
         </div>
         <div class="col-sm-6 text-right">
           <add-existing-user
-          :users=@json($users)
+          :users="{{ $user->toJson() }}"
           :organisation='{!! $organisation->toJson(); !!}'
           ></add-existing-user>
         </div>

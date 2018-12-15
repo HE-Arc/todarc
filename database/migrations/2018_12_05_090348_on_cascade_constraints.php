@@ -24,7 +24,7 @@ class OnCascadeConstraints extends Migration
       });
 
       Schema::table('label_task', function (Blueprint $table) {
-        //$table->dropForeign('label_task_label_id_foreign');
+        $table->dropForeign('label_task_label_id_foreign');
         $table->foreign('label_id')->references('id')->on('labels')->onDelete('cascade');
 
         $table->dropForeign('label_task_task_id_foreign');
